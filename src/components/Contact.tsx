@@ -92,7 +92,7 @@ function FormInput({
         <Icon className="h-4 w-4 text-slate-500" aria-hidden="true" />
         <label
           htmlFor={id}
-          className="block text-sm leading-6 font-semibold text-slate-900"
+          className="block text-sm font-medium text-slate-900"
         >
           {label}
         </label>
@@ -106,10 +106,10 @@ function FormInput({
             value={value}
             onChange={(e) => onChange(e.target.value)}
             placeholder={placeholder}
-            className={`block w-full rounded-md border-0 px-3.5 py-2.5 text-slate-900 shadow-sm ring-1 ring-inset ${
+            className={`block w-full rounded-lg border-0 px-4 py-3 text-slate-900 shadow-sm ring-1 transition duration-200 ring-inset ${
               error
                 ? 'ring-red-300 focus:ring-red-500'
-                : 'ring-slate-300 focus:ring-blue-600'
+                : 'ring-slate-200 focus:ring-blue-500'
             } placeholder:text-slate-400 focus:ring-2 focus:ring-inset sm:text-sm sm:leading-6`}
           />
         ) : (
@@ -121,16 +121,16 @@ function FormInput({
             onChange={(e) => onChange(e.target.value)}
             autoComplete={autoComplete}
             placeholder={placeholder}
-            className={`block w-full rounded-md border-0 px-3.5 py-2.5 text-slate-900 shadow-sm ring-1 ring-inset ${
+            className={`block w-full rounded-lg border-0 px-4 py-3 text-slate-900 shadow-sm ring-1 transition duration-200 ring-inset ${
               error
                 ? 'ring-red-300 focus:ring-red-500'
-                : 'ring-slate-300 focus:ring-blue-600'
+                : 'ring-slate-200 focus:ring-blue-500'
             } placeholder:text-slate-400 focus:ring-2 focus:ring-inset sm:text-sm sm:leading-6`}
           />
         )}
         {error && (
-          <div className="mt-2 flex items-center gap-1 text-sm text-red-600">
-            <XCircleIcon className="h-4 w-4" />
+          <div className="mt-2 flex items-center gap-1.5 text-sm text-red-600">
+            <XCircleIcon className="h-4 w-4 flex-shrink-0" />
             {error}
           </div>
         )}
@@ -196,7 +196,6 @@ export function Contact() {
     setSubmitStatus(null)
 
     try {
-      // Here you would typically send the data to your backend
       const response = await fetch('/api/contact', {
         method: 'POST',
         headers: {
@@ -209,7 +208,6 @@ export function Contact() {
         throw new Error('Failed to submit form')
       }
 
-      // Clear form on success
       setFormData({
         firstName: '',
         lastName: '',
@@ -227,208 +225,241 @@ export function Contact() {
   }
 
   return (
-    <div className="relative bg-white py-24 sm:py-32" id="contact">
+    <div className="relative bg-white py-16 sm:py-24 lg:py-32" id="contact">
       <div className="absolute inset-x-0 top-0 -z-10 h-24 bg-gradient-to-b from-slate-50"></div>
       <div className="absolute inset-x-0 bottom-0 -z-10 h-24 bg-gradient-to-t from-slate-50"></div>
 
       <Container>
-        <div className="mx-auto max-w-2xl text-center">
+        <div className="mx-auto max-w-2xl px-4 text-center sm:px-6 lg:px-8">
           <h2 className="text-base leading-7 font-semibold text-blue-600">
             Contact Us
           </h2>
-          <p className="mt-2 text-3xl font-bold tracking-tight text-slate-900 sm:text-4xl">
+          <p className="mt-2 text-2xl font-bold tracking-tight text-slate-900 sm:text-3xl lg:text-4xl">
             Get in Touch
           </p>
-          <p className="mt-6 text-lg leading-8 text-slate-600">
-            Have a project in mind? We&apos;d love to discuss how we can help
-            bring your ideas to life.
+          <p className="mt-4 text-base leading-7 text-slate-600 sm:mt-6 sm:text-lg">
+            Have a project in mind? Let&apos;s discuss how we can help you
+            achieve your goals with our Swiss-quality software solutions.
           </p>
         </div>
 
-        <div className="mx-auto mt-16 max-w-7xl">
-          <div className="grid grid-cols-1 gap-x-8 gap-y-16 lg:grid-cols-2">
+        <div className="mx-auto mt-12 max-w-7xl px-4 sm:mt-16 sm:px-6 lg:px-8">
+          <div className="grid grid-cols-1 gap-x-8 gap-y-8 lg:grid-cols-2">
             {/* Contact Form */}
-            <div className="relative">
-              <div className="rounded-3xl bg-white p-8 shadow-lg ring-1 ring-slate-200 lg:p-12">
-                <form onSubmit={handleSubmit} className="space-y-8">
-                  <div className="space-y-6">
-                    <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
-                      <FormInput
-                        id="first-name"
-                        label="First name"
-                        icon={UserIcon}
-                        placeholder="John"
-                        autoComplete="given-name"
-                        value={formData.firstName}
-                        onChange={(value) =>
-                          setFormData((prev) => ({ ...prev, firstName: value }))
-                        }
-                        error={errors.firstName}
-                      />
-                      <FormInput
-                        id="last-name"
-                        label="Last name"
-                        icon={UserIcon}
-                        placeholder="Doe"
-                        autoComplete="family-name"
-                        value={formData.lastName}
-                        onChange={(value) =>
-                          setFormData((prev) => ({ ...prev, lastName: value }))
-                        }
-                        error={errors.lastName}
-                      />
-                    </div>
+            <div className="relative overflow-hidden rounded-2xl bg-white p-6 shadow-lg ring-1 ring-slate-900/5 transition duration-300 hover:shadow-xl sm:rounded-3xl sm:p-8">
+              <div className="absolute inset-0 bg-gradient-to-br from-blue-50/50 via-white to-slate-50/50"></div>
+              <div className="relative">
+                <form onSubmit={handleSubmit} className="space-y-6">
+                  <div className="grid grid-cols-1 gap-6 sm:grid-cols-2">
                     <FormInput
-                      id="email"
-                      label="Email"
-                      type="email"
-                      icon={EnvelopeIcon}
-                      placeholder="you@example.com"
-                      autoComplete="email"
-                      value={formData.email}
+                      id="firstName"
+                      label="First Name"
+                      icon={UserIcon}
+                      placeholder="John"
+                      autoComplete="given-name"
+                      value={formData.firstName}
                       onChange={(value) =>
-                        setFormData((prev) => ({ ...prev, email: value }))
+                        setFormData({ ...formData, firstName: value })
                       }
-                      error={errors.email}
+                      error={errors.firstName}
                     />
                     <FormInput
-                      id="phone"
-                      label="Phone number"
-                      type="tel"
-                      icon={PhoneIcon}
-                      placeholder="+1 (555) 000-0000"
-                      autoComplete="tel"
-                      value={formData.phone}
+                      id="lastName"
+                      label="Last Name"
+                      icon={UserIcon}
+                      placeholder="Doe"
+                      autoComplete="family-name"
+                      value={formData.lastName}
                       onChange={(value) =>
-                        setFormData((prev) => ({ ...prev, phone: value }))
+                        setFormData({ ...formData, lastName: value })
                       }
-                      error={errors.phone}
-                    />
-                    <FormInput
-                      id="message"
-                      label="Message"
-                      type="textarea"
-                      icon={ChatBubbleBottomCenterTextIcon}
-                      placeholder="Tell us about your project..."
-                      value={formData.message}
-                      onChange={(value) =>
-                        setFormData((prev) => ({ ...prev, message: value }))
-                      }
-                      error={errors.message}
+                      error={errors.lastName}
                     />
                   </div>
 
-                  {submitStatus && (
-                    <div
-                      className={`flex items-center gap-2 rounded-md p-4 ${
-                        submitStatus === 'success'
-                          ? 'bg-green-50 text-green-700'
-                          : 'bg-red-50 text-red-700'
-                      }`}
-                    >
-                      {submitStatus === 'success' ? (
-                        <>
-                          <CheckCircleIcon className="h-5 w-5" />
-                          <span>
-                            Thank you! We&apos;ll get back to you soon.
-                          </span>
-                        </>
-                      ) : (
-                        <>
-                          <XCircleIcon className="h-5 w-5" />
-                          <span>
-                            Sorry, something went wrong. Please try again later.
-                          </span>
-                        </>
-                      )}
-                    </div>
-                  )}
+                  <FormInput
+                    id="email"
+                    label="Email"
+                    type="email"
+                    icon={EnvelopeIcon}
+                    placeholder="john@example.com"
+                    autoComplete="email"
+                    value={formData.email}
+                    onChange={(value) =>
+                      setFormData({ ...formData, email: value })
+                    }
+                    error={errors.email}
+                  />
+
+                  <FormInput
+                    id="phone"
+                    label="Phone"
+                    type="tel"
+                    icon={PhoneIcon}
+                    placeholder="+1 (555) 000-0000"
+                    autoComplete="tel"
+                    value={formData.phone}
+                    onChange={(value) =>
+                      setFormData({ ...formData, phone: value })
+                    }
+                    error={errors.phone}
+                  />
+
+                  <FormInput
+                    id="message"
+                    label="Message"
+                    type="textarea"
+                    icon={ChatBubbleBottomCenterTextIcon}
+                    placeholder="Tell us about your project..."
+                    value={formData.message}
+                    onChange={(value) =>
+                      setFormData({ ...formData, message: value })
+                    }
+                    error={errors.message}
+                  />
 
                   <div>
                     <Button
                       type="submit"
-                      className="group w-full bg-blue-600 text-white hover:bg-blue-500 disabled:cursor-not-allowed disabled:opacity-50"
+                      color="blue"
+                      className="group relative w-full overflow-hidden transition duration-300 hover:shadow-lg"
                       disabled={isSubmitting}
                     >
-                      <span className="flex items-center justify-center gap-2">
-                        {isSubmitting ? 'Sending...' : 'Send message'}
-                        <PaperAirplaneIcon
-                          className={`h-4 w-4 transition-transform ${
-                            isSubmitting ? '' : 'group-hover:translate-x-1'
-                          }`}
-                        />
-                      </span>
+                      <div className="relative flex items-center justify-center gap-2">
+                        {isSubmitting ? (
+                          <>
+                            <div className="h-5 w-5 animate-spin rounded-full border-2 border-white border-t-transparent" />
+                            <span>Sending...</span>
+                          </>
+                        ) : (
+                          <>
+                            <PaperAirplaneIcon className="h-5 w-5 transition-transform duration-300 group-hover:translate-x-1" />
+                            <span>Send Message</span>
+                          </>
+                        )}
+                      </div>
                     </Button>
+
+                    {submitStatus === 'success' && (
+                      <div className="mt-3 flex items-center gap-2 rounded-lg bg-emerald-50 p-3 text-sm text-emerald-600">
+                        <CheckCircleIcon className="h-5 w-5 flex-shrink-0" />
+                        Thank you! We&apos;ll get back to you soon.
+                      </div>
+                    )}
+
+                    {submitStatus === 'error' && (
+                      <div className="mt-3 flex items-center gap-2 rounded-lg bg-red-50 p-3 text-sm text-red-600">
+                        <XCircleIcon className="h-5 w-5 flex-shrink-0" />
+                        Something went wrong. Please try again.
+                      </div>
+                    )}
                   </div>
                 </form>
               </div>
-              {/* Decorative gradient background */}
-              <div className="absolute -top-4 -right-4 -z-10 h-[calc(100%+2rem)] w-[calc(100%+2rem)] rounded-[2rem] bg-gradient-to-b from-blue-50 to-white"></div>
             </div>
 
             {/* Office Locations */}
-            <div>
-              <div className="sticky top-8">
-                <div className="flex items-center gap-2">
-                  <GlobeAltIcon
-                    className="h-6 w-6 text-blue-600"
-                    aria-hidden="true"
-                  />
-                  <h3 className="text-lg leading-8 font-semibold text-slate-900">
-                    Our Global Offices
-                  </h3>
-                </div>
-                <p className="mt-4 text-sm leading-6 text-slate-600">
-                  With offices across Europe and Asia, we provide
-                  round-the-clock service and local expertise.
-                </p>
-                <div className="mt-8 space-y-6">
-                  {offices.map((office) => (
-                    <div
-                      key={office.city}
-                      className="group relative overflow-hidden rounded-2xl bg-white p-6 shadow-lg ring-1 ring-slate-200 transition-all duration-200 hover:-translate-y-1 hover:shadow-xl"
-                    >
-                      <div className="flex gap-6">
-                        <div className="relative h-24 w-24 flex-none overflow-hidden rounded-xl">
-                          <Image
-                            src={office.image}
-                            alt={`${office.city} office`}
-                            fill
-                            className="object-cover transition duration-300 group-hover:scale-110"
-                          />
-                        </div>
-                        <div className="flex-auto">
-                          <h4 className="font-semibold text-slate-900">
-                            {office.city}, {office.country}
-                          </h4>
-                          <div className="mt-3 space-y-2 text-sm">
-                            <div className="flex items-center gap-2 text-slate-600">
-                              <MapPinIcon className="h-4 w-4 shrink-0 text-slate-400" />
-                              {office.address}
-                            </div>
-                            <div className="flex items-center gap-2 text-slate-600">
-                              <ClockIcon className="h-4 w-4 shrink-0 text-slate-400" />
-                              {office.hours}
-                            </div>
-                            <div className="flex items-center gap-2 text-slate-600 hover:text-blue-600">
-                              <PhoneIcon className="h-4 w-4 shrink-0 text-slate-400 group-hover:text-blue-500" />
-                              <a href={`tel:${office.phone}`}>{office.phone}</a>
-                            </div>
-                            <div className="flex items-center gap-2 text-slate-600 hover:text-blue-600">
-                              <EnvelopeIcon className="h-4 w-4 shrink-0 text-slate-400 group-hover:text-blue-500" />
-                              <a href={`mailto:${office.email}`}>
-                                {office.email}
-                              </a>
-                            </div>
+            <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-1">
+              {offices.map((office) => (
+                <div
+                  key={office.city}
+                  className="group relative overflow-hidden rounded-xl bg-white shadow-lg ring-1 ring-slate-900/5 transition duration-300 hover:-translate-y-1 hover:shadow-xl"
+                >
+                  <div className="flex flex-col sm:flex-row lg:flex-row">
+                    <div className="relative w-full sm:w-2/5 lg:w-1/3">
+                      <div className="relative h-48 sm:h-full">
+                        <Image
+                          src={office.image}
+                          alt={`${office.city} Office`}
+                          fill
+                          className="object-cover transition duration-300 group-hover:scale-105"
+                          sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                        />
+                        <div className="absolute inset-0 bg-gradient-to-br from-black/60 via-black/30 to-transparent"></div>
+                        <div className="absolute inset-x-0 bottom-0 p-4">
+                          <div className="space-y-1">
+                            <p className="text-sm font-medium text-blue-100">
+                              {office.country}
+                            </p>
+                            <h3 className="text-xl font-semibold text-white">
+                              {office.city}
+                            </h3>
                           </div>
                         </div>
                       </div>
-                      {/* Decorative gradient background */}
-                      <div className="absolute inset-0 -z-10 bg-gradient-to-br from-blue-50 via-white to-blue-50 opacity-0 transition-opacity duration-200 group-hover:opacity-100" />
                     </div>
-                  ))}
+                    <div className="flex-1 space-y-4 p-4 sm:p-5">
+                      <dl className="grid grid-cols-1 gap-3 text-sm">
+                        <div className="flex items-start gap-x-3">
+                          <dt className="mt-0.5">
+                            <MapPinIcon
+                              className="h-5 w-5 text-blue-500"
+                              aria-hidden="true"
+                            />
+                          </dt>
+                          <dd className="text-slate-700">{office.address}</dd>
+                        </div>
+                        <div className="flex items-center gap-x-3">
+                          <dt>
+                            <PhoneIcon
+                              className="h-5 w-5 text-blue-500"
+                              aria-hidden="true"
+                            />
+                          </dt>
+                          <dd>
+                            <a
+                              href={`tel:${office.phone}`}
+                              className="text-slate-700 transition hover:text-blue-600"
+                            >
+                              {office.phone}
+                            </a>
+                          </dd>
+                        </div>
+                        <div className="flex items-center gap-x-3">
+                          <dt>
+                            <EnvelopeIcon
+                              className="h-5 w-5 text-blue-500"
+                              aria-hidden="true"
+                            />
+                          </dt>
+                          <dd>
+                            <a
+                              href={`mailto:${office.email}`}
+                              className="text-slate-700 transition hover:text-blue-600"
+                            >
+                              {office.email}
+                            </a>
+                          </dd>
+                        </div>
+                      </dl>
+                      <div className="border-t border-slate-100 pt-4">
+                        <dl className="grid grid-cols-1 gap-3 text-sm">
+                          <div className="flex items-center gap-x-3">
+                            <dt>
+                              <ClockIcon
+                                className="h-5 w-5 text-blue-500"
+                                aria-hidden="true"
+                              />
+                            </dt>
+                            <dd className="text-slate-600">{office.hours}</dd>
+                          </div>
+                          <div className="flex items-center gap-x-3">
+                            <dt>
+                              <GlobeAltIcon
+                                className="h-5 w-5 text-blue-500"
+                                aria-hidden="true"
+                              />
+                            </dt>
+                            <dd className="text-slate-600">
+                              {office.timezone}
+                            </dd>
+                          </div>
+                        </dl>
+                      </div>
+                    </div>
+                  </div>
                 </div>
-              </div>
+              ))}
             </div>
           </div>
         </div>

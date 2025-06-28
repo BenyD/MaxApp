@@ -56,26 +56,29 @@ const colors = {
 
 export function About() {
   return (
-    <div className="relative isolate bg-white py-24 sm:py-32" id="about">
+    <div
+      className="relative isolate bg-white py-16 sm:py-24 lg:py-32"
+      id="about"
+    >
       <div className="absolute inset-x-0 top-0 -z-10 h-24 bg-gradient-to-b from-slate-50"></div>
       <div className="absolute inset-x-0 bottom-0 -z-10 h-24 bg-gradient-to-t from-slate-50"></div>
 
       <Container>
-        <div className="mx-auto max-w-2xl text-center">
+        <div className="mx-auto max-w-2xl px-4 text-center sm:px-6 lg:px-8">
           <h2 className="text-base leading-7 font-semibold text-blue-600">
             About Us
           </h2>
-          <p className="mt-2 text-3xl font-bold tracking-tight text-slate-900 sm:text-4xl">
+          <p className="mt-2 text-2xl font-bold tracking-tight text-slate-900 sm:text-3xl lg:text-4xl">
             Global Excellence, Local Expertise
           </p>
-          <p className="mt-6 text-lg leading-8 text-slate-600">
+          <p className="mt-4 text-base leading-7 text-slate-600 sm:mt-6 sm:text-lg">
             We combine Swiss precision with global innovation to deliver
             exceptional software solutions.
           </p>
         </div>
 
-        <div className="mx-auto mt-16 max-w-7xl">
-          <div className="grid grid-cols-1 gap-x-8 gap-y-16 lg:grid-cols-2">
+        <div className="mx-auto mt-12 max-w-7xl px-4 sm:mt-16 sm:px-6 lg:px-8">
+          <div className="grid grid-cols-1 gap-x-8 gap-y-12 lg:grid-cols-2">
             <div className="relative lg:order-2">
               <div className="relative">
                 <Image
@@ -85,11 +88,11 @@ export function About() {
                   height={400}
                   className="aspect-[4/3] w-full rounded-2xl bg-slate-50 object-cover shadow-xl"
                 />
-                <div className="absolute -bottom-8 -left-8 hidden rounded-2xl bg-white/90 p-8 shadow-lg backdrop-blur-sm lg:block">
-                  <p className="text-lg font-semibold text-slate-900">
+                <div className="absolute right-4 -bottom-6 left-4 rounded-2xl bg-white/90 p-4 shadow-lg backdrop-blur-sm sm:-bottom-8 sm:-left-8 sm:p-8 lg:block">
+                  <p className="text-base font-semibold text-slate-900 sm:text-lg">
                     24/7 Global Operations
                   </p>
-                  <p className="mt-2 text-sm text-slate-600">
+                  <p className="mt-2 text-xs text-slate-600 sm:text-sm">
                     Our distributed team structure enables continuous
                     development and support across time zones
                   </p>
@@ -99,14 +102,14 @@ export function About() {
             </div>
 
             <div className="lg:order-1">
-              <div className="text-lg leading-8 text-slate-600">
-                <p className="mb-6">
+              <div className="text-base leading-7 text-slate-600 sm:text-lg">
+                <p className="mb-4 sm:mb-6">
                   Maxapp is a Swiss-based software company headquartered in
                   Rotkreuz. We specialize in practical, scalable software that
                   aligns with real business goals, combining technical
                   excellence with business acumen.
                 </p>
-                <p className="mb-6">
+                <p className="mb-4 sm:mb-6">
                   Our consulting and planning team in Switzerland ensures
                   strategic alignment, while our skilled development teams in
                   India and Sri Lanka deliver quality, cost-effective execution.
@@ -120,25 +123,25 @@ export function About() {
             </div>
           </div>
 
-          <div className="mx-auto mt-16 max-w-2xl sm:mt-20 lg:mt-24 lg:max-w-none">
-            <dl className="grid max-w-xl grid-cols-1 gap-x-8 gap-y-16 lg:max-w-none lg:grid-cols-3">
+          <div className="mx-auto mt-12 max-w-2xl sm:mt-16 lg:mt-20 lg:max-w-none">
+            <dl className="grid max-w-xl grid-cols-1 gap-x-6 gap-y-8 lg:max-w-none lg:grid-cols-3">
               {features.map((feature) => (
                 <div
                   key={feature.name}
-                  className={`group relative isolate flex flex-col overflow-hidden rounded-3xl bg-white p-8 shadow-lg ring-1 ring-slate-200 transition-all duration-200 hover:shadow-xl ${colors[feature.color].shadow}`}
+                  className={`group relative isolate flex flex-col overflow-hidden rounded-2xl bg-white p-6 shadow-lg ring-1 ring-slate-200 transition-all duration-200 hover:shadow-xl sm:rounded-3xl sm:p-8 ${colors[feature.color].shadow}`}
                 >
                   <div className="flex items-center gap-x-4">
                     <div
-                      className={`rounded-xl ${colors[feature.color].light} p-2.5 ${colors[feature.color].text} ring-1 ring-inset ${colors[feature.color].border}`}
+                      className={`rounded-lg sm:rounded-xl ${colors[feature.color].light} p-2 sm:p-2.5 ${colors[feature.color].text} ring-1 ring-inset ${colors[feature.color].border}`}
                     >
-                      <feature.icon className="h-6 w-6" />
+                      <feature.icon className="h-5 w-5 sm:h-6 sm:w-6" />
                     </div>
-                    <h3 className="text-xl font-semibold text-slate-900">
+                    <h3 className="text-lg font-semibold text-slate-900 sm:text-xl">
                       {feature.name}
                     </h3>
                   </div>
-                  <div className="relative mt-6 flex-1">
-                    <p className="text-base leading-7 text-slate-600">
+                  <div className="relative mt-4 flex-1 sm:mt-6">
+                    <p className="text-sm leading-6 text-slate-600 sm:text-base sm:leading-7">
                       {feature.description}
                     </p>
                   </div>

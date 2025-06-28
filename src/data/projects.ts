@@ -2,7 +2,7 @@ export type Project = {
   name: string
   description: string
   tech: string[]
-  video: string
+  image: string
   link: string
   category: string
   color: 'blue' | 'emerald' | 'purple'
@@ -14,10 +14,30 @@ export const projects: Project[] = [
     description:
       'A smart restaurant order and billing platform that revolutionizes dining operations. Features include QR code menus, real-time order tracking, and integrated payment processing.',
     tech: ['React', 'Node.js', 'MySQL', 'Stripe'],
-    video: '/videos/dineeasy-demo.mp4',
+    image: '/images/projects/dineeasy.jpg',
     link: '#',
     category: 'Restaurant Tech',
     color: 'emerald',
+  },
+  {
+    name: 'WorkFlow',
+    description:
+      'An enterprise project management solution that streamlines team collaboration, task tracking, and resource allocation with intuitive dashboards and real-time analytics.',
+    tech: ['Vue.js', 'Laravel', 'PostgreSQL', 'Redis'],
+    image: '/images/projects/workflow.jpg',
+    link: '#',
+    category: 'Enterprise Software',
+    color: 'blue',
+  },
+  {
+    name: 'HealthTrack',
+    description:
+      'A comprehensive healthcare management system that helps clinics and hospitals manage patient records, appointments, and billing while ensuring HIPAA compliance.',
+    tech: ['Next.js', 'TypeScript', 'MongoDB', 'AWS'],
+    image: '/images/projects/healthtrack.jpg',
+    link: '#',
+    category: 'Healthcare',
+    color: 'purple',
   },
 ]
 

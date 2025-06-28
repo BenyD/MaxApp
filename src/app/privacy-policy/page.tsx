@@ -123,11 +123,11 @@ export default function PrivacyPolicy() {
             <div className="prose prose-slate mt-16 space-y-12">
               <PolicySection title="Introduction" id="introduction">
                 <p className="text-slate-600">
-                  This Privacy Policy explains how MaxApp AG ("we", "us", "our")
-                  collects, uses, and protects your personal data in accordance
-                  with the Swiss Federal Act on Data Protection (FADP), the EU
-                  General Data Protection Regulation (GDPR), and other
-                  applicable data protection laws.
+                  This Privacy Policy explains how MaxApp AG (&quot;we&quot;,
+                  &quot;us&quot;, &quot;our&quot;) collects, uses, and protects
+                  your personal data in accordance with the Swiss Federal Act on
+                  Data Protection (FADP), the EU General Data Protection
+                  Regulation (GDPR), and other applicable data protection laws.
                 </p>
                 <p className="text-slate-600">
                   We are committed to protecting your privacy and ensuring the

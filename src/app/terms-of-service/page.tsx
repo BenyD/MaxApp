@@ -203,7 +203,7 @@ export default function TermsOfService() {
                     <li>Transmitting harmful code or malware</li>
                     <li>Attempting to gain unauthorized access</li>
                     <li>
-                      Interfering with other users' access to the services
+                      Interfering with other users&apos; access to the services
                     </li>
                   </ul>
                 </div>

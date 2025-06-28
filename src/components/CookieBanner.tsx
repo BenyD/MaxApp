@@ -80,8 +80,8 @@ export function CookieBanner() {
         <>
           <p className="max-w-4xl text-sm leading-6 text-slate-700">
             We use cookies to enhance your browsing experience and analyze our
-            traffic. By clicking "Accept all," you consent to our use of
-            cookies. See our{' '}
+            traffic. By clicking &quot;Accept all,&quot; you consent to our use
+            of cookies. See our{' '}
             <Link
               href="/cookie-policy"
               className="font-semibold text-blue-600 hover:text-blue-500"

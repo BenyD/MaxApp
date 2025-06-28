@@ -2,6 +2,7 @@
 
 import { useEffect, useState, useCallback } from 'react'
 import Link from 'next/link'
+import { usePathname } from 'next/navigation'
 import {
   Popover,
   PopoverButton,
@@ -13,7 +14,7 @@ import clsx from 'clsx'
 import { Button } from '@/components/Button'
 import { Container } from '@/components/Container'
 import { Logo } from '@/components/Logo'
-import { NavLink } from '@/components/NavLink'
+import { MobileNavigation } from '@/components/MobileNavigation'
 
 function MobileNavLink({
   href,
@@ -53,35 +54,6 @@ function MobileNavIcon({ open }: { open: boolean }) {
         )}
       />
     </svg>
-  )
-}
-
-function MobileNavigation() {
-  return (
-    <Popover>
-      <PopoverButton
-        className="relative z-10 flex h-8 w-8 items-center justify-center focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:outline-none"
-        aria-label="Toggle Navigation"
-      >
-        {({ open }) => <MobileNavIcon open={open} />}
-      </PopoverButton>
-      <PopoverBackdrop
-        transition
-        className="fixed inset-0 bg-slate-300/50 backdrop-blur-sm duration-150 data-closed:opacity-0 data-enter:ease-out data-leave:ease-in"
-      />
-      <PopoverPanel
-        transition
-        className="absolute inset-x-0 top-full mt-4 flex origin-top flex-col rounded-2xl bg-white p-4 text-lg tracking-tight text-slate-900 shadow-xl ring-1 ring-slate-900/5 data-closed:scale-95 data-closed:opacity-0 data-enter:duration-150 data-enter:ease-out data-leave:duration-100 data-leave:ease-in"
-      >
-        <MobileNavLink href="#about">About</MobileNavLink>
-        <MobileNavLink href="#services">Services</MobileNavLink>
-        <MobileNavLink href="#why-us">Why Us</MobileNavLink>
-        <MobileNavLink href="#projects">Projects</MobileNavLink>
-        <MobileNavLink href="#tech-stack">Tech Stack</MobileNavLink>
-        <hr className="m-2 border-slate-300/40" />
-        <MobileNavLink href="#contact">Contact</MobileNavLink>
-      </PopoverPanel>
-    </Popover>
   )
 }
 
@@ -146,15 +118,38 @@ function ScrollProgressBar() {
   )
 }
 
+function NavLink({
+  href,
+  children,
+}: {
+  href: string
+  children: React.ReactNode
+}) {
+  const pathname = usePathname()
+  const isHomePage = pathname === '/'
+  const fullHref = isHomePage ? href : `/${href.slice(1)}`
+
+  return (
+    <Link
+      href={fullHref}
+      className="inline-block rounded-lg px-2 py-1 text-sm text-slate-700 hover:bg-slate-100 hover:text-slate-900"
+    >
+      {children}
+    </Link>
+  )
+}
+
 export function Header() {
   const [isScrolled, setIsScrolled] = useState(false)
+  const pathname = usePathname()
+  const isHomePage = pathname === '/'
 
   const handleScroll = useCallback(() => {
     setIsScrolled(window.scrollY > 0)
   }, [])
 
   useEffect(() => {
-    handleScroll() // Check initial scroll position
+    handleScroll()
     window.addEventListener('scroll', handleScroll, { passive: true })
     return () => window.removeEventListener('scroll', handleScroll)
   }, [handleScroll])
@@ -169,19 +164,25 @@ export function Header() {
       <Container className="py-4 sm:py-6">
         <nav className="relative z-50 flex items-center justify-between">
           <div className="flex items-center gap-x-8 md:gap-x-12">
-            <Link href="#" aria-label="Home" className="flex-shrink-0">
+            <Link href="/" aria-label="Home" className="flex-shrink-0">
               <Logo className="h-6 w-auto sm:h-8" />
             </Link>
-            <div className="hidden md:flex md:gap-x-6">
-              <NavLink href="#about">About</NavLink>
-              <NavLink href="#services">Services</NavLink>
-              <NavLink href="#why-us">Why Us</NavLink>
-              <NavLink href="#projects">Projects</NavLink>
-              <NavLink href="#tech-stack">Tech Stack</NavLink>
-            </div>
+            {isHomePage && (
+              <div className="hidden md:flex md:gap-x-6">
+                <NavLink href="#about">About</NavLink>
+                <NavLink href="#services">Services</NavLink>
+                <NavLink href="#why-us">Why Us</NavLink>
+                <NavLink href="#projects">Projects</NavLink>
+                <NavLink href="#tech-stack">Tech Stack</NavLink>
+              </div>
+            )}
           </div>
           <div className="flex items-center gap-x-5 md:gap-x-8">
-            <Button href="#contact" color="blue" className="hidden sm:block">
+            <Button
+              href={isHomePage ? '#contact' : '/#contact'}
+              color="blue"
+              className="hidden sm:block"
+            >
               Contact Us
             </Button>
             <div className="sm:-mr-1 md:hidden">
@@ -190,7 +191,7 @@ export function Header() {
           </div>
         </nav>
       </Container>
-      <ScrollProgressBar />
+      {isHomePage && <ScrollProgressBar />}
     </header>
   )
 }

@@ -1,25 +1,55 @@
+'use client'
+
 import Link from 'next/link'
+import { usePathname } from 'next/navigation'
 
 import { Container } from '@/components/Container'
 import { Logo } from '@/components/Logo'
-import { NavLink } from '@/components/NavLink'
+
+function FooterLink({
+  href,
+  children,
+}: {
+  href: string
+  children: React.ReactNode
+}) {
+  const pathname = usePathname()
+  const isHomePage = pathname === '/'
+  const fullHref = isHomePage ? href : `/${href.slice(1)}`
+
+  return (
+    <Link
+      href={fullHref}
+      className="inline-block rounded-lg px-2 py-1 text-sm text-slate-700 transition hover:bg-slate-100 hover:text-slate-900"
+    >
+      {children}
+    </Link>
+  )
+}
 
 export function Footer() {
+  const pathname = usePathname()
+  const isHomePage = pathname === '/'
+
   return (
     <footer className="bg-slate-50">
       <Container>
         <div className="py-16">
-          <Logo className="mx-auto h-10 w-auto" />
-          <nav className="mt-10 text-sm" aria-label="quick links">
-            <div className="-my-1 flex flex-wrap justify-center gap-x-6 gap-y-3">
-              <NavLink href="#about">About</NavLink>
-              <NavLink href="#services">Services</NavLink>
-              <NavLink href="#why-us">Why Us</NavLink>
-              <NavLink href="#projects">Projects</NavLink>
-              <NavLink href="#tech-stack">Tech Stack</NavLink>
-              <NavLink href="#contact">Contact</NavLink>
-            </div>
-          </nav>
+          <Link href="/" className="mx-auto block w-fit">
+            <Logo className="h-10 w-auto" />
+          </Link>
+          {isHomePage && (
+            <nav className="mt-10 text-sm" aria-label="quick links">
+              <div className="-my-1 flex flex-wrap justify-center gap-x-6 gap-y-3">
+                <FooterLink href="#about">About</FooterLink>
+                <FooterLink href="#services">Services</FooterLink>
+                <FooterLink href="#why-us">Why Us</FooterLink>
+                <FooterLink href="#projects">Projects</FooterLink>
+                <FooterLink href="#tech-stack">Tech Stack</FooterLink>
+                <FooterLink href="#contact">Contact</FooterLink>
+              </div>
+            </nav>
+          )}
         </div>
         <div className="flex flex-col items-center border-t border-slate-400/10 py-10 sm:flex-row-reverse sm:justify-between">
           <div className="flex gap-x-6">
@@ -53,10 +83,33 @@ export function Footer() {
               </svg>
             </Link>
           </div>
-          <p className="mt-6 text-sm text-slate-500 sm:mt-0">
-            Copyright &copy; {new Date().getFullYear()} Maxapp. All rights
-            reserved.
-          </p>
+          <div className="mt-6 flex flex-col items-center gap-y-2 sm:mt-0 sm:flex-row sm:gap-x-4">
+            <p className="text-sm text-slate-500">
+              Copyright &copy; {new Date().getFullYear()} MaxApp. All rights
+              reserved.
+            </p>
+            <span className="hidden text-slate-400 sm:inline">•</span>
+            <Link
+              href="/terms-of-service"
+              className="text-sm text-slate-500 hover:text-slate-600"
+            >
+              Terms of Service
+            </Link>
+            <span className="hidden text-slate-400 sm:inline">•</span>
+            <Link
+              href="/privacy-policy"
+              className="text-sm text-slate-500 hover:text-slate-600"
+            >
+              Privacy Policy
+            </Link>
+            <span className="hidden text-slate-400 sm:inline">•</span>
+            <Link
+              href="/cookie-policy"
+              className="text-sm text-slate-500 hover:text-slate-600"
+            >
+              Cookie Policy
+            </Link>
+          </div>
         </div>
       </Container>
     </footer>

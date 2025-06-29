@@ -1,7 +1,10 @@
+'use client'
+
 import { Container } from '@/components/Container'
 import { ArrowTopRightOnSquareIcon } from '@heroicons/react/24/outline'
 import { Project, projects, colors } from '@/data/projects'
 import Image from 'next/image'
+import { useTranslations } from 'next-intl'
 
 function ProjectCard({
   project,
@@ -66,6 +69,8 @@ function ProjectCard({
 }
 
 export function Projects() {
+  const t = useTranslations('projects')
+
   return (
     <div className="relative bg-white py-16 sm:py-24 lg:py-32" id="projects">
       <div className="absolute inset-x-0 top-0 -z-10 h-24 bg-gradient-to-b from-slate-50"></div>
@@ -74,15 +79,13 @@ export function Projects() {
       <Container>
         <div className="mx-auto max-w-3xl px-4 text-center sm:px-6 lg:px-8">
           <h2 className="text-base leading-7 font-semibold text-blue-600">
-            Our Portfolio
+            {t('title')}
           </h2>
           <p className="mt-2 text-2xl font-bold tracking-tight text-slate-900 sm:text-3xl lg:text-4xl">
-            Projects We&apos;ve Delivered
+            {t('subtitle')}
           </p>
           <p className="mt-4 text-base leading-7 text-slate-600 sm:mt-6 sm:text-lg">
-            Explore some of our successful projects where we&apos;ve helped
-            businesses transform their operations with innovative software
-            solutions.
+            {t('description')}
           </p>
         </div>
         <div className="mx-auto mt-12 max-w-5xl space-y-8 px-4 sm:mt-16 sm:space-y-12 sm:px-6 lg:px-8">

@@ -80,9 +80,9 @@
     }
   },
   "projects": {
-    "title": "Unsere Arbeit",
-    "subtitle": "Ausgewählte Projekte",
-    "description": "Entdecken Sie unser Portfolio erfolgreicher Projekte und digitaler Lösungen."
+    "title": "Unser Portfolio",
+    "subtitle": "Erfolgreich umgesetzte Projekte",
+    "description": "Entdecken Sie einige unserer erfolgreichen Projekte, bei denen wir Unternehmen mit innovativen Softwarelösungen bei der Transformation ihrer Geschäftsprozesse unterstützt haben."
   },
   "contact": {
     "title": "Kontakt aufnehmen",
@@ -431,6 +431,50 @@
           "description": "Speichern Ihre Einstellungen und Präferenzen für ein besseres Erlebnis."
         }
       }
+    }
+  },
+  "techStack": {
+    "title": "Unsere Technologien",
+    "subtitle": "Technologien, die wir beherrschen",
+    "description": "Wir nutzen die neuesten und leistungsfähigsten Technologien, um robuste, skalierbare und effiziente Lösungen für unsere Kunden zu entwickeln.",
+    "categories": {
+      "Frontend Development": {
+        "title": "Frontend-Entwicklung",
+        "description": "Moderne, responsive und interaktive Benutzeroberflächen, entwickelt mit modernsten Webtechnologien."
+      },
+      "Backend Development": {
+        "title": "Backend-Entwicklung",
+        "description": "Robuste und skalierbare serverseitige Lösungen, die unsere Anwendungen antreiben."
+      },
+      "Database Systems": {
+        "title": "Datenbanksysteme",
+        "description": "Effiziente und zuverlässige Datenspeicher- und Verwaltungssysteme."
+      },
+      "Cloud & DevOps": {
+        "title": "Cloud & DevOps",
+        "description": "Nahtlose Bereitstellung und Skalierung mit moderner Cloud-Infrastruktur."
+      },
+      "Design & Collaboration": {
+        "title": "Design & Zusammenarbeit",
+        "description": "Tools und Plattformen, die schönes Design und effiziente Teamarbeit ermöglichen."
+      }
+    },
+    "types": {
+      "Framework": "Framework",
+      "Language": "Sprache",
+      "Styling": "Styling",
+      "Runtime": "Laufzeitumgebung",
+      "SQL": "SQL",
+      "NoSQL": "NoSQL",
+      "Cache": "Cache",
+      "Cloud": "Cloud",
+      "Container": "Container",
+      "Orchestration": "Orchestrierung",
+      "Hosting": "Hosting",
+      "Design": "Design",
+      "Version Control": "Versionskontrolle",
+      "Project Management": "Projektmanagement",
+      "Communication": "Kommunikation"
     }
   }
 }

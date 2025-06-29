@@ -129,9 +129,9 @@
     }
   },
   "projects": {
-    "title": "Our Work",
-    "subtitle": "Featured Projects",
-    "description": "Explore our portfolio of successful projects and digital solutions."
+    "title": "Our Portfolio",
+    "subtitle": "Projects We've Delivered",
+    "description": "Explore some of our successful projects where we've helped businesses transform their operations with innovative software solutions."
   },
   "contact": {
     "title": "Get in Touch",
@@ -431,6 +431,50 @@
           "description": "Remember your settings and preferences for a better experience."
         }
       }
+    }
+  },
+  "techStack": {
+    "title": "Our Tech Stack",
+    "subtitle": "Technologies We Master",
+    "description": "We leverage the latest and most powerful technologies to build robust, scalable, and efficient solutions for our clients.",
+    "categories": {
+      "Frontend Development": {
+        "title": "Frontend Development",
+        "description": "Modern, responsive, and interactive user interfaces built with cutting-edge web technologies."
+      },
+      "Backend Development": {
+        "title": "Backend Development",
+        "description": "Robust and scalable server-side solutions that power our applications."
+      },
+      "Database Systems": {
+        "title": "Database Systems",
+        "description": "Efficient and reliable data storage and management systems."
+      },
+      "Cloud & DevOps": {
+        "title": "Cloud & DevOps",
+        "description": "Seamless deployment and scaling with modern cloud infrastructure."
+      },
+      "Design & Collaboration": {
+        "title": "Design & Collaboration",
+        "description": "Tools and platforms that enable beautiful design and efficient teamwork."
+      }
+    },
+    "types": {
+      "Framework": "Framework",
+      "Language": "Language",
+      "Styling": "Styling",
+      "Runtime": "Runtime",
+      "SQL": "SQL",
+      "NoSQL": "NoSQL",
+      "Cache": "Cache",
+      "Cloud": "Cloud",
+      "Container": "Container",
+      "Orchestration": "Orchestration",
+      "Hosting": "Hosting",
+      "Design": "Design",
+      "Version Control": "Version Control",
+      "Project Management": "Project Management",
+      "Communication": "Communication"
     }
   }
 }

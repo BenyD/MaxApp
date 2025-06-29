@@ -19,26 +19,6 @@ export const projects: Project[] = [
     category: 'Restaurant Tech',
     color: 'emerald',
   },
-  {
-    name: 'WorkFlow',
-    description:
-      'An enterprise project management solution that streamlines team collaboration, task tracking, and resource allocation with intuitive dashboards and real-time analytics.',
-    tech: ['Vue.js', 'Laravel', 'PostgreSQL', 'Redis'],
-    image: '/images/projects/workflow.jpg',
-    link: '#',
-    category: 'Enterprise Software',
-    color: 'blue',
-  },
-  {
-    name: 'HealthTrack',
-    description:
-      'A comprehensive healthcare management system that helps clinics and hospitals manage patient records, appointments, and billing while ensuring HIPAA compliance.',
-    tech: ['Next.js', 'TypeScript', 'MongoDB', 'AWS'],
-    image: '/images/projects/healthtrack.jpg',
-    link: '#',
-    category: 'Healthcare',
-    color: 'purple',
-  },
 ]
 
 export const colors = {

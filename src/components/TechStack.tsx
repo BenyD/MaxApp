@@ -2,6 +2,7 @@
 
 import { Container } from '@/components/Container'
 import Image from 'next/image'
+import { useTranslations } from 'next-intl'
 import {
   TechStack as TechStackType,
   techStacks,
@@ -9,6 +10,8 @@ import {
 } from '@/data/tech-stack'
 
 function TechStackCard({ stack }: { stack: TechStackType }) {
+  const t = useTranslations('techStack')
+
   return (
     <div
       className={`group relative isolate overflow-hidden rounded-3xl bg-white p-8 shadow-lg ring-1 ring-slate-200 transition-all duration-200 hover:shadow-xl ${colors[stack.color].shadow}`}
@@ -22,11 +25,11 @@ function TechStackCard({ stack }: { stack: TechStackType }) {
               <stack.icon className="h-6 w-6" />
             </div>
             <h3 className="text-xl font-semibold text-slate-900">
-              {stack.category}
+              {t(`categories.${stack.category}.title`)}
             </h3>
           </div>
           <p className="text-base leading-7 text-slate-600 sm:max-w-sm sm:text-right">
-            {stack.description}
+            {t(`categories.${stack.category}.description`)}
           </p>
         </div>
 
@@ -49,7 +52,9 @@ function TechStackCard({ stack }: { stack: TechStackType }) {
                   <p className="text-sm font-medium text-slate-900">
                     {tech.name}
                   </p>
-                  <p className="mt-1 text-xs text-slate-500">{tech.type}</p>
+                  <p className="mt-1 text-xs text-slate-500">
+                    {t(`types.${tech.type}`)}
+                  </p>
                 </div>
               </div>
             ))}
@@ -64,6 +69,8 @@ function TechStackCard({ stack }: { stack: TechStackType }) {
 }
 
 export function TechStack() {
+  const t = useTranslations('techStack')
+
   return (
     <div className="relative bg-white py-24 sm:py-32" id="tech-stack">
       <div className="absolute inset-x-0 top-0 -z-10 h-24 bg-gradient-to-b from-slate-50"></div>
@@ -72,14 +79,13 @@ export function TechStack() {
       <Container>
         <div className="mx-auto max-w-3xl text-center">
           <h2 className="text-base leading-7 font-semibold text-blue-600">
-            Our Tech Stack
+            {t('title')}
           </h2>
           <p className="mt-2 text-3xl font-bold tracking-tight text-slate-900 sm:text-4xl">
-            Technologies We Master
+            {t('subtitle')}
           </p>
           <p className="mt-6 text-lg leading-8 text-slate-600">
-            We leverage the latest and most powerful technologies to build
-            robust, scalable, and efficient solutions for our clients.
+            {t('description')}
           </p>
         </div>
         <div className="mx-auto mt-16 max-w-7xl space-y-8">

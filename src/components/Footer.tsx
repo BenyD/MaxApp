@@ -2,6 +2,8 @@
 
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
+import { useTranslations } from 'next-intl'
+import { useLocale } from 'next-intl'
 
 import { Container } from '@/components/Container'
 import { Logo } from '@/components/Logo'
@@ -20,7 +22,7 @@ function FooterLink({
   return (
     <Link
       href={fullHref}
-      className="inline-block rounded-lg px-2 py-1 text-sm text-slate-700 transition hover:bg-slate-100 hover:text-slate-900"
+      className="inline-block rounded-lg px-2 py-1.5 text-sm text-slate-600 transition hover:bg-slate-100 hover:text-slate-900"
     >
       {children}
     </Link>
@@ -29,37 +31,51 @@ function FooterLink({
 
 export function Footer() {
   const pathname = usePathname()
+  const locale = useLocale()
   const isHomePage = pathname === '/'
+  const t = useTranslations('footer')
+
+  const navigationLinks = [
+    { href: '#about', key: 'about' },
+    { href: '#services', key: 'services' },
+    { href: '#why-us', key: 'whyUs' },
+    { href: '#projects', key: 'projects' },
+    { href: '#tech-stack', key: 'techStack' },
+    { href: '#contact', key: 'contact' },
+  ] as const
+
+  const legalLinks = [
+    { href: 'terms-of-service', key: 'terms' },
+    { href: 'privacy-policy', key: 'privacy' },
+    { href: 'cookie-policy', key: 'cookies' },
+  ] as const
 
   return (
     <footer className="bg-slate-50">
       <Container>
-        <div className="py-16">
-          <Link href="/" className="mx-auto block w-fit">
-            <Logo className="h-10 w-auto" />
+        <div className="py-12 sm:py-16">
+          <Link href={`/${locale}`} className="mx-auto block w-fit">
+            <Logo className="h-8 w-auto sm:h-10" />
           </Link>
-          {isHomePage && (
-            <nav className="mt-10 text-sm" aria-label="quick links">
-              <div className="-my-1 flex flex-wrap justify-center gap-x-6 gap-y-3">
-                <FooterLink href="#about">About</FooterLink>
-                <FooterLink href="#services">Services</FooterLink>
-                <FooterLink href="#why-us">Why Us</FooterLink>
-                <FooterLink href="#projects">Projects</FooterLink>
-                <FooterLink href="#tech-stack">Tech Stack</FooterLink>
-                <FooterLink href="#contact">Contact</FooterLink>
-              </div>
-            </nav>
-          )}
+          <nav className="mt-8 text-sm sm:mt-10" aria-label="quick links">
+            <div className="-my-1 flex flex-wrap justify-center gap-x-4 gap-y-3 px-4 sm:gap-x-6">
+              {navigationLinks.map(({ href, key }) => (
+                <FooterLink key={key} href={href}>
+                  {t(`navigation.${key}`)}
+                </FooterLink>
+              ))}
+            </div>
+          </nav>
         </div>
-        <div className="flex flex-col items-center border-t border-slate-400/10 py-10 sm:flex-row-reverse sm:justify-between">
+        <div className="flex flex-col items-center border-t border-slate-200 py-8 sm:py-10">
           <div className="flex gap-x-6">
             <Link
               href="mailto:hello@maxapp.ch"
               className="group"
-              aria-label="Email Maxapp"
+              aria-label={t('social.email')}
             >
               <svg
-                className="h-6 w-6 fill-slate-500 group-hover:fill-slate-700"
+                className="h-6 w-6 fill-slate-500 transition group-hover:fill-slate-700"
                 aria-hidden="true"
                 viewBox="0 0 24 24"
               >
@@ -72,10 +88,10 @@ export function Footer() {
               target="_blank"
               rel="noopener noreferrer"
               className="group"
-              aria-label="Maxapp on LinkedIn"
+              aria-label={t('social.linkedin')}
             >
               <svg
-                className="h-6 w-6 fill-slate-500 group-hover:fill-slate-700"
+                className="h-6 w-6 fill-slate-500 transition group-hover:fill-slate-700"
                 aria-hidden="true"
                 viewBox="0 0 24 24"
               >
@@ -83,32 +99,23 @@ export function Footer() {
               </svg>
             </Link>
           </div>
-          <div className="mt-6 flex flex-col items-center gap-y-2 sm:mt-0 sm:flex-row sm:gap-x-4">
+          <div className="mt-8 flex flex-col items-center gap-y-4 px-4 text-center sm:mt-6 sm:flex-row sm:justify-between sm:text-left">
             <p className="text-sm text-slate-500">
-              Copyright &copy; {new Date().getFullYear()} MaxApp. All rights
-              reserved.
+              {t.rich('legal.copyright', {
+                year: new Date().getFullYear(),
+              })}
             </p>
-            <span className="hidden text-slate-400 sm:inline">•</span>
-            <Link
-              href="/terms-of-service"
-              className="text-sm text-slate-500 hover:text-slate-600"
-            >
-              Terms of Service
-            </Link>
-            <span className="hidden text-slate-400 sm:inline">•</span>
-            <Link
-              href="/privacy-policy"
-              className="text-sm text-slate-500 hover:text-slate-600"
-            >
-              Privacy Policy
-            </Link>
-            <span className="hidden text-slate-400 sm:inline">•</span>
-            <Link
-              href="/cookie-policy"
-              className="text-sm text-slate-500 hover:text-slate-600"
-            >
-              Cookie Policy
-            </Link>
+            <div className="flex flex-wrap justify-center gap-4 sm:gap-x-6">
+              {legalLinks.map((link) => (
+                <Link
+                  key={link.key}
+                  href={`/${locale}/${link.href}`}
+                  className="text-sm text-slate-500 transition hover:text-slate-600"
+                >
+                  {t(`legal.${link.key}`)}
+                </Link>
+              ))}
+            </div>
           </div>
         </div>
       </Container>

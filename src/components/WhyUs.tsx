@@ -6,6 +6,7 @@ import {
   ChartBarIcon,
   ShieldCheckIcon,
 } from '@heroicons/react/24/outline'
+import { useTranslations } from 'next-intl'
 
 type ColorKey = 'blue' | 'emerald' | 'purple' | 'amber' | 'rose'
 
@@ -18,66 +19,41 @@ type ColorConfig = {
 }
 
 type Feature = {
-  name: string
-  description: string
+  key: string
   icon: React.ComponentType<{ className?: string }>
   color: ColorKey
-  stats?: string
-  statsText?: string
   size?: 'large' | 'medium' | 'small'
-  metrics?: { label: string; value: string }[]
 }
 
 const features: Feature[] = [
   {
-    name: 'Swiss Engineering Standards',
-    description:
-      'Every project follows strict Swiss quality guidelines, ensuring robust and reliable solutions. Our development process combines precision engineering with innovative approaches.',
+    key: 'swissStandards',
     icon: ShieldCheckIcon,
     color: 'blue',
     size: 'large',
-    metrics: [
-      { label: 'Code Coverage', value: '95%' },
-      { label: 'Test Success Rate', value: '99.9%' },
-      { label: 'Client Satisfaction', value: '100%' },
-    ],
   },
   {
-    name: 'Cost-Effective',
-    description:
-      'Swiss quality at competitive rates through our distributed team model.',
+    key: 'costEffective',
     icon: CurrencyDollarIcon,
     color: 'emerald',
-    stats: '40%',
-    statsText: 'cost reduction',
     size: 'medium',
   },
   {
-    name: 'Custom Solutions',
-    description: 'Tailored software that grows with your business needs.',
+    key: 'customSolutions',
     icon: LightBulbIcon,
     color: 'purple',
-    stats: '100%',
-    statsText: 'customization',
     size: 'medium',
   },
   {
-    name: 'Fast Delivery',
-    description: 'Agile development with transparent progress tracking.',
+    key: 'fastDelivery',
     icon: ClockIcon,
     color: 'amber',
-    stats: '2x',
-    statsText: 'faster delivery',
     size: 'small',
   },
   {
-    name: 'Proven Success',
-    description:
-      'Track record of successful projects across various industries.',
+    key: 'provenSuccess',
     icon: ChartBarIcon,
     color: 'rose',
-    stats: '50+',
-    statsText: 'projects delivered',
     size: 'small',
   },
 ]
@@ -121,6 +97,7 @@ const colors: Record<ColorKey, ColorConfig> = {
 }
 
 function FeatureCard({ feature }: { feature: Feature }) {
+  const t = useTranslations('whyUs.features')
   const sizeClasses = {
     large: 'lg:col-span-2',
     medium: '',
@@ -137,37 +114,41 @@ function FeatureCard({ feature }: { feature: Feature }) {
         >
           <feature.icon className="h-6 w-6" />
         </div>
-        <h3 className="text-xl font-semibold text-slate-900">{feature.name}</h3>
+        <h3 className="text-xl font-semibold text-slate-900">
+          {t(`${feature.key}.name`)}
+        </h3>
       </div>
 
       <div className="relative mt-6 flex-1">
         <p className="text-base leading-7 text-slate-600">
-          {feature.description}
+          {t(`${feature.key}.description`)}
         </p>
 
         {/* Metrics Grid - Only for large card */}
-        {feature.metrics && (
+        {feature.size === 'large' && (
           <div className="mt-8 grid grid-cols-3 gap-4">
-            {feature.metrics.map((metric) => (
-              <div
-                key={metric.label}
-                className={`rounded-2xl ${colors[feature.color].light} border p-4 text-center ${colors[feature.color].border}`}
-              >
+            {['codeCoverage', 'testSuccess', 'satisfaction'].map(
+              (metricKey) => (
                 <div
-                  className={`text-2xl font-bold ${colors[feature.color].text}`}
+                  key={metricKey}
+                  className={`rounded-2xl ${colors[feature.color].light} border p-4 text-center ${colors[feature.color].border}`}
                 >
-                  {metric.value}
+                  <div
+                    className={`text-2xl font-bold ${colors[feature.color].text}`}
+                  >
+                    {t(`${feature.key}.metrics.${metricKey}.value`)}
+                  </div>
+                  <div className="mt-1 text-sm text-slate-600">
+                    {t(`${feature.key}.metrics.${metricKey}.label`)}
+                  </div>
                 </div>
-                <div className="mt-1 text-sm text-slate-600">
-                  {metric.label}
-                </div>
-              </div>
-            ))}
+              ),
+            )}
           </div>
         )}
 
         {/* Stats - For medium and small cards */}
-        {feature.stats && (
+        {feature.size !== 'large' && (
           <div className="mt-8">
             <div
               className={`inline-flex items-baseline rounded-xl ${colors[feature.color].light} border px-4 py-2 ${colors[feature.color].border}`}
@@ -175,10 +156,10 @@ function FeatureCard({ feature }: { feature: Feature }) {
               <span
                 className={`text-2xl font-bold ${colors[feature.color].text}`}
               >
-                {feature.stats}
+                {t(`${feature.key}.stats`)}
               </span>
               <span className="ml-2 text-sm text-slate-600">
-                {feature.statsText}
+                {t(`${feature.key}.statsText`)}
               </span>
             </div>
           </div>
@@ -192,29 +173,30 @@ function FeatureCard({ feature }: { feature: Feature }) {
 }
 
 export function WhyUs() {
+  const t = useTranslations('whyUs')
+
   return (
     <div className="relative bg-white py-24 sm:py-32" id="why-us">
       <div className="absolute inset-x-0 top-0 -z-10 h-24 bg-gradient-to-b from-slate-50"></div>
       <div className="absolute inset-x-0 bottom-0 -z-10 h-24 bg-gradient-to-t from-slate-50"></div>
 
       <Container>
-        <div className="mx-auto max-w-2xl text-center">
+        <div className="mx-auto max-w-2xl px-4 text-center sm:px-6 lg:px-8">
           <h2 className="text-base leading-7 font-semibold text-blue-600">
-            Why Choose Us
+            {t('title')}
           </h2>
-          <p className="mt-2 text-3xl font-bold tracking-tight text-slate-900 sm:text-4xl">
-            Swiss Precision, Global Innovation
+          <p className="mt-2 text-2xl font-bold tracking-tight text-slate-900 sm:text-3xl lg:text-4xl">
+            {t('subtitle')}
           </p>
-          <p className="mt-6 text-lg leading-8 text-slate-600">
-            Experience the perfect blend of Swiss engineering standards and
-            innovative development approaches.
+          <p className="mt-4 text-base leading-7 text-slate-600 sm:mt-6 sm:text-lg">
+            {t('description')}
           </p>
         </div>
 
-        <div className="mx-auto mt-16 max-w-7xl">
-          <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
+        <div className="mx-auto mt-12 max-w-7xl px-4 sm:mt-16 sm:px-6 lg:px-8">
+          <div className="mx-auto grid max-w-2xl grid-cols-1 gap-x-6 gap-y-8 sm:gap-x-8 sm:gap-y-12 lg:mx-0 lg:max-w-none lg:grid-cols-3">
             {features.map((feature) => (
-              <FeatureCard key={feature.name} feature={feature} />
+              <FeatureCard key={feature.key} feature={feature} />
             ))}
           </div>
         </div>

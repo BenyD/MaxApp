@@ -1,5 +1,6 @@
 'use client'
 
+import { useTranslations } from 'next-intl'
 import { Container } from '@/components/Container'
 import { ContentLayout } from '@/components/ContentLayout'
 import { Button } from '@/components/Button'
@@ -8,13 +9,15 @@ function CookieSection({
   title,
   children,
   className = '',
+  id,
 }: {
   title: string
   children: React.ReactNode
   className?: string
+  id?: string
 }) {
   return (
-    <section className={`space-y-4 ${className}`}>
+    <section className={`space-y-4 ${className}`} id={id}>
       <h2 className="text-2xl font-bold tracking-tight text-slate-900">
         {title}
       </h2>
@@ -23,7 +26,8 @@ function CookieSection({
   )
 }
 
-function UpdatePreferencesButton() {
+function UpdatePreferencesButton({ t }: { t: any }) {
+  const cookieBanner = useTranslations('cookieBanner')
   return (
     <Button
       onClick={(e) => {
@@ -32,12 +36,15 @@ function UpdatePreferencesButton() {
         window.dispatchEvent(event)
       }}
     >
-      Update Cookie Preferences
+      {cookieBanner('preferences.save')}
     </Button>
   )
 }
 
 export default function CookiePolicy() {
+  const t = useTranslations('policies.cookies')
+  const common = useTranslations('policies')
+
   return (
     <ContentLayout>
       <div className="relative overflow-hidden bg-white pt-24 pb-16 sm:pt-32 sm:pb-24">
@@ -73,45 +80,53 @@ export default function CookiePolicy() {
           <div className="mx-auto max-w-2xl lg:max-w-4xl">
             <div className="text-center">
               <h1 className="text-4xl font-bold tracking-tight text-slate-900 sm:text-5xl">
-                Cookie Policy
+                {t('title')}
               </h1>
               <p className="mt-4 text-lg text-slate-600">
-                Last updated: {new Date().toLocaleDateString('en-CH')}
+                {common.rich('lastUpdated', {
+                  date: new Date('2024-01-01').toLocaleDateString('en-US', {
+                    month: 'numeric',
+                    day: 'numeric',
+                    year: 'numeric',
+                  }),
+                })}
               </p>
             </div>
 
             {/* Table of contents */}
             <div className="mt-12 rounded-2xl bg-slate-50 px-8 py-6">
-              <h2 className="text-lg font-semibold text-slate-900">Contents</h2>
+              <h2 className="text-lg font-semibold text-slate-900">
+                {common('contents')}
+              </h2>
               <ul className="mt-4 space-y-2 text-sm text-slate-600">
                 <li>
                   <a href="#what-are-cookies" className="hover:text-blue-600">
-                    What are Cookies?
+                    {t('sections.whatAreCookies.title')}
                   </a>
                 </li>
                 <li>
                   <a href="#types-of-cookies" className="hover:text-blue-600">
-                    Types of Cookies We Use
+                    {t('sections.typesOfCookies.title')}
                   </a>
                 </li>
                 <li>
                   <a href="#your-rights" className="hover:text-blue-600">
-                    Your Rights and Choices
+                    {t('sections.yourRights.title')}
                   </a>
                 </li>
                 <li>
                   <a href="#how-to-control" className="hover:text-blue-600">
-                    How to Control Cookies
+                    {t('sections.howToControl.title')}
                   </a>
                 </li>
                 <li>
                   <a href="#contact-us" className="hover:text-blue-600">
-                    Contact Us
+                    {t('sections.contactUs.title')}
                   </a>
                 </li>
                 <li>
                   <a href="#updates" className="hover:text-blue-600">
-                    Updates to This Policy
+                    {t('sections.updates.title')}
                   </a>
                 </li>
               </ul>
@@ -119,132 +134,98 @@ export default function CookiePolicy() {
 
             {/* Main content */}
             <div className="prose prose-slate mt-16 space-y-12">
-              <CookieSection title="What are Cookies?" id="what-are-cookies">
+              <CookieSection
+                title={t('sections.whatAreCookies.title')}
+                id="what-are-cookies"
+              >
                 <p className="text-slate-600">
-                  Cookies are small text files that are stored on your device
-                  when you visit a website. They serve various purposes and can
-                  enhance your browsing experience. Some cookies are essential
-                  for the website to function properly, while others help us
-                  improve our services.
+                  {t('sections.whatAreCookies.content')}
                 </p>
               </CookieSection>
 
               <CookieSection
-                title="Types of Cookies We Use"
+                title={t('sections.typesOfCookies.title')}
                 id="types-of-cookies"
               >
                 <div className="mt-8 space-y-8">
                   <div className="rounded-2xl bg-white p-6 shadow-sm ring-1 ring-slate-900/5">
                     <h3 className="font-semibold text-slate-900">
-                      Essential Cookies
+                      {t('sections.typesOfCookies.essential.title')}
                     </h3>
                     <p className="mt-2 text-slate-600">
-                      These cookies are necessary for the website to function
-                      properly. They enable basic functions like page navigation
-                      and access to secure areas of the website. The website
-                      cannot function properly without these cookies.
+                      {t('sections.typesOfCookies.essential.content')}
                     </p>
                   </div>
 
                   <div className="rounded-2xl bg-white p-6 shadow-sm ring-1 ring-slate-900/5">
                     <h3 className="font-semibold text-slate-900">
-                      Analytics Cookies
+                      {t('sections.typesOfCookies.analytics.title')}
                     </h3>
                     <p className="mt-2 text-slate-600">
-                      These cookies help us understand how visitors interact
-                      with our website by collecting and reporting information
-                      anonymously. This helps us improve our website and
-                      services.
+                      {t('sections.typesOfCookies.analytics.content')}
                     </p>
                   </div>
 
                   <div className="rounded-2xl bg-white p-6 shadow-sm ring-1 ring-slate-900/5">
                     <h3 className="font-semibold text-slate-900">
-                      Marketing Cookies
+                      {t('sections.typesOfCookies.marketing.title')}
                     </h3>
                     <p className="mt-2 text-slate-600">
-                      These cookies are used to track visitors across websites.
-                      The intention is to display ads that are relevant and
-                      engaging for the individual user.
+                      {t('sections.typesOfCookies.marketing.content')}
                     </p>
                   </div>
 
                   <div className="rounded-2xl bg-white p-6 shadow-sm ring-1 ring-slate-900/5">
                     <h3 className="font-semibold text-slate-900">
-                      Preference Cookies
+                      {t('sections.typesOfCookies.preferences.title')}
                     </h3>
                     <p className="mt-2 text-slate-600">
-                      These cookies enable the website to remember information
-                      that changes the way the website behaves or looks, like
-                      your preferred language or the region you are in.
+                      {t('sections.typesOfCookies.preferences.content')}
                     </p>
                   </div>
                 </div>
               </CookieSection>
 
-              <CookieSection title="Your Rights and Choices" id="your-rights">
+              <CookieSection
+                title={t('sections.yourRights.title')}
+                id="your-rights"
+              >
                 <p className="text-slate-600">
-                  Under Swiss and EU data protection laws, you have the right
-                  to:
+                  {t('sections.yourRights.content')}
                 </p>
                 <ul className="mt-4 list-disc space-y-2 pl-5 text-slate-600">
-                  <li>Accept or decline cookies (except essential cookies)</li>
-                  <li>Change your cookie preferences at any time</li>
-                  <li>Delete cookies stored on your device</li>
-                  <li>Be informed about how we use cookies</li>
-                  <li>Understand what data we collect and how we use it</li>
+                  {(t.raw('sections.yourRights.items') as string[]).map(
+                    (item, index) => (
+                      <li key={index}>{item}</li>
+                    ),
+                  )}
                 </ul>
                 <div className="mt-8 flex justify-center">
-                  <UpdatePreferencesButton />
+                  <UpdatePreferencesButton t={t} />
                 </div>
               </CookieSection>
 
-              <CookieSection title="How to Control Cookies" id="how-to-control">
-                <div className="space-y-4 text-slate-600">
-                  <p>
-                    You can control and/or delete cookies as you wish. You can
-                    delete all cookies that are already on your device and you
-                    can set most browsers to prevent them from being placed.
-                    However, if you do this, you may have to manually adjust
-                    some preferences every time you visit our website and some
-                    services and functionalities may not work.
-                  </p>
-                  <p>
-                    Most web browsers allow some control of most cookies through
-                    the browser settings. To find out more about cookies,
-                    including how to see what cookies have been set, visit{' '}
-                    <a
-                      href="https://www.aboutcookies.org"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="text-blue-600 hover:text-blue-500"
-                    >
-                      www.aboutcookies.org
-                    </a>
-                  </p>
-                </div>
-              </CookieSection>
-
-              <CookieSection title="Contact Us" id="contact-us">
-                <div className="rounded-2xl bg-slate-50 p-6">
-                  <p className="text-slate-600">
-                    If you have any questions about our use of cookies or this
-                    Cookie Policy, please contact us at:
-                  </p>
-                  <div className="mt-4 space-y-2 text-slate-700">
-                    <p className="font-semibold">MaxApp AG</p>
-                    <p>Email: privacy@maxapp.ch</p>
-                    <p>Address: Rotkreuz, Switzerland</p>
-                  </div>
-                </div>
-              </CookieSection>
-
-              <CookieSection title="Updates to This Policy" id="updates">
+              <CookieSection
+                title={t('sections.howToControl.title')}
+                id="how-to-control"
+              >
                 <p className="text-slate-600">
-                  We may update this Cookie Policy from time to time to reflect
-                  changes in our practices or for operational, legal, or
-                  regulatory reasons. We encourage you to periodically review
-                  this page for the latest information on our cookie practices.
+                  {t('sections.howToControl.content')}
+                </p>
+              </CookieSection>
+
+              <CookieSection
+                title={t('sections.contactUs.title')}
+                id="contact-us"
+              >
+                <p className="text-slate-600">
+                  {t('sections.contactUs.content')}
+                </p>
+              </CookieSection>
+
+              <CookieSection title={t('sections.updates.title')} id="updates">
+                <p className="text-slate-600">
+                  {t('sections.updates.content')}
                 </p>
               </CookieSection>
             </div>
@@ -254,4 +235,3 @@ export default function CookiePolicy() {
     </ContentLayout>
   )
 }
- 

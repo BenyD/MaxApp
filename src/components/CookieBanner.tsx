@@ -1,7 +1,8 @@
 'use client'
 
 import { useState, useEffect } from 'react'
-import Link from 'next/link'
+import { useTranslations } from 'next-intl'
+import { Link } from '@/i18n/navigation'
 import { Button } from '@/components/Button'
 
 type CookieConsent = {
@@ -19,6 +20,7 @@ const defaultConsent: CookieConsent = {
 }
 
 export function CookieBanner() {
+  const t = useTranslations('cookieBanner')
   const [isVisible, setIsVisible] = useState(false)
   const [showPreferences, setShowPreferences] = useState(false)
   const [consent, setConsent] = useState<CookieConsent>(defaultConsent)
@@ -79,17 +81,16 @@ export function CookieBanner() {
       {!showPreferences ? (
         <>
           <p className="max-w-4xl text-sm leading-6 text-slate-700">
-            We use cookies to enhance your browsing experience and analyze our
-            traffic. By clicking &quot;Accept all,&quot; you consent to our use
-            of cookies. See our{' '}
-            <Link
-              href="/cookie-policy"
-              className="font-semibold text-blue-600 hover:text-blue-500"
-            >
-              cookie policy
-            </Link>{' '}
-            for more information about how we use cookies and how to manage your
-            preferences.
+            {t.rich('mainText', {
+              policyLink: (chunks) => (
+                <Link
+                  href="/cookie-policy"
+                  className="font-semibold text-blue-600 hover:text-blue-500"
+                >
+                  {chunks}
+                </Link>
+              ),
+            })}
           </p>
           <div className="flex flex-none items-center gap-x-5">
             <Button
@@ -97,21 +98,21 @@ export function CookieBanner() {
               color="blue"
               className="whitespace-nowrap"
             >
-              Accept all
+              {t('acceptAll')}
             </Button>
             <button
               type="button"
               onClick={() => setShowPreferences(true)}
               className="text-sm leading-6 font-semibold text-slate-900 hover:text-slate-700"
             >
-              Customize
+              {t('customize')}
             </button>
             <button
               type="button"
               onClick={() => handleRejectAll()}
               className="text-sm leading-6 font-semibold text-slate-900 hover:text-slate-700"
             >
-              Reject all
+              {t('rejectAll')}
             </button>
           </div>
         </>
@@ -119,23 +120,24 @@ export function CookieBanner() {
         <div className="w-full space-y-4">
           <div className="flex items-center justify-between">
             <h3 className="text-lg font-semibold text-slate-900">
-              Cookie Preferences
+              {t('preferences.title')}
             </h3>
             <Button
               onClick={() => handleSavePreferences()}
               color="blue"
               className="whitespace-nowrap"
             >
-              Save preferences
+              {t('preferences.save')}
             </Button>
           </div>
           <div className="space-y-4">
             <div className="flex items-center justify-between py-3">
               <div>
-                <p className="font-medium text-slate-900">Essential Cookies</p>
+                <p className="font-medium text-slate-900">
+                  {t('preferences.cookies.essential.title')}
+                </p>
                 <p className="text-sm text-slate-600">
-                  Required for the website to function properly. Cannot be
-                  disabled.
+                  {t('preferences.cookies.essential.description')}
                 </p>
               </div>
               <input
@@ -147,10 +149,11 @@ export function CookieBanner() {
             </div>
             <div className="flex items-center justify-between border-t border-slate-200 py-3">
               <div>
-                <p className="font-medium text-slate-900">Analytics Cookies</p>
+                <p className="font-medium text-slate-900">
+                  {t('preferences.cookies.analytics.title')}
+                </p>
                 <p className="text-sm text-slate-600">
-                  Help us improve our website by collecting anonymous usage
-                  information.
+                  {t('preferences.cookies.analytics.description')}
                 </p>
               </div>
               <input
@@ -164,10 +167,11 @@ export function CookieBanner() {
             </div>
             <div className="flex items-center justify-between border-t border-slate-200 py-3">
               <div>
-                <p className="font-medium text-slate-900">Marketing Cookies</p>
+                <p className="font-medium text-slate-900">
+                  {t('preferences.cookies.marketing.title')}
+                </p>
                 <p className="text-sm text-slate-600">
-                  Used to track visitors across websites to display relevant
-                  advertisements.
+                  {t('preferences.cookies.marketing.description')}
                 </p>
               </div>
               <input
@@ -181,10 +185,11 @@ export function CookieBanner() {
             </div>
             <div className="flex items-center justify-between border-t border-slate-200 py-3">
               <div>
-                <p className="font-medium text-slate-900">Preference Cookies</p>
+                <p className="font-medium text-slate-900">
+                  {t('preferences.cookies.preferences.title')}
+                </p>
                 <p className="text-sm text-slate-600">
-                  Remember your settings and preferences for a better
-                  experience.
+                  {t('preferences.cookies.preferences.description')}
                 </p>
               </div>
               <input
@@ -202,3 +207,4 @@ export function CookieBanner() {
     </div>
   )
 }
+ 

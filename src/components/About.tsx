@@ -1,3 +1,6 @@
+'use client'
+
+import { useTranslations } from 'next-intl'
 import { Container } from '@/components/Container'
 import Image from 'next/image'
 import {
@@ -6,31 +9,41 @@ import {
   SparklesIcon,
 } from '@heroicons/react/24/outline'
 
-const features = [
+type ColorKey = 'blue' | 'emerald' | 'purple'
+
+type ColorConfig = {
+  light: string
+  text: string
+  border: string
+  gradient: string
+  shadow: string
+}
+
+type Feature = {
+  key: string
+  icon: React.ComponentType<{ className?: string }>
+  color: ColorKey
+}
+
+const features: Feature[] = [
   {
-    name: 'Global Presence',
-    description:
-      'With offices in Switzerland, India, and Sri Lanka, we bring together diverse perspectives and round-the-clock capabilities.',
+    key: 'global',
     icon: GlobeAltIcon,
     color: 'blue',
   },
   {
-    name: 'Expert Teams',
-    description:
-      'Our multinational team combines Swiss precision with Asian innovation, delivering excellence across time zones.',
+    key: 'expert',
     icon: UserGroupIcon,
     color: 'emerald',
   },
   {
-    name: 'Quality Focus',
-    description:
-      'We maintain rigorous quality standards across all locations, ensuring consistent, high-quality deliverables.',
+    key: 'quality',
     icon: SparklesIcon,
     color: 'purple',
   },
 ]
 
-const colors = {
+const colors: Record<ColorKey, ColorConfig> = {
   blue: {
     light: 'bg-blue-50',
     text: 'text-blue-600',
@@ -55,6 +68,8 @@ const colors = {
 }
 
 export function About() {
+  const t = useTranslations('about')
+
   return (
     <div
       className="relative isolate bg-white py-16 sm:py-24 lg:py-32"
@@ -66,14 +81,13 @@ export function About() {
       <Container>
         <div className="mx-auto max-w-2xl px-4 text-center sm:px-6 lg:px-8">
           <h2 className="text-base leading-7 font-semibold text-blue-600">
-            About Us
+            {t('title')}
           </h2>
           <p className="mt-2 text-2xl font-bold tracking-tight text-slate-900 sm:text-3xl lg:text-4xl">
-            Global Excellence, Local Expertise
+            {t('subtitle')}
           </p>
           <p className="mt-4 text-base leading-7 text-slate-600 sm:mt-6 sm:text-lg">
-            We combine Swiss precision with global innovation to deliver
-            exceptional software solutions.
+            {t('description')}
           </p>
         </div>
 
@@ -90,11 +104,10 @@ export function About() {
                 />
                 <div className="absolute right-4 -bottom-6 left-4 rounded-2xl bg-white/90 p-4 shadow-lg backdrop-blur-sm sm:-bottom-8 sm:-left-8 sm:p-8 lg:block">
                   <p className="text-base font-semibold text-slate-900 sm:text-lg">
-                    24/7 Global Operations
+                    {t('operations.title')}
                   </p>
                   <p className="mt-2 text-xs text-slate-600 sm:text-sm">
-                    Our distributed team structure enables continuous
-                    development and support across time zones
+                    {t('operations.description')}
                   </p>
                 </div>
               </div>
@@ -103,22 +116,9 @@ export function About() {
 
             <div className="lg:order-1">
               <div className="text-base leading-7 text-slate-600 sm:text-lg">
-                <p className="mb-4 sm:mb-6">
-                  Maxapp is a Swiss-based software company headquartered in
-                  Rotkreuz. We specialize in practical, scalable software that
-                  aligns with real business goals, combining technical
-                  excellence with business acumen.
-                </p>
-                <p className="mb-4 sm:mb-6">
-                  Our consulting and planning team in Switzerland ensures
-                  strategic alignment, while our skilled development teams in
-                  India and Sri Lanka deliver quality, cost-effective execution.
-                </p>
-                <p>
-                  This unique setup allows us to offer the best of both worlds:
-                  Swiss quality standards and project management combined with
-                  highly skilled development teams across multiple time zones.
-                </p>
+                <p className="mb-4 sm:mb-6">{t('company.intro')}</p>
+                <p className="mb-4 sm:mb-6">{t('company.teams')}</p>
+                <p>{t('company.unique')}</p>
               </div>
             </div>
           </div>
@@ -127,7 +127,7 @@ export function About() {
             <dl className="grid max-w-xl grid-cols-1 gap-x-6 gap-y-8 lg:max-w-none lg:grid-cols-3">
               {features.map((feature) => (
                 <div
-                  key={feature.name}
+                  key={feature.key}
                   className={`group relative isolate flex flex-col overflow-hidden rounded-2xl bg-white p-6 shadow-lg ring-1 ring-slate-200 transition-all duration-200 hover:shadow-xl sm:rounded-3xl sm:p-8 ${colors[feature.color].shadow}`}
                 >
                   <div className="flex items-center gap-x-4">
@@ -137,12 +137,12 @@ export function About() {
                       <feature.icon className="h-5 w-5 sm:h-6 sm:w-6" />
                     </div>
                     <h3 className="text-lg font-semibold text-slate-900 sm:text-xl">
-                      {feature.name}
+                      {t(`features.${feature.key}.title`)}
                     </h3>
                   </div>
                   <div className="relative mt-4 flex-1 sm:mt-6">
                     <p className="text-sm leading-6 text-slate-600 sm:text-base sm:leading-7">
-                      {feature.description}
+                      {t(`features.${feature.key}.description`)}
                     </p>
                   </div>
                   {/* Decorative gradient background */}

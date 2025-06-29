@@ -1,0 +1,430 @@
+{
+  "navigation": {
+    "home": "Startseite",
+    "about": "Über uns",
+    "services": "Dienstleistungen",
+    "whyUs": "Warum Wir",
+    "projects": "Projekte",
+    "techStack": "Tech Stack",
+    "contact": "Kontakt"
+  },
+  "hero": {
+    "title": "Massgeschneiderte SaaS & Web-Lösungen",
+    "subtitle": "Entwickelt für Ihr Unternehmen",
+    "description": "Wir entwickeln und gestalten individuelle Web-Apps, Websites und digitale Tools – robust, skalierbar und auf Ihre Geschäftsanforderungen zugeschnitten.",
+    "cta": "Unsere Projekte"
+  },
+  "about": {
+    "title": "Über uns",
+    "subtitle": "Globale Exzellenz, Lokale Expertise",
+    "description": "Wir verbinden Schweizer Präzision mit globaler Innovation, um außergewöhnliche Software-Lösungen zu liefern.",
+    "features": {
+      "global": {
+        "title": "Globale Präsenz",
+        "description": "Mit Büros in der Schweiz, Indien und Sri Lanka vereinen wir verschiedene Perspektiven und rund um die Uhr Verfügbarkeit."
+      },
+      "expert": {
+        "title": "Experten-Teams",
+        "description": "Unser multinationales Team verbindet Schweizer Präzision mit asiatischer Innovation und liefert Exzellenz über alle Zeitzonen hinweg."
+      },
+      "quality": {
+        "title": "Qualitätsfokus",
+        "description": "Wir halten an allen Standorten strenge Qualitätsstandards ein und gewährleisten konsistente, hochwertige Ergebnisse."
+      }
+    },
+    "operations": {
+      "title": "24/7 Globaler Betrieb",
+      "description": "Unsere verteilte Teamstruktur ermöglicht kontinuierliche Entwicklung und Support über alle Zeitzonen hinweg"
+    },
+    "company": {
+      "intro": "Maxapp ist ein Schweizer Softwareunternehmen mit Hauptsitz in Rotkreuz. Wir sind spezialisiert auf praktische, skalierbare Software, die sich an realen Geschäftszielen orientiert und technische Exzellenz mit wirtschaftlichem Verständnis verbindet.",
+      "teams": "Unser Beratungs- und Planungsteam in der Schweiz gewährleistet die strategische Ausrichtung, während unsere qualifizierten Entwicklungsteams in Indien und Sri Lanka eine qualitativ hochwertige und kosteneffektive Umsetzung liefern.",
+      "unique": "Dieser einzigartige Aufbau ermöglicht es uns, das Beste aus beiden Welten zu bieten: Schweizer Qualitätsstandards und Projektmanagement kombiniert mit hochqualifizierten Entwicklungsteams über mehrere Zeitzonen hinweg."
+    }
+  },
+  "services": {
+    "title": "Unsere Expertise",
+    "subtitle": "Digitale Lösungen in Schweizer Qualität",
+    "description": "Wir entwickeln präzise, zukunftssichere digitale Lösungen – vom Konzept bis zur Einführung. Ob Geschäftsportal, internes Tool oder Online-Präsenz, wir bauen mit Fokus auf Zweck, Leistung und Skalierbarkeit.",
+    "items": {
+      "webApps": {
+        "title": "Web-Anwendungen",
+        "description": "Interaktive, browserbasierte Plattformen, die geräteübergreifend funktionieren – ideal für interne Dashboards, CRMs und Kundenportale.",
+        "features": [
+          "Echtzeit-Datensynchronisation",
+          "Sichere Authentifizierung",
+          "Individuelle Dashboards",
+          "API-Integration"
+        ]
+      },
+      "websites": {
+        "title": "Webseiten",
+        "description": "Hochleistungsfähige, responsive Websites, die Ihre Marke stärken – Landingpages, Unternehmensprofile, Blogs und mehr.",
+        "features": [
+          "SEO-Optimierung",
+          "Schnelle Ladezeiten",
+          "Mobile-First Design",
+          "Content-Management"
+        ]
+      },
+      "pwa": {
+        "title": "Progressive Web Apps",
+        "description": "Native-ähnliche Erlebnisse im Browser – schnelle, installierbare und offline-fähige Anwendungen für moderne Unternehmen.",
+        "features": [
+          "Offline-Funktionalität",
+          "Push-Benachrichtigungen",
+          "App-ähnliches Erlebnis",
+          "Plattformübergreifende Unterstützung"
+        ]
+      }
+    }
+  },
+  "projects": {
+    "title": "Unsere Arbeit",
+    "subtitle": "Ausgewählte Projekte",
+    "description": "Entdecken Sie unser Portfolio erfolgreicher Projekte und digitaler Lösungen."
+  },
+  "contact": {
+    "title": "Kontaktieren Sie uns",
+    "subtitle": "Lassen Sie uns gemeinsam etwas Großartiges entwickeln",
+    "description": "Bereit, Ihre digitale Vision Wirklichkeit werden zu lassen? Unser Team unterstützt Sie bei jedem Schritt.",
+    "form": {
+      "firstName": {
+        "label": "Vorname",
+        "placeholder": "Ihr Vorname",
+        "error": "Vorname ist erforderlich"
+      },
+      "lastName": {
+        "label": "Nachname",
+        "placeholder": "Ihr Nachname",
+        "error": "Nachname ist erforderlich"
+      },
+      "email": {
+        "label": "E-Mail",
+        "placeholder": "ihre.email@beispiel.com",
+        "error": {
+          "required": "E-Mail ist erforderlich",
+          "invalid": "Bitte geben Sie eine gültige E-Mail-Adresse ein"
+        }
+      },
+      "phone": {
+        "label": "Telefon",
+        "placeholder": "+41 (0) 000 00 00",
+        "error": {
+          "required": "Telefonnummer ist erforderlich",
+          "invalid": "Bitte geben Sie eine gültige Telefonnummer ein"
+        }
+      },
+      "message": {
+        "label": "Nachricht",
+        "placeholder": "Erzählen Sie uns von Ihrem Projekt...",
+        "error": "Nachricht ist erforderlich"
+      },
+      "submit": {
+        "button": "Nachricht senden",
+        "sending": "Wird gesendet...",
+        "success": "Nachricht erfolgreich gesendet!",
+        "error": "Fehler beim Senden der Nachricht. Bitte versuchen Sie es erneut."
+      }
+    },
+    "offices": {
+      "title": "Unsere Büros",
+      "switzerland": {
+        "city": "Rotkreuz",
+        "country": "Schweiz",
+        "address": "Grundstrasse 12, 6343 Rotkreuz",
+        "phone": "+41 79 123 45 67",
+        "email": "switzerland@maxapp.ch",
+        "timezone": "MEZ (UTC+1)",
+        "coordinates": "47.1435° N, 8.4351° O",
+        "hours": "9:00 - 18:00 MEZ"
+      },
+      "india": {
+        "city": "Chennai",
+        "country": "Indien",
+        "address": "Anna Nagar, Chennai, Tamil Nadu 600040",
+        "phone": "+91 44 1234 5678",
+        "email": "india@maxapp.ch",
+        "timezone": "IST (UTC+5:30)",
+        "coordinates": "13.0827° N, 80.2707° O",
+        "hours": "9:30 - 18:30 IST"
+      },
+      "srilanka": {
+        "city": "Colombo",
+        "country": "Sri Lanka",
+        "address": "World Trade Center, Colombo 01",
+        "phone": "+94 11 1234 567",
+        "email": "srilanka@maxapp.ch",
+        "timezone": "SLST (UTC+5:30)",
+        "coordinates": "6.9271° N, 79.8612° O",
+        "hours": "9:00 - 18:00 SLST"
+      }
+    }
+  },
+  "footer": {
+    "navigation": {
+      "about": "Über uns",
+      "services": "Dienstleistungen",
+      "whyUs": "Warum Wir",
+      "projects": "Projekte",
+      "techStack": "Tech Stack",
+      "contact": "Kontakt"
+    },
+    "social": {
+      "email": "E-Mail an Maxapp",
+      "linkedin": "Maxapp auf LinkedIn"
+    },
+    "legal": {
+      "copyright": "Copyright © {year} MaxApp. Alle Rechte vorbehalten.",
+      "terms": "Nutzungsbedingungen",
+      "privacy": "Datenschutzerklärung",
+      "cookies": "Cookie-Richtlinie"
+    }
+  },
+  "whyUs": {
+    "title": "Warum Uns Wählen",
+    "subtitle": "Exzellenz in Jedem Aspekt",
+    "description": "Wir verbinden Schweizer Präzision mit globaler Innovation für außergewöhnlichen Mehrwert.",
+    "features": {
+      "swissStandards": {
+        "name": "Schweizer Engineering-Standards",
+        "description": "Jedes Projekt folgt strengen Schweizer Qualitätsrichtlinien und garantiert robuste und zuverlässige Lösungen. Unser Entwicklungsprozess verbindet Präzisionstechnik mit innovativen Ansätzen.",
+        "metrics": {
+          "codeCoverage": {
+            "label": "Code-Abdeckung",
+            "value": "95%"
+          },
+          "testSuccess": {
+            "label": "Testerfolgrate",
+            "value": "99.9%"
+          },
+          "satisfaction": {
+            "label": "Kundenzufriedenheit",
+            "value": "100%"
+          }
+        }
+      },
+      "costEffective": {
+        "name": "Kosteneffektiv",
+        "description": "Schweizer Qualität zu wettbewerbsfähigen Preisen durch unser verteiltes Team-Modell.",
+        "stats": "40%",
+        "statsText": "Kostenreduktion"
+      },
+      "customSolutions": {
+        "name": "Maßgeschneiderte Lösungen",
+        "description": "Individuell angepasste Software, die mit Ihren Geschäftsanforderungen wächst.",
+        "stats": "100%",
+        "statsText": "Individualisierung"
+      },
+      "fastDelivery": {
+        "name": "Schnelle Lieferung",
+        "description": "Agile Entwicklung mit transparenter Fortschrittsverfolgung.",
+        "stats": "2x",
+        "statsText": "schnellere Lieferung"
+      },
+      "provenSuccess": {
+        "name": "Bewährter Erfolg",
+        "description": "Erfolgsbilanz von Projekten in verschiedenen Branchen.",
+        "stats": "50+",
+        "statsText": "gelieferte Projekte"
+      }
+    }
+  },
+  "policies": {
+    "lastUpdated": "Zuletzt aktualisiert: {date}",
+    "contents": "Inhalt",
+    "privacy": {
+      "title": "Datenschutzerklärung",
+      "sections": {
+        "introduction": {
+          "title": "Einleitung",
+          "paragraph1": "Diese Datenschutzerklärung erläutert, wie MaxApp AG (\"wir\", \"uns\", \"unser\") Ihre personenbezogenen Daten gemäß dem Schweizerischen Bundesgesetz über den Datenschutz (DSG), der EU-Datenschutz-Grundverordnung (DSGVO) und anderen anwendbaren Datenschutzgesetzen erhebt, verwendet und schützt.",
+          "paragraph2": "Wir verpflichten uns zum Schutz Ihrer Privatsphäre und zur Gewährleistung der Sicherheit Ihrer personenbezogenen Daten. Diese Richtlinie gilt für alle personenbezogenen Daten, die über unsere Website, Dienstleistungen und Geschäftstätigkeiten erhoben werden."
+        },
+        "dataCollection": {
+          "title": "Datenerhebung und -verwendung",
+          "infoWeCollect": {
+            "title": "Informationen, die wir erheben",
+            "items": [
+              "Kontaktinformationen (Name, E-Mail, Telefonnummer)",
+              "Geschäftsinformationen (Firmenname, Position)",
+              "Technische Daten (IP-Adresse, Browsertyp, Geräteinformationen)",
+              "Nutzungsdaten (wie Sie mit unseren Diensten interagieren)",
+              "Kommunikationsdaten (Anfragen, Feedback)"
+            ]
+          },
+          "howWeUse": {
+            "title": "Wie wir Ihre Daten verwenden",
+            "items": [
+              "Zur Bereitstellung und Verbesserung unserer Dienste",
+              "Zur Kommunikation mit Ihnen über unsere Dienste",
+              "Zur Gewährleistung der Sicherheit unserer Dienste",
+              "Zur Erfüllung gesetzlicher Verpflichtungen",
+              "Zur Analyse und Verbesserung unserer Website und Dienste"
+            ]
+          }
+        },
+        "legalBasis": {
+          "title": "Rechtsgrundlage für die Verarbeitung",
+          "content": "Wir verarbeiten Ihre personenbezogenen Daten auf folgender Rechtsgrundlage:",
+          "items": [
+            "Ihre Einwilligung",
+            "Erfüllung eines Vertrags mit Ihnen",
+            "Erfüllung rechtlicher Verpflichtungen",
+            "Unsere berechtigten Geschäftsinteressen"
+          ]
+        },
+        "dataSharing": {
+          "title": "Datenweitergabe und -übermittlung",
+          "content": "Wir können Ihre personenbezogenen Daten weitergeben an:"
+        },
+        "yourRights": {
+          "title": "Ihre Rechte",
+          "content": "Nach den geltenden Datenschutzgesetzen haben Sie folgende Rechte:"
+        },
+        "dataSecurity": {
+          "title": "Datensicherheit",
+          "content": "Wir implementieren angemessene technische und organisatorische Maßnahmen zum Schutz Ihrer personenbezogenen Daten."
+        },
+        "retention": {
+          "title": "Datenspeicherung",
+          "content": "Wir speichern Ihre personenbezogenen Daten nur so lange, wie es für die Erfüllung der Zwecke, für die sie erhoben wurden, erforderlich ist."
+        },
+        "international": {
+          "title": "Internationale Datenübermittlungen",
+          "content": "Ihre Daten können in Länder außerhalb Ihres Wohnsitzlandes übermittelt und dort verarbeitet werden."
+        },
+        "contact": {
+          "title": "Kontaktinformationen",
+          "content": "Bei Fragen zu dieser Datenschutzerklärung oder unseren Datenpraktiken kontaktieren Sie uns bitte."
+        }
+      }
+    },
+    "cookies": {
+      "title": "Cookie-Richtlinie",
+      "sections": {
+        "whatAreCookies": {
+          "title": "Was sind Cookies?",
+          "content": "Cookies sind kleine Textdateien, die auf Ihrem Gerät gespeichert werden, wenn Sie eine Website besuchen. Sie dienen verschiedenen Zwecken und können Ihr Browsing-Erlebnis verbessern. Einige Cookies sind für das ordnungsgemäße Funktionieren der Website unerlässlich, während andere uns helfen, unsere Dienste zu verbessern."
+        },
+        "typesOfCookies": {
+          "title": "Arten von Cookies, die wir verwenden",
+          "essential": {
+            "title": "Essentielle Cookies",
+            "content": "Diese Cookies sind für das ordnungsgemäße Funktionieren der Website notwendig. Sie ermöglichen grundlegende Funktionen wie Seitennavigation und Zugriff auf geschützte Bereiche der Website. Die Website kann ohne diese Cookies nicht richtig funktionieren."
+          },
+          "analytics": {
+            "title": "Analyse-Cookies",
+            "content": "Diese Cookies helfen uns zu verstehen, wie Besucher mit unserer Website interagieren, indem sie anonym Informationen sammeln und melden. Dies hilft uns, unsere Website und Dienste zu verbessern."
+          },
+          "marketing": {
+            "title": "Marketing-Cookies",
+            "content": "Diese Cookies werden verwendet, um Besucher über Websites hinweg zu verfolgen. Ziel ist es, Werbung anzuzeigen, die für den einzelnen Nutzer relevant und ansprechend ist."
+          },
+          "preferences": {
+            "title": "Präferenz-Cookies",
+            "content": "Diese Cookies ermöglichen es der Website, sich an Informationen zu erinnern, die das Verhalten oder Aussehen der Website ändern, wie Ihre bevorzugte Sprache oder die Region, in der Sie sich befinden."
+          }
+        },
+        "yourRights": {
+          "title": "Ihre Rechte und Wahlmöglichkeiten",
+          "content": "Nach Schweizer und EU-Datenschutzrecht haben Sie das Recht:",
+          "items": [
+            "Cookies zu akzeptieren oder abzulehnen (außer essentielle Cookies)",
+            "Ihre Cookie-Einstellungen jederzeit zu ändern",
+            "Auf Ihrem Gerät gespeicherte Cookies zu löschen",
+            "Über unsere Verwendung von Cookies informiert zu werden",
+            "Zu verstehen, welche Daten wir erheben und wie wir sie verwenden"
+          ]
+        },
+        "howToControl": {
+          "title": "Wie Sie Cookies kontrollieren können",
+          "content": "Sie können Cookies über Ihre Browsereinstellungen und unser Cookie-Präferenzzentrum kontrollieren."
+        },
+        "contactUs": {
+          "title": "Kontaktieren Sie uns",
+          "content": "Wenn Sie Fragen zu unserer Cookie-Richtlinie haben, kontaktieren Sie uns bitte."
+        },
+        "updates": {
+          "title": "Aktualisierungen dieser Richtlinie",
+          "content": "Wir können diese Cookie-Richtlinie von Zeit zu Zeit aktualisieren. Alle Änderungen werden auf dieser Seite veröffentlicht."
+        }
+      }
+    },
+    "terms": {
+      "title": "Nutzungsbedingungen",
+      "sections": {
+        "agreement": {
+          "title": "Zustimmung zu den Bedingungen",
+          "content": "Durch den Zugriff auf und die Nutzung der Dienste von MaxApp AG stimmen Sie zu, an diese Nutzungsbedingungen und alle geltenden Gesetze und Vorschriften gebunden zu sein. Wenn Sie mit diesen Bedingungen nicht einverstanden sind, ist Ihnen die Nutzung unserer Dienste untersagt."
+        },
+        "services": {
+          "title": "Dienstleistungen",
+          "content": "Wir bieten kundenspezifische Softwareentwicklung, Webanwendungen und digitale Lösungen an. Unsere Dienstleistungen umfassen:",
+          "items": [
+            "Kundenspezifische Softwareentwicklung",
+            "Entwicklung von Webanwendungen",
+            "Entwicklung mobiler Anwendungen",
+            "Technische Beratung",
+            "Wartungs- und Support-Dienstleistungen"
+          ],
+          "note": "Wir behalten uns das Recht vor, jederzeit Teile unserer Dienste zu ändern, auszusetzen oder einzustellen."
+        },
+        "intellectualProperty": {
+          "title": "Rechte an geistigem Eigentum",
+          "content": "Alle Rechte an geistigem Eigentum an unseren Diensten und Liefergegenständen bleiben unser Eigentum, sofern nicht ausdrücklich schriftlich anders vereinbart. Dies umfasst:",
+          "items": [
+            "Quellcode und Software",
+            "Designs und Benutzeroberflächen",
+            "Dokumentation und Spezifikationen",
+            "Markenzeichen und Logos"
+          ],
+          "note": "Kundenspezifische Liefergegenstände werden durch separate Vereinbarungen geregelt, die das geistige Eigentum festlegen."
+        },
+        "userAccounts": {
+          "title": "Benutzerkonten",
+          "content": "Bei der Erstellung eines Kontos bei uns müssen Sie genaue und vollständige Informationen angeben. Sie sind verantwortlich für:",
+          "items": [
+            "Die Wahrung der Vertraulichkeit Ihres Kontos",
+            "Alle Aktivitäten, die unter Ihrem Konto stattfinden",
+            "Die Benachrichtigung bei unbefugtem Zugriff"
+          ]
+        },
+        "prohibitedUses": {
+          "title": "Verbotene Nutzungen",
+          "content": "Sie dürfen unsere Dienste nicht für rechtswidrige Zwecke oder in einer Weise nutzen, die unsere Dienste beschädigen, deaktivieren, überlasten oder beeinträchtigen könnte."
+        }
+      }
+    }
+  },
+  "cookieBanner": {
+    "mainText": "Wir verwenden Cookies, um Ihr Browsing-Erlebnis zu verbessern und unseren Verkehr zu analysieren. Durch Klicken auf \"Alle akzeptieren\" stimmen Sie der Verwendung von Cookies zu. Weitere Informationen zur Verwendung von Cookies und zur Verwaltung Ihrer Einstellungen finden Sie in unserer {policyLink}.",
+    "policyLink": "Cookie-Richtlinie",
+    "acceptAll": "Alle akzeptieren",
+    "customize": "Anpassen",
+    "rejectAll": "Alle ablehnen",
+    "preferences": {
+      "title": "Cookie-Einstellungen",
+      "save": "Einstellungen speichern",
+      "cookies": {
+        "essential": {
+          "title": "Essentielle Cookies",
+          "description": "Erforderlich für das ordnungsgemäße Funktionieren der Website. Können nicht deaktiviert werden."
+        },
+        "analytics": {
+          "title": "Analyse-Cookies",
+          "description": "Helfen uns, unsere Website durch Sammeln anonymer Nutzungsinformationen zu verbessern."
+        },
+        "marketing": {
+          "title": "Marketing-Cookies",
+          "description": "Werden verwendet, um Besucher über Websites hinweg zu verfolgen und relevante Werbung anzuzeigen."
+        },
+        "preferences": {
+          "title": "Präferenz-Cookies",
+          "description": "Speichern Ihre Einstellungen und Präferenzen für ein besseres Erlebnis."
+        }
+      }
+    }
+  }
+}
+ 

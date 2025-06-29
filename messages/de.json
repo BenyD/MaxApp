@@ -85,10 +85,12 @@
     "description": "Entdecken Sie unser Portfolio erfolgreicher Projekte und digitaler Lösungen."
   },
   "contact": {
-    "title": "Kontaktieren Sie uns",
-    "subtitle": "Lassen Sie uns gemeinsam etwas Großartiges entwickeln",
+    "title": "Kontakt aufnehmen",
+    "subtitle": "Lassen Sie uns gemeinsam etwas Großartiges schaffen",
     "description": "Bereit, Ihre digitale Vision Wirklichkeit werden zu lassen? Unser Team unterstützt Sie bei jedem Schritt.",
     "form": {
+      "title": "Kontaktieren Sie uns",
+      "description": "Füllen Sie das untenstehende Formular aus und wir melden uns innerhalb von 24 Stunden bei Ihnen.",
       "firstName": {
         "label": "Vorname",
         "placeholder": "Ihr Vorname",
@@ -127,8 +129,13 @@
         "error": "Fehler beim Senden der Nachricht. Bitte versuchen Sie es erneut."
       }
     },
+    "info": {
+      "title": "Kontaktinformationen",
+      "description": "Unser Hauptsitz befindet sich in der Schweiz. Sie können uns über jeden dieser Kanäle erreichen."
+    },
     "offices": {
-      "title": "Unsere Büros",
+      "title": "Globale Standorte",
+      "description": "Mit Büros in drei Ländern bieten wir rund um die Uhr Service und lokale Expertise.",
       "switzerland": {
         "city": "Rotkreuz",
         "country": "Schweiz",
@@ -427,4 +434,3 @@
     }
   }
 }
- 

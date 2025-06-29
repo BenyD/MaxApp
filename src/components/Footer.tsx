@@ -66,9 +66,7 @@ export function Footer() {
               ))}
             </div>
           </nav>
-        </div>
-        <div className="flex flex-col items-center border-t border-slate-200 py-8 sm:py-10">
-          <div className="flex gap-x-6">
+          <div className="mt-8 flex justify-center gap-x-6">
             <Link
               href="mailto:hello@maxapp.ch"
               className="group"
@@ -99,23 +97,23 @@ export function Footer() {
               </svg>
             </Link>
           </div>
-          <div className="mt-8 flex flex-col items-center gap-y-4 px-4 text-center sm:mt-6 sm:flex-row sm:justify-between sm:text-left">
-            <p className="text-sm text-slate-500">
-              {t.rich('legal.copyright', {
-                year: new Date().getFullYear(),
-              })}
-            </p>
-            <div className="flex flex-wrap justify-center gap-4 sm:gap-x-6">
-              {legalLinks.map((link) => (
-                <Link
-                  key={link.key}
-                  href={`/${locale}/${link.href}`}
-                  className="text-sm text-slate-500 transition hover:text-slate-600"
-                >
-                  {t(`legal.${link.key}`)}
-                </Link>
-              ))}
-            </div>
+        </div>
+        <div className="flex flex-col items-center border-t border-slate-200 py-8 sm:flex-row sm:justify-between sm:py-10">
+          <p className="text-sm text-slate-500">
+            {t.rich('legal.copyright', {
+              year: new Date().getFullYear(),
+            })}
+          </p>
+          <div className="mt-4 flex flex-wrap justify-center gap-x-8 sm:mt-0">
+            {legalLinks.map((link) => (
+              <Link
+                key={link.key}
+                href={`/${locale}/${link.href}`}
+                className="text-sm text-slate-500 transition hover:text-slate-600"
+              >
+                {t(`legal.${link.key}`)}
+              </Link>
+            ))}
           </div>
         </div>
       </Container>

@@ -138,6 +138,8 @@
     "subtitle": "Let's Build Something Great Together",
     "description": "Ready to transform your digital vision into reality? Our team is here to help you every step of the way.",
     "form": {
+      "title": "Contact Us",
+      "description": "Fill out the form below and we'll get back to you within 24 hours.",
       "firstName": {
         "label": "First Name",
         "placeholder": "Your first name",
@@ -176,8 +178,13 @@
         "error": "Error sending message. Please try again."
       }
     },
+    "info": {
+      "title": "Contact Information",
+      "description": "Our main office is located in Switzerland. Feel free to reach out through any of these channels."
+    },
     "offices": {
-      "title": "Our Offices",
+      "title": "Global Offices",
+      "description": "With offices across three countries, we provide round-the-clock service and local expertise.",
       "switzerland": {
         "city": "Rotkreuz",
         "country": "Switzerland",

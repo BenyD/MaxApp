@@ -15,6 +15,7 @@ import {
   PaperAirplaneIcon,
   CheckCircleIcon,
   XCircleIcon,
+  BuildingOffice2Icon,
 } from '@heroicons/react/24/outline'
 import Image from 'next/image'
 
@@ -73,8 +74,8 @@ function FormInput({
 }) {
   return (
     <div>
-      <div className="mb-2 flex items-center gap-2">
-        <Icon className="h-4 w-4 text-slate-500" aria-hidden="true" />
+      <div className="mb-1.5 flex items-center gap-1.5">
+        <Icon className="h-3.5 w-3.5 text-slate-500" aria-hidden="true" />
         <label
           htmlFor={id}
           className="block text-sm font-medium text-slate-900"
@@ -82,16 +83,16 @@ function FormInput({
           {label}
         </label>
       </div>
-      <div className="relative mt-2">
+      <div className="relative mt-1">
         {type === 'textarea' ? (
           <textarea
             id={id}
             name={id}
-            rows={4}
+            rows={3}
             value={value}
             onChange={(e) => onChange(e.target.value)}
             placeholder={placeholder}
-            className={`block w-full rounded-lg border-0 px-4 py-3 text-slate-900 shadow-sm ring-1 transition duration-200 ring-inset ${
+            className={`block w-full rounded-lg border-0 px-3.5 py-2 text-slate-900 shadow-sm ring-1 transition duration-200 ring-inset ${
               error
                 ? 'ring-red-300 focus:ring-red-500'
                 : 'ring-slate-200 focus:ring-blue-500'
@@ -106,7 +107,7 @@ function FormInput({
             onChange={(e) => onChange(e.target.value)}
             autoComplete={autoComplete}
             placeholder={placeholder}
-            className={`block w-full rounded-lg border-0 px-4 py-3 text-slate-900 shadow-sm ring-1 transition duration-200 ring-inset ${
+            className={`block w-full rounded-lg border-0 px-3.5 py-2 text-slate-900 shadow-sm ring-1 transition duration-200 ring-inset ${
               error
                 ? 'ring-red-300 focus:ring-red-500'
                 : 'ring-slate-200 focus:ring-blue-500'
@@ -114,8 +115,8 @@ function FormInput({
           />
         )}
         {error && (
-          <div className="mt-2 flex items-center gap-1.5 text-sm text-red-600">
-            <XCircleIcon className="h-4 w-4 flex-shrink-0" />
+          <div className="mt-1 flex items-center gap-1 text-xs text-red-600">
+            <XCircleIcon className="h-3.5 w-3.5 flex-shrink-0" />
             {error}
           </div>
         )}
@@ -210,194 +211,308 @@ export function Contact() {
   }
 
   return (
-    <div className="relative bg-white py-16 sm:py-24 lg:py-32" id="contact">
-      <div className="absolute inset-x-0 top-0 -z-10 h-24 bg-gradient-to-b from-slate-50"></div>
-      <div className="absolute inset-x-0 bottom-0 -z-10 h-24 bg-gradient-to-t from-slate-50"></div>
+    <section
+      id="contact"
+      className="relative isolate bg-white px-6 py-16 sm:py-24 lg:px-8"
+    >
+      {/* Gradient Background */}
+      <div className="absolute inset-x-0 top-0 -z-10 h-24 bg-gradient-to-b from-slate-50" />
+      <div className="absolute inset-x-0 bottom-0 -z-10 h-24 bg-gradient-to-t from-slate-50" />
 
       <Container>
-        <div className="mx-auto max-w-2xl px-4 text-center sm:px-6 lg:px-8">
-          <h2 className="text-base leading-7 font-semibold text-blue-600">
+        <div className="mx-auto max-w-2xl text-center">
+          <h2 className="text-3xl font-bold tracking-tight text-slate-900 sm:text-4xl">
             {t('title')}
           </h2>
-          <p className="mt-2 text-2xl font-bold tracking-tight text-slate-900 sm:text-3xl lg:text-4xl">
+          <p className="mt-2 text-lg font-semibold text-blue-600">
             {t('subtitle')}
           </p>
-          <p className="mt-4 text-base leading-7 text-slate-600 sm:mt-6 sm:text-lg">
+          <p className="mt-3 text-lg leading-8 text-slate-600">
             {t('description')}
           </p>
         </div>
 
-        <div className="mx-auto mt-12 max-w-7xl px-4 sm:mt-16 sm:px-6 lg:px-8">
-          <div className="mx-auto grid max-w-2xl grid-cols-1 gap-x-8 gap-y-12 lg:mx-0 lg:max-w-none lg:grid-cols-2">
+        <div className="mx-auto mt-12 max-w-6xl space-y-8">
+          {/* Top Section: Contact Form and Info */}
+          <div className="grid gap-6 lg:grid-cols-2">
             {/* Contact Form */}
-            <div>
-              <form onSubmit={handleSubmit} className="space-y-6">
-                <div className="grid grid-cols-1 gap-6 sm:grid-cols-2">
+            <div className="group relative isolate flex flex-col overflow-hidden rounded-3xl bg-white p-8 shadow-lg ring-1 ring-slate-200 transition-all duration-200 hover:shadow-xl">
+              <div className="mb-6 flex items-center gap-x-4">
+                <div className="rounded-xl bg-blue-50 p-2.5 text-blue-600 ring-1 ring-blue-200 ring-inset">
+                  <EnvelopeIcon className="h-6 w-6" />
+                </div>
+                <div>
+                  <h3 className="text-xl font-semibold text-slate-900">
+                    {t('form.title')}
+                  </h3>
+                  <p className="mt-1 text-sm leading-6 text-slate-600">
+                    {t('form.description')}
+                  </p>
+                </div>
+              </div>
+              <form onSubmit={handleSubmit} className="flex flex-1 flex-col">
+                <div className="flex-1 space-y-4">
+                  {/* Name Fields Row */}
+                  <div className="grid grid-cols-1 gap-x-4 gap-y-4 sm:grid-cols-2">
+                    <FormInput
+                      id="firstName"
+                      label={t('form.firstName.label')}
+                      icon={UserIcon}
+                      placeholder={t('form.firstName.placeholder')}
+                      value={formData.firstName}
+                      onChange={(value) =>
+                        setFormData({ ...formData, firstName: value })
+                      }
+                      error={errors.firstName}
+                      autoComplete="given-name"
+                    />
+                    <FormInput
+                      id="lastName"
+                      label={t('form.lastName.label')}
+                      icon={UserIcon}
+                      placeholder={t('form.lastName.placeholder')}
+                      value={formData.lastName}
+                      onChange={(value) =>
+                        setFormData({ ...formData, lastName: value })
+                      }
+                      error={errors.lastName}
+                      autoComplete="family-name"
+                    />
+                  </div>
+
+                  {/* Contact Fields Row */}
+                  <div className="grid grid-cols-1 gap-x-4 gap-y-4 sm:grid-cols-2">
+                    <FormInput
+                      id="email"
+                      type="email"
+                      label={t('form.email.label')}
+                      icon={EnvelopeIcon}
+                      placeholder={t('form.email.placeholder')}
+                      value={formData.email}
+                      onChange={(value) =>
+                        setFormData({ ...formData, email: value })
+                      }
+                      error={errors.email}
+                      autoComplete="email"
+                    />
+                    <FormInput
+                      id="phone"
+                      type="tel"
+                      label={t('form.phone.label')}
+                      icon={PhoneIcon}
+                      placeholder={t('form.phone.placeholder')}
+                      value={formData.phone}
+                      onChange={(value) =>
+                        setFormData({ ...formData, phone: value })
+                      }
+                      error={errors.phone}
+                      autoComplete="tel"
+                    />
+                  </div>
+
+                  {/* Message Field */}
                   <FormInput
-                    id="firstName"
-                    label={t('form.firstName.label')}
-                    icon={UserIcon}
-                    placeholder={t('form.firstName.placeholder')}
-                    autoComplete="given-name"
-                    value={formData.firstName}
+                    id="message"
+                    type="textarea"
+                    label={t('form.message.label')}
+                    icon={ChatBubbleBottomCenterTextIcon}
+                    placeholder={t('form.message.placeholder')}
+                    value={formData.message}
                     onChange={(value) =>
-                      setFormData({ ...formData, firstName: value })
+                      setFormData({ ...formData, message: value })
                     }
-                    error={errors.firstName}
-                  />
-                  <FormInput
-                    id="lastName"
-                    label={t('form.lastName.label')}
-                    icon={UserIcon}
-                    placeholder={t('form.lastName.placeholder')}
-                    autoComplete="family-name"
-                    value={formData.lastName}
-                    onChange={(value) =>
-                      setFormData({ ...formData, lastName: value })
-                    }
-                    error={errors.lastName}
+                    error={errors.message}
                   />
                 </div>
 
-                <FormInput
-                  id="email"
-                  label={t('form.email.label')}
-                  type="email"
-                  icon={EnvelopeIcon}
-                  placeholder={t('form.email.placeholder')}
-                  autoComplete="email"
-                  value={formData.email}
-                  onChange={(value) =>
-                    setFormData({ ...formData, email: value })
-                  }
-                  error={errors.email}
-                />
-
-                <FormInput
-                  id="phone"
-                  label={t('form.phone.label')}
-                  type="tel"
-                  icon={PhoneIcon}
-                  placeholder={t('form.phone.placeholder')}
-                  autoComplete="tel"
-                  value={formData.phone}
-                  onChange={(value) =>
-                    setFormData({ ...formData, phone: value })
-                  }
-                  error={errors.phone}
-                />
-
-                <FormInput
-                  id="message"
-                  label={t('form.message.label')}
-                  type="textarea"
-                  icon={ChatBubbleBottomCenterTextIcon}
-                  placeholder={t('form.message.placeholder')}
-                  value={formData.message}
-                  onChange={(value) =>
-                    setFormData({ ...formData, message: value })
-                  }
-                  error={errors.message}
-                />
-
-                <div>
+                {/* Submit Button */}
+                <div className="mt-4 flex items-center justify-end gap-x-4">
+                  {submitStatus && (
+                    <div
+                      className={`flex items-center gap-x-2 text-xs ${
+                        submitStatus === 'success'
+                          ? 'text-green-600'
+                          : 'text-red-600'
+                      }`}
+                    >
+                      {submitStatus === 'success' ? (
+                        <>
+                          <CheckCircleIcon className="h-4 w-4" />
+                          {t('form.submit.success')}
+                        </>
+                      ) : (
+                        <>
+                          <XCircleIcon className="h-4 w-4" />
+                          {t('form.submit.error')}
+                        </>
+                      )}
+                    </div>
+                  )}
                   <Button
                     type="submit"
-                    variant="solid"
-                    color="blue"
-                    className="w-full"
                     disabled={isSubmitting}
+                    className="group relative py-2"
                   >
-                    {isSubmitting ? (
-                      <div className="flex items-center justify-center gap-2">
-                        <div className="h-4 w-4 animate-spin rounded-full border-2 border-white border-t-transparent" />
-                        <span>{t('form.submit.sending')}</span>
-                      </div>
-                    ) : (
-                      <div className="flex items-center justify-center gap-2">
-                        <PaperAirplaneIcon className="h-4 w-4" />
-                        <span>{t('form.submit.button')}</span>
+                    <span
+                      className={`flex items-center gap-2 transition-opacity ${
+                        isSubmitting ? 'opacity-0' : 'opacity-100'
+                      }`}
+                    >
+                      {isSubmitting
+                        ? t('form.submit.sending')
+                        : t('form.submit.button')}
+                      <PaperAirplaneIcon className="h-4 w-4" />
+                    </span>
+                    {isSubmitting && (
+                      <div className="absolute inset-0 flex items-center justify-center">
+                        <div className="h-4 w-4 animate-spin rounded-full border-2 border-slate-200 border-t-blue-600" />
                       </div>
                     )}
                   </Button>
-
-                  {submitStatus === 'success' && (
-                    <div className="mt-4 flex items-center gap-2 text-sm text-emerald-600">
-                      <CheckCircleIcon className="h-4 w-4" />
-                      {t('form.submit.success')}
-                    </div>
-                  )}
-
-                  {submitStatus === 'error' && (
-                    <div className="mt-4 flex items-center gap-2 text-sm text-red-600">
-                      <XCircleIcon className="h-4 w-4" />
-                      {t('form.submit.error')}
-                    </div>
-                  )}
                 </div>
               </form>
+
+              {/* Decorative gradient background */}
+              <div className="absolute inset-0 -z-10 bg-gradient-to-br from-slate-50 via-white to-slate-50 opacity-0 transition-opacity duration-200 group-hover:opacity-100" />
             </div>
 
-            {/* Office Locations */}
-            <div>
-              <h3 className="text-lg font-semibold text-slate-900">
-                {t('offices.title')}
-              </h3>
-              <div className="mt-6 space-y-8">
-                {offices.map((office) => (
-                  <div
-                    key={office.key}
-                    className="group relative overflow-hidden rounded-2xl bg-white shadow-lg ring-1 ring-slate-200"
-                  >
-                    <div className="aspect-[4/3]">
-                      <Image
-                        src={office.image}
-                        alt={t(`offices.${office.key}.city`)}
-                        className="h-full w-full object-cover transition duration-300 group-hover:scale-105"
-                        width={400}
-                        height={300}
-                      />
+            {/* Contact Information */}
+            <div className="group relative isolate overflow-hidden rounded-3xl bg-white p-8 shadow-lg ring-1 ring-slate-200 transition-all duration-200 hover:shadow-xl">
+              <div className="mb-6 flex items-center gap-x-4">
+                <div className="rounded-xl bg-emerald-50 p-2.5 text-emerald-600 ring-1 ring-emerald-200 ring-inset">
+                  <MapPinIcon className="h-6 w-6" />
+                </div>
+                <div>
+                  <h3 className="text-xl font-semibold text-slate-900">
+                    {t('info.title')}
+                  </h3>
+                  <p className="mt-1 text-sm leading-6 text-slate-600">
+                    {t('info.description')}
+                  </p>
+                </div>
+              </div>
+              <dl className="space-y-4 text-sm leading-6 text-slate-600">
+                <div className="flex gap-x-4">
+                  <dt className="flex-none">
+                    <span className="sr-only">
+                      {t('offices.switzerland.address')}
+                    </span>
+                    <div className="rounded-lg bg-emerald-50/50 p-2 text-emerald-600/80 ring-1 ring-emerald-200/50 ring-inset">
+                      <MapPinIcon className="h-5 w-5" />
                     </div>
-                    <div className="p-6">
-                      <h4 className="text-lg font-semibold text-slate-900">
-                        {t(`offices.${office.key}.city`)},{' '}
-                        {t(`offices.${office.key}.country`)}
-                      </h4>
-                      <div className="mt-4 space-y-3 text-sm text-slate-600">
-                        <div className="flex items-start gap-3">
-                          <MapPinIcon className="h-5 w-5 flex-shrink-0 text-slate-400" />
-                          <div>
-                            <p>{t(`offices.${office.key}.address`)}</p>
-                            <p className="mt-1 text-xs text-slate-500">
-                              {t(`offices.${office.key}.coordinates`)}
-                            </p>
-                          </div>
-                        </div>
-                        <div className="flex items-center gap-3">
-                          <PhoneIcon className="h-5 w-5 flex-shrink-0 text-slate-400" />
-                          <p>{t(`offices.${office.key}.phone`)}</p>
-                        </div>
-                        <div className="flex items-center gap-3">
-                          <EnvelopeIcon className="h-5 w-5 flex-shrink-0 text-slate-400" />
-                          <p>{t(`offices.${office.key}.email`)}</p>
-                        </div>
-                        <div className="flex items-center gap-3">
-                          <GlobeAltIcon className="h-5 w-5 flex-shrink-0 text-slate-400" />
-                          <p>{t(`offices.${office.key}.timezone`)}</p>
-                        </div>
-                        <div className="flex items-center gap-3">
-                          <ClockIcon className="h-5 w-5 flex-shrink-0 text-slate-400" />
-                          <p>{t(`offices.${office.key}.hours`)}</p>
-                        </div>
-                      </div>
+                  </dt>
+                  <dd className="flex items-center">
+                    {t('offices.switzerland.address')}
+                  </dd>
+                </div>
+                <div className="flex gap-x-4">
+                  <dt className="flex-none">
+                    <span className="sr-only">
+                      {t('offices.switzerland.phone')}
+                    </span>
+                    <div className="rounded-lg bg-emerald-50/50 p-2 text-emerald-600/80 ring-1 ring-emerald-200/50 ring-inset">
+                      <PhoneIcon className="h-5 w-5" />
                     </div>
-                  </div>
-                ))}
+                  </dt>
+                  <dd className="flex items-center">
+                    <a
+                      className="hover:text-slate-900"
+                      href={`tel:${t('offices.switzerland.phone')}`}
+                    >
+                      {t('offices.switzerland.phone')}
+                    </a>
+                  </dd>
+                </div>
+                <div className="flex gap-x-4">
+                  <dt className="flex-none">
+                    <span className="sr-only">
+                      {t('offices.switzerland.email')}
+                    </span>
+                    <div className="rounded-lg bg-emerald-50/50 p-2 text-emerald-600/80 ring-1 ring-emerald-200/50 ring-inset">
+                      <EnvelopeIcon className="h-5 w-5" />
+                    </div>
+                  </dt>
+                  <dd className="flex items-center">
+                    <a
+                      className="hover:text-slate-900"
+                      href={`mailto:${t('offices.switzerland.email')}`}
+                    >
+                      {t('offices.switzerland.email')}
+                    </a>
+                  </dd>
+                </div>
+                <div className="flex gap-x-4">
+                  <dt className="flex-none">
+                    <span className="sr-only">
+                      {t('offices.switzerland.hours')}
+                    </span>
+                    <div className="rounded-lg bg-emerald-50/50 p-2 text-emerald-600/80 ring-1 ring-emerald-200/50 ring-inset">
+                      <ClockIcon className="h-5 w-5" />
+                    </div>
+                  </dt>
+                  <dd className="flex items-center">
+                    {t('offices.switzerland.hours')}
+                  </dd>
+                </div>
+              </dl>
+
+              {/* Decorative gradient background */}
+              <div className="absolute inset-0 -z-10 bg-gradient-to-br from-slate-50 via-white to-slate-50 opacity-0 transition-opacity duration-200 group-hover:opacity-100" />
+            </div>
+          </div>
+
+          {/* Global Offices */}
+          <div className="group relative isolate overflow-hidden rounded-3xl bg-white p-8 shadow-lg ring-1 ring-slate-200 transition-all duration-200 hover:shadow-xl">
+            <div className="mb-6 flex items-center gap-x-4">
+              <div className="rounded-xl bg-purple-50 p-2.5 text-purple-600 ring-1 ring-purple-200 ring-inset">
+                <BuildingOffice2Icon className="h-6 w-6" />
+              </div>
+              <div>
+                <h3 className="text-xl font-semibold text-slate-900">
+                  {t('offices.title')}
+                </h3>
+                <p className="mt-1 text-sm leading-6 text-slate-600">
+                  {t('offices.description')}
+                </p>
               </div>
             </div>
+            <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+              {offices.map((office) => (
+                <div
+                  key={office.key}
+                  className="group/card relative overflow-hidden rounded-2xl bg-white shadow-md ring-1 ring-slate-200 transition-all duration-200 hover:shadow-lg"
+                >
+                  <div className="h-24 overflow-hidden">
+                    <Image
+                      src={office.image}
+                      alt={`${t(`offices.${office.key}.city`)}, ${t(`offices.${office.key}.country`)}`}
+                      className="h-full w-full object-cover object-center transition duration-300 group-hover/card:scale-105"
+                      width={240}
+                      height={96}
+                    />
+                  </div>
+                  <div className="p-4">
+                    <h4 className="text-sm font-medium text-slate-900">
+                      {t(`offices.${office.key}.city`)},{' '}
+                      {t(`offices.${office.key}.country`)}
+                    </h4>
+                    <div className="mt-2 space-y-1.5 text-xs text-slate-600">
+                      <p>{t(`offices.${office.key}.address`)}</p>
+                      <p>{t(`offices.${office.key}.phone`)}</p>
+                      <p className="text-slate-500">
+                        {t(`offices.${office.key}.timezone`)}
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+
+            {/* Decorative gradient background */}
+            <div className="absolute inset-0 -z-10 bg-gradient-to-br from-slate-50 via-white to-slate-50 opacity-0 transition-opacity duration-200 group-hover:opacity-100" />
           </div>
         </div>
       </Container>
-    </div>
+    </section>
   )
 }

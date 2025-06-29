@@ -8,151 +8,216 @@
     "techStack": "Tech Stack",
     "contact": "Contact"
   },
+  "meta": {
+    "title": "Max App - Your Trusted Development Partner",
+    "description": "We are a professional software development company specializing in web and mobile applications. Let's build something amazing together!"
+  },
   "hero": {
-    "title": "Tailored SaaS & Web Solutions",
-    "subtitle": "Built for Your Business",
-    "description": "We design and develop custom web apps, websites, and digital tools—robust, scalable, and crafted to meet real business needs.",
-    "cta": "View Our Projects"
+    "title": "Your Trusted",
+    "subtitle": "Development Partner",
+    "description": "We are a professional software development company specializing in web and mobile applications. Let's build something amazing together!",
+    "cta": "Get in Touch"
   },
   "about": {
     "title": "About Us",
-    "subtitle": "Global Excellence, Local Expertise",
-    "description": "We combine Swiss precision with global innovation to deliver exceptional software solutions.",
+    "subtitle": "Building the Future of Digital Solutions",
+    "description": "We are a team of passionate developers and designers who love to create amazing digital experiences. Our goal is to help businesses grow through technology.",
+    "operations": {
+      "title": "Global Operations",
+      "description": "With a presence in multiple countries, we deliver solutions worldwide while maintaining our Swiss quality standards."
+    },
+    "company": {
+      "intro": "Founded with a vision to bridge the gap between business needs and technological solutions, we've grown into a trusted partner for companies worldwide.",
+      "teams": "Our teams consist of experienced developers, designers, and project managers who bring diverse perspectives and expertise to every project.",
+      "unique": "What sets us apart is our commitment to excellence, transparent communication, and our ability to deliver solutions that drive real business value."
+    },
     "features": {
       "global": {
-        "title": "Global Presence",
-        "description": "With offices in Switzerland, India, and Sri Lanka, we bring together diverse perspectives and round-the-clock capabilities."
+        "title": "Global Reach",
+        "description": "We work with clients worldwide, delivering solutions that transcend geographical boundaries."
       },
       "expert": {
         "title": "Expert Teams",
-        "description": "Our multinational team combines Swiss precision with Asian innovation, delivering excellence across time zones."
+        "description": "Our specialists bring years of experience and deep expertise in the latest technologies."
       },
       "quality": {
-        "title": "Quality Focus",
-        "description": "We maintain rigorous quality standards across all locations, ensuring consistent, high-quality deliverables."
+        "title": "Swiss Quality",
+        "description": "We maintain the highest standards of quality and precision in every project we deliver."
       }
-    },
-    "operations": {
-      "title": "24/7 Global Operations",
-      "description": "Our distributed team structure enables continuous development and support across time zones"
-    },
-    "company": {
-      "intro": "Maxapp is a Swiss-based software company headquartered in Rotkreuz. We specialize in practical, scalable software that aligns with real business goals, combining technical excellence with business acumen.",
-      "teams": "Our consulting and planning team in Switzerland ensures strategic alignment, while our skilled development teams in India and Sri Lanka deliver quality, cost-effective execution.",
-      "unique": "This unique setup allows us to offer the best of both worlds: Swiss quality standards and project management combined with highly skilled development teams across multiple time zones."
     }
   },
   "services": {
-    "title": "Our Expertise",
-    "subtitle": "Swiss-Quality Digital Solutions",
-    "description": "We craft precise, future-proof digital solutions—from concept to launch. Whether it's a business portal, internal tool, or online presence, we build with purpose, performance, and scalability in mind.",
+    "title": "Our Services",
+    "subtitle": "Comprehensive Digital Solutions",
+    "description": "We offer a wide range of services to help you achieve your goals.",
     "items": {
       "webApps": {
-        "title": "Web Apps",
-        "description": "Interactive, browser-based platforms that work across devices—ideal for internal dashboards, CRMs, and client portals.",
+        "title": "Web Applications",
+        "description": "Custom web applications built with modern technologies to solve your business needs.",
         "features": [
-          "Real-time data synchronization",
-          "Secure authentication",
-          "Custom dashboards",
-          "API integration"
+          "Full-stack development",
+          "Real-time functionality",
+          "Cloud integration",
+          "Scalable architecture"
         ]
       },
       "websites": {
-        "title": "Websites",
-        "description": "High-performance, responsive websites that elevate your brand—landing pages, company profiles, blogs, and more.",
+        "title": "Business Websites",
+        "description": "Professional websites that showcase your brand and drive customer engagement.",
         "features": [
+          "Responsive design",
           "SEO optimization",
-          "Fast page loads",
-          "Mobile-first design",
-          "Content management"
+          "Content management",
+          "Performance focused"
         ]
       },
       "pwa": {
         "title": "Progressive Web Apps",
-        "description": "Native-like experiences in the browser—fast, installable, and offline-ready applications for modern businesses.",
+        "description": "Modern web apps that provide a native app-like experience across all devices.",
         "features": [
           "Offline functionality",
-          "Push notifications",
-          "App-like experience",
-          "Cross-platform support"
+          "Fast loading",
+          "Cross-platform",
+          "Push notifications"
         ]
+      },
+      "webDev": {
+        "title": "Web Development",
+        "description": "We create beautiful, responsive websites that work seamlessly across all devices."
+      },
+      "mobileDev": {
+        "title": "Mobile Development",
+        "description": "Native and cross-platform mobile applications that deliver exceptional user experiences."
+      },
+      "cloudSolutions": {
+        "title": "Cloud Solutions",
+        "description": "Scalable cloud infrastructure and solutions to power your applications."
+      },
+      "consulting": {
+        "title": "Technical Consulting",
+        "description": "Expert advice to help you make the right technical decisions for your business."
       }
     }
   },
   "whyUs": {
     "title": "Why Choose Us",
-    "subtitle": "Excellence in Every Aspect",
-    "description": "We combine Swiss precision with global innovation to deliver exceptional value.",
+    "subtitle": "Excellence in Every Project",
+    "description": "We combine technical expertise with a deep understanding of business needs.",
     "features": {
       "swissStandards": {
-        "name": "Swiss Engineering Standards",
-        "description": "Every project follows strict Swiss quality guidelines, ensuring robust and reliable solutions. Our development process combines precision engineering with innovative approaches.",
+        "name": "Swiss Quality Standards",
+        "description": "We adhere to the highest Swiss quality standards in every project we deliver, ensuring exceptional results.",
         "metrics": {
           "codeCoverage": {
-            "label": "Code Coverage",
-            "value": "95%"
+            "value": "98%",
+            "label": "Code Coverage"
           },
           "testSuccess": {
-            "label": "Test Success Rate",
-            "value": "99.9%"
+            "value": "99.9%",
+            "label": "Test Success"
           },
           "satisfaction": {
-            "label": "Client Satisfaction",
-            "value": "100%"
+            "value": "100%",
+            "label": "Client Satisfaction"
           }
         }
       },
       "costEffective": {
-        "name": "Cost-Effective",
-        "description": "Swiss quality at competitive rates through our distributed team model.",
-        "stats": "40%",
-        "statsText": "cost reduction"
+        "name": "Cost-Effective Solutions",
+        "description": "We deliver high-quality solutions while maintaining cost efficiency through smart resource allocation.",
+        "stats": "30%",
+        "statsText": "lower TCO"
       },
       "customSolutions": {
         "name": "Custom Solutions",
-        "description": "Tailored software that grows with your business needs.",
+        "description": "We create tailored solutions that perfectly match your unique business requirements and goals.",
         "stats": "100%",
-        "statsText": "customization"
+        "statsText": "customized"
       },
       "fastDelivery": {
         "name": "Fast Delivery",
-        "description": "Agile development with transparent progress tracking.",
+        "description": "Our agile approach ensures quick delivery without compromising on quality.",
         "stats": "2x",
         "statsText": "faster delivery"
       },
       "provenSuccess": {
         "name": "Proven Success",
-        "description": "Track record of successful projects across various industries.",
+        "description": "Our track record speaks for itself with successful projects across various industries.",
         "stats": "50+",
-        "statsText": "projects delivered"
+        "statsText": "successful projects"
       }
     }
   },
   "projects": {
-    "title": "Our Portfolio",
-    "subtitle": "Projects We've Delivered",
-    "description": "Explore some of our successful projects where we've helped businesses transform their operations with innovative software solutions."
+    "title": "Our Projects",
+    "subtitle": "Showcasing Our Best Work",
+    "description": "Take a look at some of our recent projects that demonstrate our expertise and commitment to delivering exceptional solutions.",
+    "viewProject": "View Project"
+  },
+  "techStack": {
+    "title": "Our Tech Stack",
+    "subtitle": "Modern Technologies for Modern Solutions",
+    "description": "We use cutting-edge technologies and frameworks to build scalable, maintainable, and high-performance applications.",
+    "categories": {
+      "Frontend Development": {
+        "title": "Frontend Development",
+        "description": "Modern, responsive, and interactive user interfaces built with cutting-edge web technologies."
+      },
+      "Backend Development": {
+        "title": "Backend Development",
+        "description": "Robust and scalable server-side solutions that power our applications."
+      },
+      "Database Systems": {
+        "title": "Database Systems",
+        "description": "Efficient and reliable data storage and management systems."
+      },
+      "Cloud & DevOps": {
+        "title": "Cloud & DevOps",
+        "description": "Seamless deployment and scaling with modern cloud infrastructure."
+      },
+      "Design & Collaboration": {
+        "title": "Design & Collaboration",
+        "description": "Tools and platforms that enable beautiful design and efficient teamwork."
+      }
+    },
+    "types": {
+      "Framework": "Framework",
+      "Language": "Language",
+      "Styling": "Styling",
+      "Runtime": "Runtime",
+      "SQL": "SQL Database",
+      "NoSQL": "NoSQL Database",
+      "Cache": "Cache System",
+      "Cloud": "Cloud Platform",
+      "Container": "Container Platform",
+      "Orchestration": "Container Orchestration",
+      "Hosting": "Hosting Platform",
+      "Design": "Design Tool",
+      "Version Control": "Version Control",
+      "Project Management": "Project Management",
+      "Communication": "Communication Tool"
+    }
   },
   "contact": {
     "title": "Get in Touch",
-    "subtitle": "Let's Build Something Great Together",
-    "description": "Ready to transform your digital vision into reality? Our team is here to help you every step of the way.",
+    "subtitle": "Let's Build Something Amazing Together",
+    "description": "Have a project in mind? We'd love to hear about it. Send us a message and we'll get back to you as soon as possible.",
     "form": {
-      "title": "Contact Us",
+      "title": "Send us a message",
       "description": "Fill out the form below and we'll get back to you within 24 hours.",
       "firstName": {
         "label": "First Name",
-        "placeholder": "Your first name",
+        "placeholder": "Enter your first name",
         "error": "First name is required"
       },
       "lastName": {
         "label": "Last Name",
-        "placeholder": "Your last name",
+        "placeholder": "Enter your last name",
         "error": "Last name is required"
       },
       "email": {
         "label": "Email",
-        "placeholder": "your.email@example.com",
+        "placeholder": "Enter your email",
         "error": {
           "required": "Email is required",
           "invalid": "Please enter a valid email address"
@@ -160,7 +225,7 @@
       },
       "phone": {
         "label": "Phone",
-        "placeholder": "+1 (555) 000-0000",
+        "placeholder": "Enter your phone number",
         "error": {
           "required": "Phone number is required",
           "invalid": "Please enter a valid phone number"
@@ -168,52 +233,49 @@
       },
       "message": {
         "label": "Message",
-        "placeholder": "Tell us about your project...",
+        "placeholder": "Tell us about your project",
         "error": "Message is required"
       },
       "submit": {
         "button": "Send Message",
         "sending": "Sending...",
         "success": "Message sent successfully!",
-        "error": "Error sending message. Please try again."
+        "error": "There was an error sending your message. Please try again."
       }
     },
     "info": {
       "title": "Contact Information",
-      "description": "Our main office is located in Switzerland. Feel free to reach out through any of these channels."
+      "description": "Get in touch with us through any of these channels."
     },
     "offices": {
-      "title": "Global Offices",
-      "description": "With offices across three countries, we provide round-the-clock service and local expertise.",
+      "title": "Our Global Offices",
+      "description": "We have a presence in multiple locations to serve you better.",
       "switzerland": {
-        "city": "Rotkreuz",
+        "city": "Zurich",
         "country": "Switzerland",
-        "address": "Grundstrasse 12, 6343 Rotkreuz",
-        "phone": "+41 79 123 45 67",
-        "email": "switzerland@maxapp.ch",
-        "timezone": "CET (UTC+1)",
-        "coordinates": "47.1435° N, 8.4351° E",
-        "hours": "9:00 AM - 6:00 PM CET"
+        "address": "Bahnhofstrasse 21, 8001 Zürich, Switzerland",
+        "phone": "+41 44 123 45 67",
+        "email": "zurich@maxapp.com",
+        "hours": "Mon-Fri: 9:00 AM - 6:00 PM CET",
+        "timezone": "Central European Time (CET/CEST)"
       },
       "india": {
-        "city": "Chennai",
+        "city": "Bangalore",
         "country": "India",
-        "address": "Anna Nagar, Chennai, Tamil Nadu 600040",
-        "phone": "+91 44 1234 5678",
-        "email": "india@maxapp.ch",
-        "timezone": "IST (UTC+5:30)",
-        "coordinates": "13.0827° N, 80.2707° E",
-        "hours": "9:30 AM - 6:30 PM IST"
+        "address": "Brigade Road, Bangalore 560001, India",
+        "phone": "+91 80 4567 8901",
+        "email": "bangalore@maxapp.com",
+        "hours": "Mon-Fri: 9:00 AM - 6:00 PM IST",
+        "timezone": "India Standard Time (IST)"
       },
       "srilanka": {
         "city": "Colombo",
         "country": "Sri Lanka",
-        "address": "World Trade Center, Colombo 01",
-        "phone": "+94 11 1234 567",
-        "email": "srilanka@maxapp.ch",
-        "timezone": "SLST (UTC+5:30)",
-        "coordinates": "6.9271° N, 79.8612° E",
-        "hours": "9:00 AM - 6:00 PM SLST"
+        "address": "Galle Road, Colombo 03, Sri Lanka",
+        "phone": "+94 11 234 5678",
+        "email": "colombo@maxapp.com",
+        "hours": "Mon-Fri: 9:00 AM - 6:00 PM SLST",
+        "timezone": "Sri Lanka Standard Time (SLST)"
       }
     }
   },
@@ -227,182 +289,86 @@
       "contact": "Contact"
     },
     "social": {
-      "email": "Email Maxapp",
-      "linkedin": "Maxapp on LinkedIn"
+      "email": "Send us an email",
+      "linkedin": "Follow us on LinkedIn"
     },
     "legal": {
-      "copyright": "Copyright © {year} MaxApp. All rights reserved.",
+      "copyright": "© {year} Max App. All rights reserved.",
       "terms": "Terms of Service",
       "privacy": "Privacy Policy",
       "cookies": "Cookie Policy"
     }
   },
-  "policies": {
-    "lastUpdated": "Last updated: {date}",
-    "contents": "Contents",
-    "privacy": {
-      "title": "Privacy Policy",
-      "sections": {
-        "introduction": {
-          "title": "Introduction",
-          "paragraph1": "This Privacy Policy explains how MaxApp AG (\"we\", \"us\", \"our\") collects, uses, and protects your personal data in accordance with the Swiss Federal Act on Data Protection (FADP), the EU General Data Protection Regulation (GDPR), and other applicable data protection laws.",
-          "paragraph2": "We are committed to protecting your privacy and ensuring the security of your personal data. This policy applies to all personal data collected through our website, services, and business operations."
-        },
-        "dataCollection": {
-          "title": "Data Collection and Use",
-          "infoWeCollect": {
-            "title": "Information We Collect",
-            "items": [
-              "Contact information (name, email, phone number)",
-              "Business information (company name, role)",
-              "Technical data (IP address, browser type, device information)",
-              "Usage data (how you interact with our services)",
-              "Communication data (inquiries, feedback)"
-            ]
-          },
-          "howWeUse": {
-            "title": "How We Use Your Data",
-            "items": [
-              "To provide and improve our services",
-              "To communicate with you about our services",
-              "To ensure the security of our services",
-              "To comply with legal obligations",
-              "To analyze and improve our website and services"
-            ]
-          }
-        },
-        "legalBasis": {
-          "title": "Legal Basis for Processing",
-          "content": "We process your personal data based on the following legal grounds:",
-          "items": [
-            "Your consent",
-            "Performance of a contract with you",
-            "Compliance with legal obligations",
-            "Our legitimate business interests"
-          ]
-        },
-        "dataSharing": {
-          "title": "Data Sharing and Transfer",
-          "content": "We may share your personal data with:"
-        },
-        "yourRights": {
-          "title": "Your Rights",
-          "content": "Under applicable data protection laws, you have the following rights:"
-        },
-        "dataSecurity": {
-          "title": "Data Security",
-          "content": "We implement appropriate technical and organizational measures to protect your personal data."
-        },
-        "retention": {
-          "title": "Data Retention",
-          "content": "We retain your personal data only for as long as necessary to fulfill the purposes for which it was collected."
-        },
-        "international": {
-          "title": "International Data Transfers",
-          "content": "Your data may be transferred to and processed in countries outside your country of residence."
-        },
-        "contact": {
-          "title": "Contact Information",
-          "content": "For any questions about this Privacy Policy or our data practices, please contact us."
+  "admin": {
+    "dashboard": {
+      "title": "Dashboard",
+      "stats": {
+        "total": "Total Submissions",
+        "today": "Today",
+        "thisWeek": "This Week",
+        "thisMonth": "This Month"
+      },
+      "search": "Search submissions...",
+      "submissions": "Submissions",
+      "table": {
+        "description": "A list of all contact form submissions.",
+        "date": "Date",
+        "name": "Name",
+        "email": "Email",
+        "message": "Message",
+        "status": "Status",
+        "statuses": {
+          "new": "New",
+          "replied": "Replied",
+          "archived": "Archived"
         }
-      }
+      },
+      "modal": {
+        "title": "Contact Submission Details",
+        "close": "Close",
+        "submittedAt": "Submitted At",
+        "name": "Name",
+        "email": "Email",
+        "phone": "Phone",
+        "message": "Message",
+        "reply": "Reply Message",
+        "replyPlaceholder": "Type your reply message here...",
+        "sendReply": "Send Reply",
+        "sending": "Sending...",
+        "archive": "Archive",
+        "delete": "Delete",
+        "deleteConfirmation": "Are you sure you want to delete this submission? This action cannot be undone."
+      },
+      "pagination": {
+        "previous": "Previous",
+        "next": "Next",
+        "showing": "Showing",
+        "to": "to",
+        "of": "of",
+        "results": "results"
+      },
+      "overview": "Overview",
+      "navigation": "Navigation",
+      "backToHome": "Back to Home",
+      "administrator": "Administrator",
+      "loading": "Loading...",
+      "signOut": "Sign Out",
+      "recentSubmissions": "Recent Submissions",
+      "viewAll": "View all"
     },
-    "cookies": {
-      "title": "Cookie Policy",
-      "sections": {
-        "whatAreCookies": {
-          "title": "What are Cookies?",
-          "content": "Cookies are small text files that are stored on your device when you visit a website. They serve various purposes and can enhance your browsing experience. Some cookies are essential for the website to function properly, while others help us improve our services."
-        },
-        "typesOfCookies": {
-          "title": "Types of Cookies We Use",
-          "essential": {
-            "title": "Essential Cookies",
-            "content": "These cookies are necessary for the website to function properly. They enable basic functions like page navigation and access to secure areas of the website. The website cannot function properly without these cookies."
-          },
-          "analytics": {
-            "title": "Analytics Cookies",
-            "content": "These cookies help us understand how visitors interact with our website by collecting and reporting information anonymously. This helps us improve our website and services."
-          },
-          "marketing": {
-            "title": "Marketing Cookies",
-            "content": "These cookies are used to track visitors across websites. The intention is to display ads that are relevant and engaging for the individual user."
-          },
-          "preferences": {
-            "title": "Preference Cookies",
-            "content": "These cookies enable the website to remember information that changes the way the website behaves or looks, like your preferred language or the region you are in."
-          }
-        },
-        "yourRights": {
-          "title": "Your Rights and Choices",
-          "content": "Under Swiss and EU data protection laws, you have the right to:",
-          "items": [
-            "Accept or decline cookies (except essential cookies)",
-            "Change your cookie preferences at any time",
-            "Delete cookies stored on your device",
-            "Be informed about how we use cookies",
-            "Understand what data we collect and how we use it"
-          ]
-        },
-        "howToControl": {
-          "title": "How to Control Cookies",
-          "content": "You can control cookies through your browser settings and our cookie preferences center."
-        },
-        "contactUs": {
-          "title": "Contact Us",
-          "content": "If you have any questions about our Cookie Policy, please contact us."
-        },
-        "updates": {
-          "title": "Updates to This Policy",
-          "content": "We may update this Cookie Policy from time to time. Any changes will be posted on this page."
-        }
-      }
-    },
-    "terms": {
-      "title": "Terms of Service",
-      "sections": {
-        "agreement": {
-          "title": "Agreement to Terms",
-          "content": "By accessing and using MaxApp AG's services, you agree to be bound by these Terms of Service and all applicable laws and regulations. If you do not agree with any of these terms, you are prohibited from using our services."
-        },
-        "services": {
-          "title": "Services",
-          "content": "We provide custom software development, web applications, and digital solutions. Our services include:",
-          "items": [
-            "Custom software development",
-            "Web application development",
-            "Mobile application development",
-            "Technical consulting",
-            "Maintenance and support services"
-          ],
-          "note": "We reserve the right to modify, suspend, or discontinue any part of our services at any time."
-        },
-        "intellectualProperty": {
-          "title": "Intellectual Property Rights",
-          "content": "All intellectual property rights in our services and deliverables remain our property unless explicitly agreed otherwise in writing. This includes:",
-          "items": [
-            "Source code and software",
-            "Designs and user interfaces",
-            "Documentation and specifications",
-            "Trademarks and logos"
-          ],
-          "note": "Client-specific deliverables will be governed by separate agreements specifying intellectual property ownership."
-        },
-        "userAccounts": {
-          "title": "User Accounts",
-          "content": "When creating an account with us, you must provide accurate and complete information. You are responsible for:",
-          "items": [
-            "Maintaining the confidentiality of your account",
-            "All activities that occur under your account",
-            "Notifying us of any unauthorized access"
-          ]
-        },
-        "prohibitedUses": {
-          "title": "Prohibited Uses",
-          "content": "You may not use our services for any unlawful purpose or in any way that could damage, disable, overburden, or impair our services."
-        }
-      }
+    "login": {
+      "title": "Admin Login",
+      "email": "Email",
+      "password": "Password",
+      "submit": "Sign In",
+      "error": "Invalid email or password"
     }
+  },
+  "cookieConsent": {
+    "message": "We use cookies to enhance your experience. By continuing to visit this site you agree to our use of cookies.",
+    "accept": "Accept",
+    "decline": "Decline",
+    "learnMore": "Learn More"
   },
   "cookieBanner": {
     "mainText": "We use cookies to enhance your browsing experience and analyze our traffic. By clicking \"Accept all,\" you consent to our use of cookies. See our {policyLink} for more information about how we use cookies and how to manage your preferences.",
@@ -433,48 +399,172 @@
       }
     }
   },
-  "techStack": {
-    "title": "Our Tech Stack",
-    "subtitle": "Technologies We Master",
-    "description": "We leverage the latest and most powerful technologies to build robust, scalable, and efficient solutions for our clients.",
-    "categories": {
-      "Frontend Development": {
-        "title": "Frontend Development",
-        "description": "Modern, responsive, and interactive user interfaces built with cutting-edge web technologies."
-      },
-      "Backend Development": {
-        "title": "Backend Development",
-        "description": "Robust and scalable server-side solutions that power our applications."
-      },
-      "Database Systems": {
-        "title": "Database Systems",
-        "description": "Efficient and reliable data storage and management systems."
-      },
-      "Cloud & DevOps": {
-        "title": "Cloud & DevOps",
-        "description": "Seamless deployment and scaling with modern cloud infrastructure."
-      },
-      "Design & Collaboration": {
-        "title": "Design & Collaboration",
-        "description": "Tools and platforms that enable beautiful design and efficient teamwork."
+  "policies": {
+    "lastUpdated": "Last updated: {date}",
+    "contents": "Table of Contents",
+    "privacy": {
+      "title": "Privacy Policy",
+      "sections": {
+        "introduction": {
+          "title": "Introduction",
+          "paragraph1": "We are committed to protecting your privacy and personal data. This Privacy Policy explains how we collect, use, and protect your personal information when you use our services.",
+          "paragraph2": "Please read this policy carefully to understand our practices regarding your personal data and how we will treat it."
+        },
+        "dataCollection": {
+          "title": "Data Collection and Use",
+          "infoWeCollect": {
+            "title": "Information We Collect",
+            "items": [
+              "Contact information (name, email, phone number)",
+              "Technical information (IP address, browser type, device information)",
+              "Usage data (how you interact with our services)",
+              "Communication data (messages you send us)",
+              "Cookies and similar technologies"
+            ]
+          },
+          "howWeUse": {
+            "title": "How We Use Your Information",
+            "items": [
+              "To provide and maintain our services",
+              "To communicate with you about our services",
+              "To improve our services and user experience",
+              "To detect and prevent fraud or abuse",
+              "To comply with legal obligations"
+            ]
+          }
+        },
+        "legalBasis": {
+          "title": "Legal Basis for Processing",
+          "content": "We process your personal data on the following legal grounds:",
+          "items": [
+            "Performance of a contract when providing our services",
+            "Your consent for specific purposes",
+            "Our legitimate interests in operating our business",
+            "Compliance with legal obligations"
+          ]
+        },
+        "dataSharing": {
+          "title": "Data Sharing and Disclosure",
+          "content": "We do not sell your personal information. We may share your data with trusted service providers who assist us in operating our services, conducting our business, or serving you, subject to strict confidentiality agreements."
+        },
+        "yourRights": {
+          "title": "Your Rights and Choices",
+          "content": "Under applicable data protection laws, you have rights regarding your personal data, including the right to access, correct, delete, or restrict processing of your data. You can also object to processing and request data portability."
+        },
+        "dataSecurity": {
+          "title": "Data Security",
+          "content": "We implement appropriate technical and organizational measures to protect your personal data against unauthorized or unlawful processing, accidental loss, destruction, or damage."
+        },
+        "retention": {
+          "title": "Data Retention",
+          "content": "We retain your personal data only for as long as necessary to fulfill the purposes for which we collected it, including for legal, accounting, or reporting requirements."
+        },
+        "international": {
+          "title": "International Data Transfers",
+          "content": "Your data may be transferred to and processed in countries other than your country of residence. We ensure appropriate safeguards are in place to protect your information in such cases."
+        },
+        "contact": {
+          "title": "Contact Us",
+          "content": "If you have any questions about this Privacy Policy or our data practices, please contact us at privacy@maxapp.com."
+        }
       }
     },
-    "types": {
-      "Framework": "Framework",
-      "Language": "Language",
-      "Styling": "Styling",
-      "Runtime": "Runtime",
-      "SQL": "SQL",
-      "NoSQL": "NoSQL",
-      "Cache": "Cache",
-      "Cloud": "Cloud",
-      "Container": "Container",
-      "Orchestration": "Orchestration",
-      "Hosting": "Hosting",
-      "Design": "Design",
-      "Version Control": "Version Control",
-      "Project Management": "Project Management",
-      "Communication": "Communication"
+    "cookies": {
+      "title": "Cookie Policy",
+      "sections": {
+        "whatAreCookies": {
+          "title": "What Are Cookies",
+          "content": "Cookies are small text files that are placed on your device when you visit our website. They help us provide you with a better experience by remembering your preferences, analyzing how you use our site, and enabling certain features."
+        },
+        "typesOfCookies": {
+          "title": "Types of Cookies We Use",
+          "essential": {
+            "title": "Essential Cookies",
+            "content": "These cookies are necessary for the website to function properly. They enable basic functions like page navigation and access to secure areas of the website. The website cannot function properly without these cookies."
+          },
+          "analytics": {
+            "title": "Analytics Cookies",
+            "content": "These cookies help us understand how visitors interact with our website by collecting and reporting information anonymously. This helps us improve our website and services."
+          },
+          "marketing": {
+            "title": "Marketing Cookies",
+            "content": "These cookies are used to track visitors across websites. The intention is to display ads that are relevant and engaging for the individual user."
+          },
+          "preferences": {
+            "title": "Preference Cookies",
+            "content": "These cookies enable the website to remember information that changes the way the website behaves or looks, like your preferred language or the region you are in."
+          }
+        },
+        "yourRights": {
+          "title": "Your Rights and Choices",
+          "content": "You have the right to decide whether to accept or reject cookies. You can exercise your cookie rights by setting your preferences in the Cookie Consent Manager. Here's what you can do:",
+          "items": [
+            "Accept or reject all cookies",
+            "Choose which categories of cookies to accept",
+            "Change your cookie preferences at any time",
+            "Withdraw your consent at any time"
+          ]
+        },
+        "howToControl": {
+          "title": "How to Control Cookies",
+          "content": "Most web browsers allow you to control cookies through their settings preferences. However, if you limit the ability of websites to set cookies, you may worsen your overall user experience. To manage your cookie preferences on our website, click the button below."
+        },
+        "contactUs": {
+          "title": "Contact Us",
+          "content": "If you have any questions about our use of cookies or this Cookie Policy, please contact us through our contact form or email us at privacy@maxapp.com."
+        },
+        "updates": {
+          "title": "Updates to This Policy",
+          "content": "We may update this Cookie Policy from time to time to reflect changes in our practices or for operational, legal, or regulatory reasons. We encourage you to periodically review this page for the latest information on our cookie practices."
+        }
+      }
+    },
+    "terms": {
+      "title": "Terms of Service",
+      "sections": {
+        "agreement": {
+          "title": "Agreement to Terms",
+          "content": "By accessing and using our services, you agree to be bound by these Terms of Service. If you disagree with any part of these terms, you may not access our services."
+        },
+        "services": {
+          "title": "Description of Services",
+          "content": "We provide software development and consulting services, including but not limited to:",
+          "items": [
+            "Web application development",
+            "Mobile application development",
+            "Cloud solutions and infrastructure",
+            "Technical consulting and advisory services",
+            "System integration and maintenance"
+          ],
+          "note": "We reserve the right to modify, suspend, or discontinue any part of our services at any time."
+        },
+        "intellectualProperty": {
+          "title": "Intellectual Property Rights",
+          "content": "Our intellectual property includes, but is not limited to:",
+          "items": [
+            "Source code and software",
+            "Designs and user interfaces",
+            "Documentation and technical specifications",
+            "Trademarks and logos",
+            "Patents and trade secrets"
+          ],
+          "note": "All rights, title, and interest in and to our services are and will remain the exclusive property of Max App and its licensors."
+        },
+        "userAccounts": {
+          "title": "User Accounts",
+          "content": "When creating an account with us, you must provide accurate and complete information. You are responsible for:",
+          "items": [
+            "Maintaining the security of your account",
+            "All activities that occur under your account",
+            "Promptly notifying us of any unauthorized use",
+            "Ensuring your account information is up to date"
+          ]
+        },
+        "prohibitedUses": {
+          "title": "Prohibited Uses",
+          "content": "You may not use our services for any illegal or unauthorized purpose. You must not violate any laws in your jurisdiction while using our services."
+        }
+      }
     }
   }
 }

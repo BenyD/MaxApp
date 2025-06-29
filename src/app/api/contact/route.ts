@@ -1,38 +1,51 @@
 import { NextResponse } from 'next/server'
+import { createClient } from '@supabase/supabase-js'
+import { cookies } from 'next/headers'
+
+const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL!
+const supabaseServiceKey = process.env.SUPABASE_SERVICE_ROLE_KEY!
 
 export async function POST(request: Request) {
   try {
-    const data = await request.json()
+    const body = await request.json()
+    const { first_name, last_name, email, phone, message } = body
 
-    // Here you would typically:
-    // 1. Validate the data
-    // 2. Store it in a database
-    // 3. Send an email notification
-    // 4. Integrate with your CRM system
-    // For now, we'll just log it and return success
+    // Validate input
+    if (!first_name || !last_name || !email || !phone || !message) {
+      return NextResponse.json(
+        { error: 'All fields are required' },
+        { status: 400 },
+      )
+    }
 
-    // Example: Send email using your email service
-    // await sendEmail({
-    //   to: 'your-email@maxapp.ch',
-    //   subject: 'New Contact Form Submission',
-    //   body: `
-    //     Name: ${data.firstName} ${data.lastName}
-    //     Email: ${data.email}
-    //     Phone: ${data.phone}
-    //     Message: ${data.message}
-    //   `
-    // })
+    // Create a Supabase client with service role key for admin operations
+    const supabase = createClient(supabaseUrl, supabaseServiceKey)
 
-    console.log('Form submission:', data)
+    // Save to Supabase
+    const { error } = await supabase.from('contact_submissions').insert([
+      {
+        first_name,
+        last_name,
+        email,
+        phone,
+        message,
+        status: 'new',
+      },
+    ])
 
-    return NextResponse.json(
-      { message: 'Form submitted successfully' },
-      { status: 200 },
-    )
+    if (error) {
+      console.error('Error saving contact submission:', error)
+      return NextResponse.json(
+        { error: 'Failed to save contact submission' },
+        { status: 500 },
+      )
+    }
+
+    return NextResponse.json({ success: true })
   } catch (error) {
-    console.error('Error processing form submission:', error)
+    console.error('Error in contact API:', error)
     return NextResponse.json(
-      { message: 'Error processing form submission' },
+      { error: 'Internal server error' },
       { status: 500 },
     )
   }

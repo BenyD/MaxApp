@@ -26,6 +26,78 @@ function SearchIcon() {
   )
 }
 
+function TotalIcon() {
+  return (
+    <svg
+      className="h-6 w-6"
+      fill="none"
+      viewBox="0 0 24 24"
+      stroke="currentColor"
+    >
+      <path
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        strokeWidth={2}
+        d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"
+      />
+    </svg>
+  )
+}
+
+function TodayIcon() {
+  return (
+    <svg
+      className="h-6 w-6"
+      fill="none"
+      viewBox="0 0 24 24"
+      stroke="currentColor"
+    >
+      <path
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        strokeWidth={2}
+        d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"
+      />
+    </svg>
+  )
+}
+
+function WeekIcon() {
+  return (
+    <svg
+      className="h-6 w-6"
+      fill="none"
+      viewBox="0 0 24 24"
+      stroke="currentColor"
+    >
+      <path
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        strokeWidth={2}
+        d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"
+      />
+    </svg>
+  )
+}
+
+function MonthIcon() {
+  return (
+    <svg
+      className="h-6 w-6"
+      fill="none"
+      viewBox="0 0 24 24"
+      stroke="currentColor"
+    >
+      <path
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        strokeWidth={2}
+        d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"
+      />
+    </svg>
+  )
+}
+
 interface ContactSubmission {
   id: number
   created_at: string
@@ -67,27 +139,42 @@ export default function SubmissionsPage() {
   const fetchSubmissions = useCallback(async () => {
     try {
       setLoading(true)
+      setError(null)
 
-      // Count total submissions for pagination
-      const { count } = await supabase
+      // Build the base query for counting
+      let countQuery = supabase
         .from('contact_submissions')
         .select('*', { count: 'exact', head: true })
-        .ilike('first_name', `%${searchQuery}%`)
-        .or(
-          `last_name.ilike.%${searchQuery}%,email.ilike.%${searchQuery}%,message.ilike.%${searchQuery}%`,
+
+      // Apply search filter if there's a search query
+      if (searchQuery) {
+        countQuery = countQuery.or(
+          `first_name.ilike.%${searchQuery}%,last_name.ilike.%${searchQuery}%,email.ilike.%${searchQuery}%,message.ilike.%${searchQuery}%`,
         )
+      }
+
+      // Get total count
+      const { count, error: countError } = await countQuery
+
+      if (countError) throw countError
 
       setTotalCount(count || 0)
 
-      // Fetch paginated submissions
-      const { data, error: fetchError } = await supabase
-        .from('contact_submissions')
-        .select('*')
-        .ilike('first_name', `%${searchQuery}%`)
-        .or(
-          `last_name.ilike.%${searchQuery}%,email.ilike.%${searchQuery}%,message.ilike.%${searchQuery}%`,
+      // Build the query for fetching data
+      let dataQuery = supabase.from('contact_submissions').select('*')
+
+      // Apply search filter if there's a search query
+      if (searchQuery) {
+        dataQuery = dataQuery.or(
+          `first_name.ilike.%${searchQuery}%,last_name.ilike.%${searchQuery}%,email.ilike.%${searchQuery}%,message.ilike.%${searchQuery}%`,
         )
-        .order('created_at', { ascending: false })
+      }
+
+      // Fetch paginated data
+      const { data, error: fetchError } = await dataQuery
+        .order(sortConfig.key, {
+          ascending: sortConfig.direction === 'asc',
+        })
         .range((currentPage - 1) * itemsPerPage, currentPage * itemsPerPage - 1)
 
       if (fetchError) throw fetchError
@@ -99,7 +186,7 @@ export default function SubmissionsPage() {
     } finally {
       setLoading(false)
     }
-  }, [currentPage, searchQuery, supabase, itemsPerPage])
+  }, [currentPage, searchQuery, sortConfig, supabase, itemsPerPage])
 
   useEffect(() => {
     fetchSubmissions()
@@ -124,7 +211,7 @@ export default function SubmissionsPage() {
 
   // Calculate stats
   const stats: Stats = {
-    total: submissions.length,
+    total: totalCount,
     today: submissions.filter(
       (s) =>
         new Date(s.created_at).toDateString() === new Date().toDateString(),
@@ -154,6 +241,49 @@ export default function SubmissionsPage() {
           ? 'desc'
           : 'asc',
     }))
+  }
+
+  // Update submission status
+  const handleStatusUpdate = async (
+    id: number,
+    status: 'new' | 'replied' | 'archived',
+  ) => {
+    try {
+      const { error } = await supabase
+        .from('contact_submissions')
+        .update({ status })
+        .eq('id', id)
+
+      if (error) throw error
+
+      // Refresh submissions after update
+      fetchSubmissions()
+    } catch (err) {
+      console.error('Error updating submission status:', err)
+      setError('Failed to update submission status')
+    }
+  }
+
+  // Handle reply to submission
+  const handleReply = async (id: number, replyMessage: string) => {
+    try {
+      const { error } = await supabase
+        .from('contact_submissions')
+        .update({
+          status: 'replied',
+          reply_message: replyMessage,
+          replied_at: new Date().toISOString(),
+        })
+        .eq('id', id)
+
+      if (error) throw error
+
+      // Refresh submissions after reply
+      fetchSubmissions()
+    } catch (err) {
+      console.error('Error replying to submission:', err)
+      setError('Failed to save reply')
+    }
   }
 
   if (loading) {
@@ -191,65 +321,76 @@ export default function SubmissionsPage() {
 
   return (
     <div className="space-y-8">
-      {/* Stats */}
-      <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.1 }}
-          className="overflow-hidden rounded-lg bg-white px-4 py-5 shadow sm:p-6"
-        >
-          <dt className="truncate text-sm font-medium text-gray-500">
-            {t('stats.total')}
-          </dt>
-          <dd className="mt-1 text-3xl font-semibold tracking-tight text-gray-900">
-            {stats.total}
-          </dd>
-        </motion.div>
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.2 }}
-          className="overflow-hidden rounded-lg bg-white px-4 py-5 shadow sm:p-6"
-        >
-          <dt className="truncate text-sm font-medium text-gray-500">
-            {t('stats.today')}
-          </dt>
-          <dd className="mt-1 text-3xl font-semibold tracking-tight text-gray-900">
-            {stats.today}
-          </dd>
-        </motion.div>
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.3 }}
-          className="overflow-hidden rounded-lg bg-white px-4 py-5 shadow sm:p-6"
-        >
-          <dt className="truncate text-sm font-medium text-gray-500">
-            {t('stats.thisWeek')}
-          </dt>
-          <dd className="mt-1 text-3xl font-semibold tracking-tight text-gray-900">
-            {stats.thisWeek}
-          </dd>
-        </motion.div>
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.4 }}
-          className="overflow-hidden rounded-lg bg-white px-4 py-5 shadow sm:p-6"
-        >
-          <dt className="truncate text-sm font-medium text-gray-500">
-            {t('stats.thisMonth')}
-          </dt>
-          <dd className="mt-1 text-3xl font-semibold tracking-tight text-gray-900">
-            {stats.thisMonth}
-          </dd>
-        </motion.div>
+      {/* Stats Grid */}
+      <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+        <div className="overflow-hidden rounded-xl bg-white p-6 shadow-sm ring-1 ring-zinc-900/5">
+          <div className="flex items-center gap-4">
+            <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-lg bg-blue-50 text-blue-600">
+              <TotalIcon />
+            </div>
+            <div>
+              <p className="text-sm font-medium text-zinc-500">
+                {t('stats.total')}
+              </p>
+              <p className="text-2xl font-semibold text-zinc-900">
+                {stats.total}
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div className="overflow-hidden rounded-xl bg-white p-6 shadow-sm ring-1 ring-zinc-900/5">
+          <div className="flex items-center gap-4">
+            <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-lg bg-green-50 text-green-600">
+              <TodayIcon />
+            </div>
+            <div>
+              <p className="text-sm font-medium text-zinc-500">
+                {t('stats.today')}
+              </p>
+              <p className="text-2xl font-semibold text-zinc-900">
+                {stats.today}
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div className="overflow-hidden rounded-xl bg-white p-6 shadow-sm ring-1 ring-zinc-900/5">
+          <div className="flex items-center gap-4">
+            <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-lg bg-purple-50 text-purple-600">
+              <WeekIcon />
+            </div>
+            <div>
+              <p className="text-sm font-medium text-zinc-500">
+                {t('stats.thisWeek')}
+              </p>
+              <p className="text-2xl font-semibold text-zinc-900">
+                {stats.thisWeek}
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div className="overflow-hidden rounded-xl bg-white p-6 shadow-sm ring-1 ring-zinc-900/5">
+          <div className="flex items-center gap-4">
+            <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-lg bg-orange-50 text-orange-600">
+              <MonthIcon />
+            </div>
+            <div>
+              <p className="text-sm font-medium text-zinc-500">
+                {t('stats.thisMonth')}
+              </p>
+              <p className="text-2xl font-semibold text-zinc-900">
+                {stats.thisMonth}
+              </p>
+            </div>
+          </div>
+        </div>
       </div>
 
-      {/* Search */}
-      <div className="flex items-center gap-4">
-        <div className="relative max-w-lg flex-1">
+      {/* Search Bar */}
+      <div className="flex items-center space-x-4">
+        <div className="relative flex-1">
           <div className="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
             <SearchIcon />
           </div>
@@ -257,252 +398,166 @@ export default function SubmissionsPage() {
             type="text"
             value={searchQuery}
             onChange={handleSearch}
-            placeholder={t('search')}
-            className="block w-full rounded-lg border-0 py-2.5 pr-4 pl-10 text-zinc-900 ring-1 ring-zinc-300 ring-inset placeholder:text-zinc-400 focus:ring-2 focus:ring-blue-600 focus:ring-inset sm:text-sm sm:leading-6"
+            placeholder={t('search.placeholder')}
+            className="block w-full rounded-lg border-0 py-2 pr-3 pl-10 text-zinc-900 shadow-sm ring-1 ring-zinc-300 ring-inset placeholder:text-zinc-400 focus:ring-2 focus:ring-blue-600 focus:ring-inset sm:text-sm sm:leading-6"
           />
         </div>
       </div>
 
-      {/* Table */}
-      <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ delay: 0.5 }}
-        className="overflow-hidden rounded-lg bg-white shadow"
-      >
-        <div className="px-4 py-5 sm:px-6">
-          <h3 className="text-lg leading-6 font-medium text-gray-900">
-            {t('submissions')}
-          </h3>
-          <p className="mt-1 text-sm text-gray-500">{t('table.description')}</p>
-        </div>
-        <div className="border-t border-gray-200">
-          <div className="overflow-x-auto">
-            <table className="min-w-full divide-y divide-gray-200">
-              <thead className="bg-gray-50">
-                <tr>
-                  {[
-                    { key: 'created_at', label: t('table.date') },
-                    { key: 'first_name', label: t('table.name') },
-                    { key: 'email', label: t('table.email') },
-                    { key: 'message', label: t('table.message') },
-                    { key: 'status', label: t('table.status') },
-                  ].map(({ key, label }) => (
-                    <th
-                      key={key}
-                      scope="col"
-                      className="px-6 py-3 text-left text-xs font-medium tracking-wider text-gray-500 uppercase"
-                    >
-                      <button
-                        className="group inline-flex"
-                        onClick={() =>
-                          handleSort(key as keyof ContactSubmission)
-                        }
-                      >
-                        {label}
-                        <span
-                          className={`ml-2 flex-none rounded ${
-                            sortConfig.key === key
-                              ? 'bg-gray-100 text-gray-900'
-                              : 'invisible text-gray-400 group-hover:visible'
-                          }`}
-                        >
-                          {sortConfig.key === key &&
-                          sortConfig.direction === 'desc' ? (
-                            <svg
-                              className="h-5 w-5"
-                              viewBox="0 0 20 20"
-                              fill="currentColor"
-                            >
-                              <path
-                                fillRule="evenodd"
-                                d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
-                                clipRule="evenodd"
-                              />
-                            </svg>
-                          ) : (
-                            <svg
-                              className="h-5 w-5"
-                              viewBox="0 0 20 20"
-                              fill="currentColor"
-                            >
-                              <path
-                                fillRule="evenodd"
-                                d="M14.707 12.707a1 1 0 01-1.414 0L10 9.414l-3.293 3.293a1 1 0 01-1.414-1.414l4-4a1 1 0 011.414 0l4 4a1 1 0 010 1.414z"
-                                clipRule="evenodd"
-                              />
-                            </svg>
-                          )}
-                        </span>
-                      </button>
-                    </th>
-                  ))}
-                </tr>
-              </thead>
-              <tbody className="divide-y divide-gray-200 bg-white">
-                {sortedSubmissions.map((submission) => (
-                  <tr
-                    key={submission.id}
-                    className="cursor-pointer hover:bg-gray-50"
+      {/* Submissions Table */}
+      <div className="overflow-hidden rounded-xl bg-white shadow-sm ring-1 ring-zinc-900/5">
+        <table className="min-w-full divide-y divide-zinc-200">
+          <thead>
+            <tr>
+              <th className="px-6 py-3 text-left text-sm font-semibold text-zinc-900">
+                {t('table.name')}
+              </th>
+              <th className="px-6 py-3 text-left text-sm font-semibold text-zinc-900">
+                {t('table.email')}
+              </th>
+              <th className="px-6 py-3 text-left text-sm font-semibold text-zinc-900">
+                {t('table.phone')}
+              </th>
+              <th className="px-6 py-3 text-left text-sm font-semibold text-zinc-900">
+                {t('table.date')}
+              </th>
+              <th className="px-6 py-3 text-left text-sm font-semibold text-zinc-900">
+                {t('table.status')}
+              </th>
+              <th className="px-6 py-3 text-left text-sm font-semibold text-zinc-900">
+                {t('table.actions')}
+              </th>
+            </tr>
+          </thead>
+          <tbody className="divide-y divide-zinc-200">
+            {sortedSubmissions.map((submission) => (
+              <tr key={submission.id}>
+                <td className="px-6 py-4 text-sm whitespace-nowrap text-zinc-900">
+                  {`${submission.first_name} ${submission.last_name}`}
+                </td>
+                <td className="px-6 py-4 text-sm whitespace-nowrap text-zinc-900">
+                  {submission.email}
+                </td>
+                <td className="px-6 py-4 text-sm whitespace-nowrap text-zinc-900">
+                  {submission.phone}
+                </td>
+                <td className="px-6 py-4 text-sm whitespace-nowrap text-zinc-500">
+                  {format(new Date(submission.created_at), 'MMM d, yyyy')}
+                </td>
+                <td className="px-6 py-4 text-sm whitespace-nowrap">
+                  <span
+                    className={`inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-medium ${
+                      submission.status === 'new'
+                        ? 'bg-blue-100 text-blue-800'
+                        : submission.status === 'replied'
+                          ? 'bg-green-100 text-green-800'
+                          : 'bg-zinc-100 text-zinc-800'
+                    }`}
+                  >
+                    {t(`status.${submission.status}`)}
+                  </span>
+                </td>
+                <td className="px-6 py-4 text-sm whitespace-nowrap">
+                  <button
                     onClick={() => setSelectedSubmission(submission)}
+                    className="text-blue-600 hover:text-blue-500"
                   >
-                    <td className="px-6 py-4 text-sm whitespace-nowrap text-gray-900">
-                      {format(new Date(submission.created_at), 'MMM d, yyyy')}
-                    </td>
-                    <td className="px-6 py-4 text-sm whitespace-nowrap text-gray-900">
-                      {submission.first_name} {submission.last_name}
-                    </td>
-                    <td className="px-6 py-4 text-sm whitespace-nowrap text-gray-500">
-                      {submission.email}
-                    </td>
-                    <td className="max-w-xs truncate px-6 py-4 text-sm text-gray-500">
-                      {submission.message}
-                    </td>
-                    <td className="px-6 py-4 text-sm whitespace-nowrap">
-                      <span
-                        className={`inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-medium ${
-                          submission.status === 'new'
-                            ? 'bg-blue-100 text-blue-800'
-                            : submission.status === 'replied'
-                              ? 'bg-green-100 text-green-800'
-                              : 'bg-gray-100 text-gray-800'
-                        }`}
-                      >
-                        {t(`table.statuses.${submission.status}`)}
-                      </span>
-                    </td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
-        </div>
+                    {t('actions.view')}
+                  </button>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
 
-        {/* Pagination */}
-        <div className="flex items-center justify-between border-t border-gray-200 bg-white px-4 py-3 sm:px-6">
-          <div className="flex flex-1 justify-between sm:hidden">
-            <button
-              onClick={() => setCurrentPage((page) => Math.max(1, page - 1))}
-              disabled={currentPage === 1}
-              className="relative inline-flex items-center rounded-md border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50 disabled:cursor-not-allowed disabled:opacity-50"
-            >
-              {t('pagination.previous')}
-            </button>
-            <button
-              onClick={() =>
-                setCurrentPage((page) => Math.min(totalPages, page + 1))
-              }
-              disabled={currentPage === totalPages}
-              className="relative ml-3 inline-flex items-center rounded-md border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50 disabled:cursor-not-allowed disabled:opacity-50"
-            >
-              {t('pagination.next')}
-            </button>
+      {/* Pagination */}
+      <div className="flex items-center justify-between border-t border-zinc-200 px-4 py-3 sm:px-6">
+        <div className="flex flex-1 justify-between sm:hidden">
+          <button
+            onClick={() => setCurrentPage((prev) => Math.max(prev - 1, 1))}
+            disabled={currentPage === 1}
+            className="relative inline-flex items-center rounded-md border border-zinc-300 bg-white px-4 py-2 text-sm font-medium text-zinc-700 hover:bg-zinc-50"
+          >
+            {t('pagination.previous')}
+          </button>
+          <button
+            onClick={() =>
+              setCurrentPage((prev) => Math.min(prev + 1, totalPages))
+            }
+            disabled={currentPage === totalPages}
+            className="relative ml-3 inline-flex items-center rounded-md border border-zinc-300 bg-white px-4 py-2 text-sm font-medium text-zinc-700 hover:bg-zinc-50"
+          >
+            {t('pagination.next')}
+          </button>
+        </div>
+        <div className="hidden sm:flex sm:flex-1 sm:items-center sm:justify-between">
+          <div>
+            <p className="text-sm text-zinc-700">
+              {t('pagination.showing', {
+                start: (currentPage - 1) * itemsPerPage + 1,
+                end: Math.min(currentPage * itemsPerPage, totalCount),
+                total: totalCount,
+              })}
+            </p>
           </div>
-          <div className="hidden sm:flex sm:flex-1 sm:items-center sm:justify-between">
-            <div>
-              <p className="text-sm text-gray-700">
-                {t('pagination.showing')}{' '}
-                <span className="font-medium">
-                  {(currentPage - 1) * itemsPerPage + 1}
-                </span>{' '}
-                {t('pagination.to')}{' '}
-                <span className="font-medium">
-                  {Math.min(currentPage * itemsPerPage, submissions.length)}
-                </span>{' '}
-                {t('pagination.of')}{' '}
-                <span className="font-medium">{totalCount}</span>{' '}
-                {t('pagination.results')}
-              </p>
-            </div>
-            <div>
-              <nav
-                className="relative z-0 inline-flex -space-x-px rounded-md shadow-sm"
-                aria-label="Pagination"
+          <div>
+            <nav
+              className="isolate inline-flex -space-x-px rounded-md shadow-sm"
+              aria-label="Pagination"
+            >
+              <button
+                onClick={() => setCurrentPage((prev) => Math.max(prev - 1, 1))}
+                disabled={currentPage === 1}
+                className="relative inline-flex items-center rounded-l-md px-2 py-2 text-zinc-400 ring-1 ring-zinc-300 ring-inset hover:bg-zinc-50 focus:z-20 focus:outline-offset-0"
               >
-                <button
-                  onClick={() =>
-                    setCurrentPage((page) => Math.max(1, page - 1))
-                  }
-                  disabled={currentPage === 1}
-                  className="relative inline-flex items-center rounded-l-md border border-gray-300 bg-white px-2 py-2 text-sm font-medium text-gray-500 hover:bg-gray-50 disabled:cursor-not-allowed disabled:opacity-50"
+                <span className="sr-only">{t('pagination.previous')}</span>
+                <svg
+                  className="h-5 w-5"
+                  viewBox="0 0 20 20"
+                  fill="currentColor"
+                  aria-hidden="true"
                 >
-                  <span className="sr-only">{t('pagination.previous')}</span>
-                  <svg
-                    className="h-5 w-5"
-                    viewBox="0 0 20 20"
-                    fill="currentColor"
-                  >
-                    <path
-                      fillRule="evenodd"
-                      d="M12.79 5.23a.75.75 0 01-.02 1.06L8.832 10l3.938 3.71a.75.75 0 11-1.04 1.08l-4.5-4.25a.75.75 0 010-1.414l4.5-4.25a.75.75 0 011.06.02z"
-                      clipRule="evenodd"
-                    />
-                  </svg>
-                </button>
-                {Array.from({ length: totalPages }, (_, i) => i + 1)
-                  .filter(
-                    (page) =>
-                      page === 1 ||
-                      page === totalPages ||
-                      (page >= currentPage - 1 && page <= currentPage + 1),
-                  )
-                  .map((page, index, array) => {
-                    const showEllipsis =
-                      index > 0 && page - array[index - 1] > 1
-
-                    return (
-                      <div key={page} className="flex items-center">
-                        {showEllipsis && (
-                          <span className="relative inline-flex items-center px-4 py-2 text-sm font-semibold text-gray-700 ring-1 ring-gray-300 ring-inset focus:outline-offset-0">
-                            ...
-                          </span>
-                        )}
-                        <button
-                          onClick={() => setCurrentPage(page)}
-                          className={`relative inline-flex items-center px-4 py-2 text-sm font-semibold ${
-                            currentPage === page
-                              ? 'z-10 bg-blue-600 text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600'
-                              : 'text-gray-900 ring-1 ring-gray-300 ring-inset hover:bg-gray-50 focus:outline-offset-0'
-                          }`}
-                        >
-                          {page}
-                        </button>
-                      </div>
-                    )
-                  })}
-                <button
-                  onClick={() =>
-                    setCurrentPage((page) => Math.min(totalPages, page + 1))
-                  }
-                  disabled={currentPage === totalPages}
-                  className="relative inline-flex items-center rounded-r-md border border-gray-300 bg-white px-2 py-2 text-sm font-medium text-gray-500 hover:bg-gray-50 disabled:cursor-not-allowed disabled:opacity-50"
+                  <path
+                    fillRule="evenodd"
+                    d="M12.79 5.23a.75.75 0 01-.02 1.06L8.832 10l3.938 3.71a.75.75 0 11-1.04 1.08l-4.5-4.25a.75.75 0 010-1.08l4.5-4.25a.75.75 0 011.06.02z"
+                    clipRule="evenodd"
+                  />
+                </svg>
+              </button>
+              <button
+                onClick={() =>
+                  setCurrentPage((prev) => Math.min(prev + 1, totalPages))
+                }
+                disabled={currentPage === totalPages}
+                className="relative inline-flex items-center rounded-r-md px-2 py-2 text-zinc-400 ring-1 ring-zinc-300 ring-inset hover:bg-zinc-50 focus:z-20 focus:outline-offset-0"
+              >
+                <span className="sr-only">{t('pagination.next')}</span>
+                <svg
+                  className="h-5 w-5"
+                  viewBox="0 0 20 20"
+                  fill="currentColor"
+                  aria-hidden="true"
                 >
-                  <span className="sr-only">{t('pagination.next')}</span>
-                  <svg
-                    className="h-5 w-5"
-                    viewBox="0 0 20 20"
-                    fill="currentColor"
-                  >
-                    <path
-                      fillRule="evenodd"
-                      d="M7.21 14.77a.75.75 0 01.02-1.06L11.168 10 7.23 6.29a.75.75 0 111.04-1.08l4.5 4.25a.75.75 0 010 1.08l-4.5 4.25a.75.75 0 01-1.06-.02z"
-                      clipRule="evenodd"
-                    />
-                  </svg>
-                </button>
-              </nav>
-            </div>
+                  <path
+                    fillRule="evenodd"
+                    d="M7.21 14.77a.75.75 0 01.02-1.06L11.168 10 7.23 6.29a.75.75 0 111.04-1.08l4.5 4.25a.75.75 0 010 1.08l-4.5 4.25a.75.75 0 01-1.06-.02z"
+                    clipRule="evenodd"
+                  />
+                </svg>
+              </button>
+            </nav>
           </div>
         </div>
-      </motion.div>
+      </div>
 
       {/* Submission Modal */}
       {selectedSubmission && (
         <SubmissionModal
-          isOpen={!!selectedSubmission}
-          onClose={() => setSelectedSubmission(null)}
           submission={selectedSubmission}
-          onSubmissionUpdated={fetchSubmissions}
+          onClose={() => setSelectedSubmission(null)}
+          onStatusUpdate={handleStatusUpdate}
+          onReply={handleReply}
         />
       )}
     </div>

@@ -82,9 +82,12 @@ function MonthIcon() {
 interface Submission {
   id: string
   created_at: string
-  name: string
+  first_name: string
+  last_name: string
   email: string
+  phone: string
   message: string
+  status: 'new' | 'replied' | 'archived'
 }
 
 interface Stats {
@@ -110,11 +113,14 @@ export default function DashboardPage() {
     const fetchData = async () => {
       try {
         // Fetch recent submissions (last 5)
-        const { data: recentSubmissions } = await supabase
-          .from('contact_submissions')
-          .select('*')
-          .order('created_at', { ascending: false })
-          .limit(5)
+        const { data: recentSubmissions, error: submissionsError } =
+          await supabase
+            .from('contact_submissions')
+            .select('*')
+            .order('created_at', { ascending: false })
+            .limit(5)
+
+        if (submissionsError) throw submissionsError
 
         if (recentSubmissions) {
           setSubmissions(recentSubmissions)
@@ -127,30 +133,42 @@ export default function DashboardPage() {
         weekStart.setDate(today.getDate() - today.getDay())
         const monthStart = new Date(now.getFullYear(), now.getMonth(), 1)
 
-        const { data: totalCount } = await supabase
+        // Get total count
+        const { count: totalCount, error: totalError } = await supabase
           .from('contact_submissions')
-          .select('id', { count: 'exact' })
+          .select('*', { count: 'exact', head: true })
 
-        const { data: todayCount } = await supabase
+        if (totalError) throw totalError
+
+        // Get today's count
+        const { count: todayCount, error: todayError } = await supabase
           .from('contact_submissions')
-          .select('id', { count: 'exact' })
+          .select('*', { count: 'exact', head: true })
           .gte('created_at', today.toISOString())
 
-        const { data: weekCount } = await supabase
+        if (todayError) throw todayError
+
+        // Get this week's count
+        const { count: weekCount, error: weekError } = await supabase
           .from('contact_submissions')
-          .select('id', { count: 'exact' })
+          .select('*', { count: 'exact', head: true })
           .gte('created_at', weekStart.toISOString())
 
-        const { data: monthCount } = await supabase
+        if (weekError) throw weekError
+
+        // Get this month's count
+        const { count: monthCount, error: monthError } = await supabase
           .from('contact_submissions')
-          .select('id', { count: 'exact' })
+          .select('*', { count: 'exact', head: true })
           .gte('created_at', monthStart.toISOString())
 
+        if (monthError) throw monthError
+
         setStats({
-          total: totalCount?.length || 0,
-          today: todayCount?.length || 0,
-          thisWeek: weekCount?.length || 0,
-          thisMonth: monthCount?.length || 0,
+          total: totalCount || 0,
+          today: todayCount || 0,
+          thisWeek: weekCount || 0,
+          thisMonth: monthCount || 0,
         })
       } catch (error) {
         console.error('Error fetching data:', error)
@@ -240,58 +258,57 @@ export default function DashboardPage() {
       </div>
 
       {/* Recent Submissions */}
-      <div className="space-y-4">
-        <div className="flex items-center justify-between">
-          <h2 className="text-lg font-medium text-zinc-900">
-            {t('recentSubmissions')}
-          </h2>
-          <Link
-            href="/admin/submissions"
-            className="text-sm font-medium text-blue-600 hover:text-blue-500"
-          >
-            {t('viewAll')}
-          </Link>
-        </div>
-
+      <div>
+        <h2 className="mb-6 text-lg font-semibold text-zinc-900">
+          {t('recent.title')}
+        </h2>
         <div className="overflow-hidden rounded-xl bg-white shadow-sm ring-1 ring-zinc-900/5">
-          <div className="min-w-full divide-y divide-zinc-200">
-            <table className="min-w-full divide-y divide-zinc-200">
-              <thead>
-                <tr>
-                  <th className="px-6 py-3 text-left text-sm font-semibold text-zinc-900">
-                    {t('table.name')}
-                  </th>
-                  <th className="px-6 py-3 text-left text-sm font-semibold text-zinc-900">
-                    {t('table.email')}
-                  </th>
-                  <th className="px-6 py-3 text-left text-sm font-semibold text-zinc-900">
-                    {t('table.message')}
-                  </th>
-                  <th className="px-6 py-3 text-left text-sm font-semibold text-zinc-900">
-                    {t('table.date')}
-                  </th>
+          <table className="min-w-full divide-y divide-zinc-200">
+            <thead>
+              <tr>
+                <th className="px-6 py-3 text-left text-sm font-semibold text-zinc-900">
+                  {t('table.name')}
+                </th>
+                <th className="px-6 py-3 text-left text-sm font-semibold text-zinc-900">
+                  {t('table.email')}
+                </th>
+                <th className="px-6 py-3 text-left text-sm font-semibold text-zinc-900">
+                  {t('table.date')}
+                </th>
+                <th className="px-6 py-3 text-left text-sm font-semibold text-zinc-900">
+                  {t('table.status')}
+                </th>
+              </tr>
+            </thead>
+            <tbody className="divide-y divide-zinc-200">
+              {submissions.map((submission) => (
+                <tr key={submission.id}>
+                  <td className="px-6 py-4 text-sm whitespace-nowrap text-zinc-900">
+                    {`${submission.first_name} ${submission.last_name}`}
+                  </td>
+                  <td className="px-6 py-4 text-sm whitespace-nowrap text-zinc-900">
+                    {submission.email}
+                  </td>
+                  <td className="px-6 py-4 text-sm whitespace-nowrap text-zinc-500">
+                    {format(new Date(submission.created_at), 'MMM d, yyyy')}
+                  </td>
+                  <td className="px-6 py-4 text-sm whitespace-nowrap">
+                    <span
+                      className={`inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-medium ${
+                        submission.status === 'new'
+                          ? 'bg-blue-100 text-blue-800'
+                          : submission.status === 'replied'
+                            ? 'bg-green-100 text-green-800'
+                            : 'bg-zinc-100 text-zinc-800'
+                      }`}
+                    >
+                      {t(`status.${submission.status}`)}
+                    </span>
+                  </td>
                 </tr>
-              </thead>
-              <tbody className="divide-y divide-zinc-200 bg-white">
-                {submissions.map((submission) => (
-                  <tr key={submission.id} className="hover:bg-zinc-50">
-                    <td className="px-6 py-4 text-sm whitespace-nowrap text-zinc-900">
-                      {submission.name}
-                    </td>
-                    <td className="px-6 py-4 text-sm whitespace-nowrap text-zinc-900">
-                      {submission.email}
-                    </td>
-                    <td className="max-w-xs truncate px-6 py-4 text-sm text-zinc-900">
-                      {submission.message}
-                    </td>
-                    <td className="px-6 py-4 text-sm whitespace-nowrap text-zinc-500">
-                      {format(new Date(submission.created_at), 'MMM d, yyyy')}
-                    </td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
+              ))}
+            </tbody>
+          </table>
         </div>
       </div>
     </div>

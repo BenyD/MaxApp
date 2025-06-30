@@ -298,59 +298,62 @@
   "admin": {
     "dashboard": {
       "title": "Dashboard",
+      "overview": "Übersicht",
+      "submissions": "Einreichungen",
       "stats": {
         "total": "Gesamte Einreichungen",
         "today": "Heute",
         "thisWeek": "Diese Woche",
         "thisMonth": "Dieser Monat"
       },
-      "search": "Einreichungen durchsuchen...",
-      "submissions": "Einreichungen",
+      "search": {
+        "placeholder": "Einreichungen durchsuchen..."
+      },
       "table": {
-        "description": "Eine Liste aller Kontaktformular-Einreichungen.",
-        "date": "Datum",
         "name": "Name",
         "email": "E-Mail",
-        "message": "Nachricht",
+        "phone": "Telefon",
+        "date": "Datum",
         "status": "Status",
-        "statuses": {
-          "new": "Neu",
-          "replied": "Beantwortet",
-          "archived": "Archiviert"
-        }
+        "actions": "Aktionen"
+      },
+      "status": {
+        "new": "Neu",
+        "replied": "Beantwortet",
+        "archived": "Archiviert"
+      },
+      "actions": {
+        "view": "Ansehen"
+      },
+      "pagination": {
+        "previous": "Zurück",
+        "next": "Weiter",
+        "showing": "{start} bis {end} von {total} Ergebnissen"
       },
       "modal": {
-        "title": "Kontaktformular-Details",
-        "close": "Schließen",
+        "title": "Einreichungsdetails",
         "submittedAt": "Eingereicht am",
         "name": "Name",
         "email": "E-Mail",
         "phone": "Telefon",
         "message": "Nachricht",
-        "reply": "Antwortnachricht",
-        "replyPlaceholder": "Geben Sie hier Ihre Antwortnachricht ein...",
+        "repliedAt": "Beantwortet am",
+        "replyMessage": "Antwortnachricht",
+        "reply": "Ihre Antwort",
         "sendReply": "Antwort senden",
         "sending": "Wird gesendet...",
         "archive": "Archivieren",
-        "delete": "Löschen",
-        "deleteConfirmation": "Sind Sie sicher, dass Sie diese Einreichung löschen möchten? Diese Aktion kann nicht rückgängig gemacht werden."
+        "close": "Schließen"
       },
-      "pagination": {
-        "previous": "Vorherige",
-        "next": "Nächste",
-        "showing": "Zeige",
-        "to": "bis",
-        "of": "von",
-        "results": "Ergebnissen"
-      },
-      "overview": "Übersicht",
       "navigation": "Navigation",
       "backToHome": "Zurück zur Startseite",
-      "administrator": "Administrator",
       "loading": "Laden...",
       "signOut": "Abmelden",
-      "recentSubmissions": "Neueste Einreichungen",
-      "viewAll": "Alle anzeigen"
+      "recent": {
+        "title": "Neueste Einreichungen",
+        "empty": "Keine neuen Einreichungen",
+        "viewAll": "Alle Einreichungen anzeigen"
+      }
     },
     "login": {
       "title": "Admin-Login",

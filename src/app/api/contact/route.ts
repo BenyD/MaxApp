@@ -8,10 +8,10 @@ const supabaseServiceKey = process.env.SUPABASE_SERVICE_ROLE_KEY!
 export async function POST(request: Request) {
   try {
     const body = await request.json()
-    const { first_name, last_name, email, phone, message } = body
+    const { firstName, lastName, email, phone, message } = body
 
     // Validate input
-    if (!first_name || !last_name || !email || !phone || !message) {
+    if (!firstName || !lastName || !email || !phone || !message) {
       return NextResponse.json(
         { error: 'All fields are required' },
         { status: 400 },
@@ -24,8 +24,8 @@ export async function POST(request: Request) {
     // Save to Supabase
     const { error } = await supabase.from('contact_submissions').insert([
       {
-        first_name,
-        last_name,
+        first_name: firstName,
+        last_name: lastName,
         email,
         phone,
         message,

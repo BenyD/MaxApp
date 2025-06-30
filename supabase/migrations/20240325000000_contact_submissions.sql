@@ -1,8 +1,24 @@
--- Create an enum for submission status
-CREATE TYPE submission_status AS ENUM ('new', 'replied', 'archived');
+-- Create an enum for submission status if it doesn't exist
+DO $$ BEGIN
+    CREATE TYPE submission_status AS ENUM ('new', 'replied', 'archived');
+EXCEPTION
+    WHEN duplicate_object THEN NULL;
+END $$;
 
--- Create the contact submissions table
-CREATE TABLE contact_submissions (
+-- Drop existing policies if they exist
+DROP POLICY IF EXISTS "Allow anonymous insert" ON contact_submissions;
+DROP POLICY IF EXISTS "Allow authenticated users to view submissions" ON contact_submissions;
+DROP POLICY IF EXISTS "Allow authenticated users to update submissions" ON contact_submissions;
+DROP POLICY IF EXISTS "Allow authenticated users to delete submissions" ON contact_submissions;
+
+-- Drop existing trigger if it exists
+DROP TRIGGER IF EXISTS update_contact_submissions_updated_at ON contact_submissions;
+
+-- Drop existing function if it exists
+DROP FUNCTION IF EXISTS handle_updated_at();
+
+-- Create or replace the contact submissions table
+CREATE TABLE IF NOT EXISTS contact_submissions (
     id BIGSERIAL PRIMARY KEY,
     created_at TIMESTAMPTZ NOT NULL DEFAULT NOW(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT NOW(),
@@ -20,32 +36,29 @@ CREATE TABLE contact_submissions (
 -- Enable Row Level Security
 ALTER TABLE contact_submissions ENABLE ROW LEVEL SECURITY;
 
--- Create an admin role for managing submissions
-CREATE ROLE admin;
-
 -- Create policies for contact submissions
 -- Anonymous users can only insert
 CREATE POLICY "Allow anonymous insert" ON contact_submissions
     FOR INSERT 
     WITH CHECK (true);
 
--- Only admins can view all submissions
-CREATE POLICY "Allow admins to view submissions" ON contact_submissions
+-- Allow authenticated users to view and manage submissions
+CREATE POLICY "Allow authenticated users to view submissions" ON contact_submissions
     FOR SELECT
-    TO admin
+    TO authenticated
     USING (true);
 
--- Only admins can update submissions
-CREATE POLICY "Allow admins to update submissions" ON contact_submissions
+-- Allow authenticated users to update submissions
+CREATE POLICY "Allow authenticated users to update submissions" ON contact_submissions
     FOR UPDATE
-    TO admin
+    TO authenticated
     USING (true)
     WITH CHECK (true);
 
--- Only admins can delete submissions
-CREATE POLICY "Allow admins to delete submissions" ON contact_submissions
+-- Allow authenticated users to delete submissions
+CREATE POLICY "Allow authenticated users to delete submissions" ON contact_submissions
     FOR DELETE
-    TO admin
+    TO authenticated
     USING (true);
 
 -- Create function to handle updated_at

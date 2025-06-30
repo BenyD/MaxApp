@@ -302,59 +302,62 @@
   "admin": {
     "dashboard": {
       "title": "Dashboard",
+      "overview": "Overview",
+      "submissions": "Submissions",
       "stats": {
         "total": "Total Submissions",
         "today": "Today",
         "thisWeek": "This Week",
         "thisMonth": "This Month"
       },
-      "search": "Search submissions...",
-      "submissions": "Submissions",
+      "search": {
+        "placeholder": "Search submissions..."
+      },
       "table": {
-        "description": "A list of all contact form submissions.",
-        "date": "Date",
         "name": "Name",
         "email": "Email",
-        "message": "Message",
+        "phone": "Phone",
+        "date": "Date",
         "status": "Status",
-        "statuses": {
-          "new": "New",
-          "replied": "Replied",
-          "archived": "Archived"
-        }
+        "actions": "Actions"
+      },
+      "status": {
+        "new": "New",
+        "replied": "Replied",
+        "archived": "Archived"
+      },
+      "actions": {
+        "view": "View"
+      },
+      "pagination": {
+        "previous": "Previous",
+        "next": "Next",
+        "showing": "Showing {start} to {end} of {total} results"
       },
       "modal": {
-        "title": "Contact Submission Details",
-        "close": "Close",
+        "title": "Submission Details",
         "submittedAt": "Submitted At",
         "name": "Name",
         "email": "Email",
         "phone": "Phone",
         "message": "Message",
-        "reply": "Reply Message",
-        "replyPlaceholder": "Type your reply message here...",
+        "repliedAt": "Replied At",
+        "replyMessage": "Reply Message",
+        "reply": "Your Reply",
         "sendReply": "Send Reply",
         "sending": "Sending...",
         "archive": "Archive",
-        "delete": "Delete",
-        "deleteConfirmation": "Are you sure you want to delete this submission? This action cannot be undone."
+        "close": "Close"
       },
-      "pagination": {
-        "previous": "Previous",
-        "next": "Next",
-        "showing": "Showing",
-        "to": "to",
-        "of": "of",
-        "results": "results"
-      },
-      "overview": "Overview",
       "navigation": "Navigation",
       "backToHome": "Back to Home",
-      "administrator": "Administrator",
       "loading": "Loading...",
       "signOut": "Sign Out",
-      "recentSubmissions": "Recent Submissions",
-      "viewAll": "View all"
+      "recent": {
+        "title": "Recent Submissions",
+        "empty": "No recent submissions",
+        "viewAll": "View All Submissions"
+      }
     },
     "login": {
       "title": "Admin Login",

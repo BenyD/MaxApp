@@ -191,8 +191,10 @@ export function Contact() {
         body: JSON.stringify(formData),
       })
 
+      const data = await response.json()
+
       if (!response.ok) {
-        throw new Error('Network response was not ok')
+        throw new Error(data.error || 'Network response was not ok')
       }
 
       setSubmitStatus('success')
@@ -204,6 +206,7 @@ export function Contact() {
         message: '',
       })
     } catch (error) {
+      console.error('Error submitting form:', error)
       setSubmitStatus('error')
     } finally {
       setIsSubmitting(false)

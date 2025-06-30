@@ -7,7 +7,7 @@ import { getMessages } from 'next-intl/server'
 
 import '@/styles/tailwind.css'
 import { CookieBanner } from '@/components/CookieBanner'
-import { locales } from '@/i18n/settings'
+import { locales, isValidLocale } from '@/i18n/settings'
 
 export const metadata: Metadata = {
   title: {
@@ -36,13 +36,16 @@ export function generateStaticParams() {
 
 export default async function RootLayout({
   children,
-  params: { locale },
+  params,
 }: {
   children: React.ReactNode
-  params: { locale: string }
+  params: Promise<{ locale: string }>
 }) {
-  // Validate that the incoming `locale` parameter is valid
-  if (!locales.includes(locale as any)) notFound()
+  const { locale } = await params
+
+  if (!isValidLocale(locale)) {
+    notFound()
+  }
 
   const messages = await getMessages({ locale })
 

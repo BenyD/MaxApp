@@ -286,6 +286,24 @@ export default function SubmissionsPage() {
     }
   }
 
+  // Handle delete submission
+  const handleDelete = async (id: number) => {
+    try {
+      const { error } = await supabase
+        .from('contact_submissions')
+        .delete()
+        .eq('id', id)
+
+      if (error) throw error
+
+      // Refresh submissions after delete
+      fetchSubmissions()
+    } catch (err) {
+      console.error('Error deleting submission:', err)
+      throw new Error('Failed to delete submission')
+    }
+  }
+
   if (loading) {
     return (
       <div className="flex items-center justify-center py-12">
@@ -555,9 +573,11 @@ export default function SubmissionsPage() {
       {selectedSubmission && (
         <SubmissionModal
           submission={selectedSubmission}
+          isOpen={!!selectedSubmission}
           onClose={() => setSelectedSubmission(null)}
           onStatusUpdate={handleStatusUpdate}
           onReply={handleReply}
+          onDelete={handleDelete}
         />
       )}
     </div>

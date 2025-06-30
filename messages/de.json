@@ -343,6 +343,11 @@
         "sendReply": "Antwort senden",
         "sending": "Wird gesendet...",
         "archive": "Archivieren",
+        "delete": "Löschen",
+        "deleting": "Wird gelöscht...",
+        "confirmDelete": "Ja, löschen",
+        "deleteConfirmation": "Sind Sie sicher, dass Sie diese Einreichung löschen möchten? Diese Aktion kann nicht rückgängig gemacht werden.",
+        "cancel": "Abbrechen",
         "close": "Schließen"
       },
       "navigation": "Navigation",

@@ -88,8 +88,7 @@ export function Header() {
             <Link href="/" aria-label="Home">
               <Logo
                 className={clsx(
-                  'w-auto transition-all duration-300',
-                  scrolled ? 'h-9 sm:h-11' : 'h-8 sm:h-10',
+                  'h-8 w-auto transition-all duration-300 sm:h-10',
                 )}
               />
             </Link>

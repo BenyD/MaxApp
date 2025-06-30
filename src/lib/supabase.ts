@@ -29,10 +29,12 @@ export interface Database {
   }
 }
 
+// Create a Supabase client for browser environments
 export const createClient = () => {
-  return createBrowserClient<Database>(supabaseUrl, supabaseAnonKey, {
+  return createBrowserClient(supabaseUrl, supabaseAnonKey, {
     cookies: {
       get(name: string) {
+        if (typeof document === 'undefined') return ''
         return document.cookie
           .split('; ')
           .find((row) => row.startsWith(`${name}=`))
@@ -41,14 +43,21 @@ export const createClient = () => {
       set(
         name: string,
         value: string,
-        options: { path?: string; maxAge?: number },
+        options: {
+          path?: string
+          domain?: string
+          maxAge?: number
+          httpOnly?: boolean
+          secure?: boolean
+          sameSite?: 'strict' | 'lax' | 'none'
+        },
       ) {
-        document.cookie = `${name}=${value}${options.path ? `;path=${options.path}` : ''}${
-          options.maxAge ? `;max-age=${options.maxAge}` : ''
-        }`
+        if (typeof document === 'undefined') return
+        document.cookie = `${name}=${value}; path=${options.path || '/'}`
       },
-      remove(name: string, options: { path?: string }) {
-        document.cookie = `${name}=;max-age=0${options.path ? `;path=${options.path}` : ''}`
+      remove(name: string, options: { path?: string; domain?: string }) {
+        if (typeof document === 'undefined') return
+        document.cookie = `${name}=; path=${options.path || '/'};max-age=0`
       },
     },
   })

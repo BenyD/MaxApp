@@ -53,11 +53,24 @@ export function SubmissionModal({
       setIsSending(true)
       setError(null)
 
+      console.log('Attempting to send reply:', {
+        submissionId: submission.id,
+        replyMessage,
+      })
+
+      if (!submission.id) {
+        throw new Error('Missing submission ID')
+      }
+
       await onReply(submission.id, replyMessage)
       onClose()
     } catch (err) {
-      setError('Failed to send reply. Please try again.')
-      console.error('Error sending reply:', err)
+      console.error('Error in handleSendReply:', err)
+      setError(
+        err instanceof Error
+          ? err.message
+          : 'Failed to send reply. Please try again.',
+      )
     } finally {
       setIsSending(false)
     }
@@ -211,7 +224,7 @@ export function SubmissionModal({
                             </div>
                             <div>
                               <dt className="text-sm font-medium text-zinc-500">
-                                {t('modal.submittedAt')}
+                                {t('modal.date')}
                               </dt>
                               <dd className="mt-1 text-sm text-zinc-900">
                                 {format(
@@ -240,36 +253,58 @@ export function SubmissionModal({
                           </div>
                         </motion.div>
 
+                        {/* Reply Section */}
+                        <motion.div
+                          initial={{ opacity: 0, y: 20 }}
+                          animate={{ opacity: 1, y: 0 }}
+                          transition={{ delay: 0.6, duration: 0.3 }}
+                          className="space-y-4"
+                        >
+                          <h3 className="text-lg font-medium text-zinc-900">
+                            {t('modal.reply')}
+                          </h3>
+                          <div className="space-y-4">
+                            <textarea
+                              rows={6}
+                              className="block w-full rounded-md border-zinc-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm"
+                              placeholder={t('modal.replyPlaceholder')}
+                              value={replyMessage}
+                              onChange={(e) => setReplyMessage(e.target.value)}
+                            />
+                            {error && (
+                              <p className="text-sm text-red-600">{error}</p>
+                            )}
+                            <div className="flex justify-end space-x-3">
+                              <button
+                                type="button"
+                                className="inline-flex items-center rounded-md border border-zinc-300 bg-white px-4 py-2 text-sm font-medium text-zinc-700 shadow-sm hover:bg-zinc-50 focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:outline-none"
+                                onClick={() => setShowDeleteConfirm(true)}
+                              >
+                                {t('modal.delete')}
+                              </button>
+                              <button
+                                type="button"
+                                className="inline-flex items-center rounded-md border border-zinc-300 bg-white px-4 py-2 text-sm font-medium text-zinc-700 shadow-sm hover:bg-zinc-50 focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:outline-none"
+                                onClick={handleArchive}
+                              >
+                                {t('modal.archive')}
+                              </button>
+                              <button
+                                type="button"
+                                className="inline-flex items-center rounded-md border border-transparent bg-blue-600 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-blue-700 focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:outline-none"
+                                onClick={handleSendReply}
+                                disabled={isSending || !replyMessage.trim()}
+                              >
+                                {isSending
+                                  ? t('modal.sending')
+                                  : t('modal.send')}
+                              </button>
+                            </div>
+                          </div>
+                        </motion.div>
+
                         {/* Previous Reply */}
                         {submission.reply_message && (
-                          <motion.div
-                            initial={{ opacity: 0, y: 20 }}
-                            animate={{ opacity: 1, y: 0 }}
-                            transition={{ delay: 0.6, duration: 0.3 }}
-                            className="space-y-4"
-                          >
-                            <div className="flex items-center justify-between">
-                              <h3 className="text-lg font-medium text-zinc-900">
-                                {t('modal.replyMessage')}
-                              </h3>
-                              <span className="text-sm text-zinc-500">
-                                {submission.replied_at &&
-                                  format(
-                                    new Date(submission.replied_at),
-                                    'PPpp',
-                                  )}
-                              </span>
-                            </div>
-                            <div className="rounded-lg bg-zinc-50 p-4">
-                              <p className="text-sm whitespace-pre-wrap text-zinc-900">
-                                {submission.reply_message}
-                              </p>
-                            </div>
-                          </motion.div>
-                        )}
-
-                        {/* Reply Form */}
-                        {submission.status !== 'archived' && (
                           <motion.div
                             initial={{ opacity: 0, y: 20 }}
                             animate={{ opacity: 1, y: 0 }}
@@ -277,117 +312,21 @@ export function SubmissionModal({
                             className="space-y-4"
                           >
                             <h3 className="text-lg font-medium text-zinc-900">
-                              {t('modal.reply')}
+                              {t('modal.previousReply')}
                             </h3>
-                            <div>
-                              <textarea
-                                id="reply"
-                                name="reply"
-                                rows={6}
-                                value={replyMessage}
-                                onChange={(e) =>
-                                  setReplyMessage(e.target.value)
-                                }
-                                className="block w-full rounded-lg border-0 py-2 text-zinc-900 shadow-sm ring-1 ring-zinc-300 ring-inset placeholder:text-zinc-400 focus:ring-2 focus:ring-blue-600 focus:ring-inset sm:text-sm sm:leading-6"
-                              />
-                            </div>
-                          </motion.div>
-                        )}
-
-                        {error && (
-                          <motion.div
-                            initial={{ opacity: 0, scale: 0.95 }}
-                            animate={{ opacity: 1, scale: 1 }}
-                            exit={{ opacity: 0, scale: 0.95 }}
-                            className="rounded-md bg-red-50 p-4"
-                          >
-                            <div className="flex">
-                              <div className="ml-3">
-                                <h3 className="text-sm font-medium text-red-800">
-                                  {error}
-                                </h3>
-                              </div>
-                            </div>
-                          </motion.div>
-                        )}
-                      </div>
-                    </motion.div>
-
-                    {/* Actions */}
-                    <motion.div
-                      initial={{ opacity: 0, y: 20 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      transition={{ delay: 0.8, duration: 0.3 }}
-                      className="sticky bottom-0 z-10 border-t border-zinc-200 bg-white px-6 py-4"
-                    >
-                      <div className="flex flex-col gap-3">
-                        {submission.status !== 'archived' && (
-                          <>
-                            <motion.button
-                              whileHover={{ scale: 1.01 }}
-                              whileTap={{ scale: 0.99 }}
-                              type="button"
-                              onClick={handleSendReply}
-                              disabled={isSending || !replyMessage.trim()}
-                              className="inline-flex w-full justify-center rounded-md bg-blue-600 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-blue-500 focus-visible:outline focus-visible:outline-offset-2 focus-visible:outline-blue-600 disabled:cursor-not-allowed disabled:opacity-50"
-                            >
-                              {isSending
-                                ? t('modal.sending')
-                                : t('modal.sendReply')}
-                            </motion.button>
-                            <motion.button
-                              whileHover={{ scale: 1.01 }}
-                              whileTap={{ scale: 0.99 }}
-                              type="button"
-                              onClick={handleArchive}
-                              className="inline-flex w-full justify-center rounded-md bg-zinc-600 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-zinc-500 focus-visible:outline focus-visible:outline-offset-2 focus-visible:outline-zinc-600"
-                            >
-                              {t('modal.archive')}
-                            </motion.button>
-                          </>
-                        )}
-                        {!showDeleteConfirm ? (
-                          <motion.button
-                            whileHover={{ scale: 1.01 }}
-                            whileTap={{ scale: 0.99 }}
-                            type="button"
-                            onClick={() => setShowDeleteConfirm(true)}
-                            className="inline-flex w-full justify-center rounded-md bg-red-600 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-red-500 focus-visible:outline focus-visible:outline-offset-2 focus-visible:outline-red-600"
-                          >
-                            {t('modal.delete')}
-                          </motion.button>
-                        ) : (
-                          <motion.div
-                            initial={{ opacity: 0, y: 10 }}
-                            animate={{ opacity: 1, y: 0 }}
-                            exit={{ opacity: 0, y: 10 }}
-                            className="space-y-3"
-                          >
-                            <p className="text-sm text-zinc-600">
-                              {t('modal.deleteConfirmation')}
-                            </p>
-                            <div className="flex gap-3">
-                              <motion.button
-                                whileHover={{ scale: 1.01 }}
-                                whileTap={{ scale: 0.99 }}
-                                type="button"
-                                onClick={handleDelete}
-                                disabled={isDeleting}
-                                className="flex-1 rounded-md bg-red-600 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-red-500 focus-visible:outline focus-visible:outline-offset-2 focus-visible:outline-red-600 disabled:cursor-not-allowed disabled:opacity-50"
-                              >
-                                {isDeleting
-                                  ? t('modal.deleting')
-                                  : t('modal.confirmDelete')}
-                              </motion.button>
-                              <motion.button
-                                whileHover={{ scale: 1.01 }}
-                                whileTap={{ scale: 0.99 }}
-                                type="button"
-                                onClick={() => setShowDeleteConfirm(false)}
-                                className="flex-1 rounded-md bg-zinc-600 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-zinc-500 focus-visible:outline focus-visible:outline-offset-2 focus-visible:outline-zinc-600"
-                              >
-                                {t('modal.cancel')}
-                              </motion.button>
+                            <div className="rounded-lg bg-zinc-50 p-4">
+                              <p className="text-sm whitespace-pre-wrap text-zinc-900">
+                                {submission.reply_message}
+                              </p>
+                              {submission.replied_at && (
+                                <p className="mt-2 text-xs text-zinc-500">
+                                  {t('modal.repliedAt')}{' '}
+                                  {format(
+                                    new Date(submission.replied_at),
+                                    'PPpp',
+                                  )}
+                                </p>
+                              )}
                             </div>
                           </motion.div>
                         )}
@@ -398,6 +337,53 @@ export function SubmissionModal({
               </div>
             </div>
           </div>
+
+          {/* Delete Confirmation Dialog */}
+          <Transition show={showDeleteConfirm} as={Fragment}>
+            <Dialog
+              as="div"
+              className="relative z-50"
+              onClose={() => setShowDeleteConfirm(false)}
+            >
+              <div className="fixed inset-0 bg-black/30" />
+              <div className="fixed inset-0 overflow-y-auto">
+                <div className="flex min-h-full items-center justify-center p-4 text-center">
+                  <Dialog.Panel className="w-full max-w-md transform overflow-hidden rounded-2xl bg-white p-6 text-left align-middle shadow-xl transition-all">
+                    <Dialog.Title
+                      as="h3"
+                      className="text-lg leading-6 font-medium text-zinc-900"
+                    >
+                      {t('modal.deleteConfirmTitle')}
+                    </Dialog.Title>
+                    <div className="mt-2">
+                      <p className="text-sm text-zinc-500">
+                        {t('modal.deleteConfirmMessage')}
+                      </p>
+                    </div>
+                    <div className="mt-4 flex justify-end space-x-3">
+                      <button
+                        type="button"
+                        className="inline-flex justify-center rounded-md border border-transparent bg-zinc-100 px-4 py-2 text-sm font-medium text-zinc-900 hover:bg-zinc-200 focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:outline-none"
+                        onClick={() => setShowDeleteConfirm(false)}
+                      >
+                        {t('modal.cancel')}
+                      </button>
+                      <button
+                        type="button"
+                        className="inline-flex justify-center rounded-md border border-transparent bg-red-600 px-4 py-2 text-sm font-medium text-white hover:bg-red-700 focus:ring-2 focus:ring-red-500 focus:ring-offset-2 focus:outline-none"
+                        onClick={handleDelete}
+                        disabled={isDeleting}
+                      >
+                        {isDeleting
+                          ? t('modal.deleting')
+                          : t('modal.confirmDelete')}
+                      </button>
+                    </div>
+                  </Dialog.Panel>
+                </div>
+              </div>
+            </Dialog>
+          </Transition>
         </Dialog>
       )}
     </AnimatePresence>

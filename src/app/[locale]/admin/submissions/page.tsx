@@ -141,6 +141,21 @@ export default function SubmissionsPage() {
       setLoading(true)
       setError(null)
 
+      // Check authentication first
+      const {
+        data: { session },
+        error: authError,
+      } = await supabase.auth.getSession()
+
+      if (authError) {
+        console.error('Auth error:', authError)
+        throw new Error('Authentication error')
+      }
+
+      if (!session) {
+        throw new Error('Not authenticated')
+      }
+
       // Build the base query for counting
       let countQuery = supabase
         .from('contact_submissions')
@@ -156,12 +171,16 @@ export default function SubmissionsPage() {
       // Get total count
       const { count, error: countError } = await countQuery
 
-      if (countError) throw countError
+      if (countError) {
+        console.error('Count error:', countError)
+        throw countError
+      }
 
+      console.log('Total count:', count)
       setTotalCount(count || 0)
 
       // Build the query for fetching data
-      let dataQuery = supabase.from('contact_submissions').select('*')
+      let dataQuery = supabase.from('contact_submissions').select()
 
       // Apply search filter if there's a search query
       if (searchQuery) {
@@ -177,12 +196,22 @@ export default function SubmissionsPage() {
         })
         .range((currentPage - 1) * itemsPerPage, currentPage * itemsPerPage - 1)
 
-      if (fetchError) throw fetchError
+      if (fetchError) {
+        console.error('Fetch error:', fetchError)
+        throw fetchError
+      }
 
+      console.log('Fetched submissions:', data)
       setSubmissions(data || [])
     } catch (err) {
-      console.error('Error fetching submissions:', err)
-      setError('Failed to fetch submissions')
+      console.error('Error in fetchSubmissions:', err)
+      setError(
+        err instanceof Error ? err.message : 'Failed to fetch submissions',
+      )
+      // If not authenticated, redirect to login
+      if (err instanceof Error && err.message === 'Not authenticated') {
+        window.location.href = '/admin/login'
+      }
     } finally {
       setLoading(false)
     }
@@ -267,22 +296,48 @@ export default function SubmissionsPage() {
   // Handle reply to submission
   const handleReply = async (id: number, replyMessage: string) => {
     try {
-      const { error } = await supabase
-        .from('contact_submissions')
-        .update({
-          status: 'replied',
-          reply_message: replyMessage,
-          replied_at: new Date().toISOString(),
-        })
-        .eq('id', id)
+      console.log('Sending reply for submission:', { id, replyMessage })
 
-      if (error) throw error
+      // First verify the submission exists in our local state
+      const submission = submissions.find((sub) => sub.id === id)
+      if (!submission) {
+        console.error('Submission not found in local state:', id)
+        throw new Error('Submission not found')
+      }
 
-      // Refresh submissions after reply
-      fetchSubmissions()
+      const response = await fetch('/api/admin/reply', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          submissionId: id,
+          replyMessage,
+        }),
+      })
+
+      if (!response.ok) {
+        const errorData = await response.json()
+        console.error('Reply error response:', errorData)
+        throw new Error(errorData.error || 'Failed to send reply')
+      }
+
+      // Update the submission status locally
+      setSubmissions((prev) =>
+        prev.map((sub) =>
+          sub.id === id
+            ? {
+                ...sub,
+                status: 'replied',
+                reply_message: replyMessage,
+                replied_at: new Date().toISOString(),
+              }
+            : sub,
+        ),
+      )
     } catch (err) {
-      console.error('Error replying to submission:', err)
-      setError('Failed to save reply')
+      console.error('Error sending reply:', err)
+      throw err
     }
   }
 

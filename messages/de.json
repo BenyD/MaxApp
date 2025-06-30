@@ -318,9 +318,9 @@
         "actions": "Aktionen"
       },
       "status": {
-        "new": "Neu",
-        "replied": "Beantwortet",
-        "archived": "Archiviert"
+          "new": "Neu",
+          "replied": "Beantwortet",
+          "archived": "Archiviert"
       },
       "actions": {
         "view": "Ansehen"

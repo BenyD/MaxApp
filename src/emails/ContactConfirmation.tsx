@@ -35,7 +35,7 @@ export const ContactConfirmationEmail = ({
           <Text style={text}>
             Best regards,
             <br />
-            The Max App Team
+            The MaxApp Team
           </Text>
         </Container>
       </Body>

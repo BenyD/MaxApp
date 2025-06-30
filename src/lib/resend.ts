@@ -9,7 +9,8 @@ export const resend = new Resend(process.env.RESEND_API_KEY)
 // For development, use Resend's testing domain
 const isDevelopment = process.env.NODE_ENV === 'development'
 
-// Replace 'yourdomain.com' with your actual domain when deploying to production
+// In development, use Resend's testing domain
+// In production, use verified maxapp.ch domain
 export const DEFAULT_FROM_EMAIL = isDevelopment
-  ? 'Max App <onboarding@resend.dev>'
-  : 'Max App <no-reply@yourdomain.com>' // Replace yourdomain.com with your actual domain
+  ? 'MaxApp <onboarding@resend.dev>'
+  : 'MaxApp <no-reply@maxapp.ch>'

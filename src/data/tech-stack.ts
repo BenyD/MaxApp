@@ -112,21 +112,25 @@ export const techStacks: TechStack[] = [
     description:
       'Modern, responsive, and interactive user interfaces built with cutting-edge web technologies.',
     technologies: [
-      { name: 'React', logo: '/images/logos/react.svg', type: 'Framework' },
-      { name: 'Next.js', logo: '/images/logos/nextjs.svg', type: 'Framework' },
+      { name: 'React', logo: '/src/images/logos/react.svg', type: 'Framework' },
+      {
+        name: 'Next.js',
+        logo: '/src/images/logos/nextjs.svg',
+        type: 'Framework',
+      },
       {
         name: 'TypeScript',
-        logo: '/images/logos/typescript.svg',
+        logo: '/src/images/logos/typescript.svg',
         type: 'Language',
       },
       {
         name: 'Tailwind CSS',
-        logo: '/images/logos/tailwind.svg',
+        logo: '/src/images/logos/tailwind.svg',
         type: 'Styling',
       },
       {
         name: 'Shadcn',
-        logo: '/images/logos/shadcn.svg',
+        logo: '/src/images/logos/shadcn.svg',
         type: 'UI Components',
       },
     ],
@@ -139,12 +143,16 @@ export const techStacks: TechStack[] = [
     technologies: [
       {
         name: 'Supabase',
-        logo: '/images/logos/supabase.svg',
+        logo: '/src/images/logos/supabase.svg',
         type: 'Database',
       },
-      { name: 'PostgreSQL', logo: '/images/logos/postgresql.svg', type: 'SQL' },
-      { name: 'Redis', logo: '/images/logos/redis.svg', type: 'Cache' },
-      { name: 'MongoDB', logo: '/images/logos/mongodb.svg', type: 'NoSQL' },
+      {
+        name: 'PostgreSQL',
+        logo: '/src/images/logos/postgresql.svg',
+        type: 'SQL',
+      },
+      { name: 'Redis', logo: '/src/images/logos/redis.svg', type: 'Cache' },
+      { name: 'MongoDB', logo: '/src/images/logos/mongodb.svg', type: 'NoSQL' },
     ],
   },
   {
@@ -154,15 +162,23 @@ export const techStacks: TechStack[] = [
     description:
       'Seamless deployment and scaling with modern cloud infrastructure.',
     technologies: [
-      { name: 'Azure', logo: '/images/logos/azure.svg', type: 'Cloud' },
-      { name: 'Git', logo: '/images/logos/git.svg', type: 'Version Control' },
-      { name: 'Docker', logo: '/images/logos/docker.svg', type: 'Container' },
+      { name: 'Azure', logo: '/src/images/logos/azure.svg', type: 'Cloud' },
+      {
+        name: 'Git',
+        logo: '/src/images/logos/git.svg',
+        type: 'Version Control',
+      },
+      {
+        name: 'Docker',
+        logo: '/src/images/logos/docker.svg',
+        type: 'Container',
+      },
       {
         name: 'Kubernetes',
-        logo: '/images/logos/kubernetes.svg',
+        logo: '/src/images/logos/kubernetes.svg',
         type: 'Orchestration',
       },
-      { name: 'Vercel', logo: '/images/logos/vercel.svg', type: 'Hosting' },
+      { name: 'Vercel', logo: '/src/images/logos/vercel.svg', type: 'Hosting' },
     ],
   },
   {
@@ -172,15 +188,15 @@ export const techStacks: TechStack[] = [
     description:
       'Tools and platforms that enable beautiful design and efficient teamwork.',
     technologies: [
-      { name: 'Figma', logo: '/images/logos/figma.svg', type: 'Design' },
+      { name: 'Figma', logo: '/src/images/logos/figma.svg', type: 'Design' },
       {
         name: 'GitHub',
-        logo: '/images/logos/github.svg',
+        logo: '/src/images/logos/github.svg',
         type: 'Version Control',
       },
       {
         name: 'Framer',
-        logo: '/images/logos/framer.svg',
+        logo: '/src/images/logos/framer.svg',
         type: 'Design',
       },
     ],

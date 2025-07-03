@@ -58,18 +58,18 @@ function ProjectCard({
       <div className="aspect-[16/9] w-full overflow-hidden rounded-xl sm:aspect-[4/3] sm:w-1/2 sm:rounded-2xl">
         {project.video ? (
           <div className="relative h-full w-full">
-            <div
-              className={`absolute inset-0 ${!isVideoLoaded ? 'block' : 'hidden'}`}
-            >
-              <Image
-                src={project.image}
-                alt={project.name}
-                width={800}
-                height={600}
-                className="h-full w-full object-cover"
-                priority={true}
-              />
-            </div>
+            {project.image && !isVideoLoaded && (
+              <div className="absolute inset-0">
+                <Image
+                  src={project.image}
+                  alt={project.name}
+                  width={800}
+                  height={600}
+                  className="h-full w-full object-cover"
+                  priority={true}
+                />
+              </div>
+            )}
             <video
               autoPlay
               loop
@@ -84,7 +84,7 @@ function ProjectCard({
               Your browser does not support the video tag.
             </video>
           </div>
-        ) : (
+        ) : project.image ? (
           <Image
             src={project.image}
             alt={project.name}
@@ -93,7 +93,7 @@ function ProjectCard({
             className="h-full w-full object-cover transition duration-300 group-hover:scale-105"
             priority={true}
           />
-        )}
+        ) : null}
       </div>
 
       {/* Decorative gradient background */}

@@ -1,22 +1,29 @@
+import { StaticImageData } from 'next/image'
+import dineEasyImage from '@/images/projects/DineEasy.png'
+
 export type Project = {
   name: string
   description: string
   tech: string[]
-  image: string
+  image?: string | StaticImageData
   video?: string
   link: string
   category: string
   color: 'blue' | 'emerald' | 'purple'
 }
 
-export const projects: Project[] = [
+// Ensure at least one of image or video is provided
+type ProjectWithMedia = Project &
+  ({ image: string | StaticImageData } | { video: string })
+
+export const projects: ProjectWithMedia[] = [
   {
     name: 'DineEasy',
     description:
       'A smart restaurant order and billing platform that revolutionizes dining operations. Features include QR code menus, real-time order tracking, and integrated payment processing.',
     tech: ['React', 'Node.js', 'MySQL', 'Stripe'],
-    image: '/images/projects/dineeasy.jpg',
-    video: '/videos/projects/dineeasy.mp4',
+    image: dineEasyImage,
+    video: '/api/video/DineEasy.mp4',
     link: '#',
     category: 'Restaurant Tech',
     color: 'emerald',

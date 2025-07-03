@@ -243,6 +243,8 @@
       "description": "Kontaktieren Sie uns über einen dieser Kanäle."
     },
     "offices": {
+      "title": "Unsere globalen Standorte",
+      "description": "Wir sind an mehreren Standorten präsent, um Sie besser betreuen zu können",
       "switzerland": {
         "title": "Schweiz",
         "company": "Maxsoft AG",

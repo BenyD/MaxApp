@@ -3,16 +3,9 @@
 import { useTranslations } from 'next-intl'
 import Image from 'next/image'
 import { motion } from 'framer-motion'
-
 import { Button } from '@/components/Button'
 import { Container } from '@/components/Container'
 import { Badge } from '@/components/ui/badge'
-import logoLaravel from '@/images/logos/laravel.svg'
-import logoMirage from '@/images/logos/mirage.svg'
-import logoStatamic from '@/images/logos/statamic.svg'
-import logoStaticKit from '@/images/logos/statickit.svg'
-import logoTransistor from '@/images/logos/transistor.svg'
-import logoTuple from '@/images/logos/tuple.svg'
 import { fadeIn, fadeInUp, staggerContainer, scaleUp } from '@/lib/animations'
 
 export function Hero() {
@@ -142,7 +135,7 @@ export function Hero() {
             </Button>
           </motion.div>
 
-          <motion.div variants={fadeInUp} className="mt-24 sm:mt-32 lg:mt-44">
+          {/* <motion.div variants={fadeInUp} className="mt-24 sm:mt-32 lg:mt-44">
             <motion.p
               variants={fadeInUp}
               className="font-display text-sm text-slate-900 sm:text-base"
@@ -190,7 +183,7 @@ export function Hero() {
                 </motion.li>
               ))}
             </motion.ul>
-          </motion.div>
+          </motion.div> */}
         </motion.div>
       </Container>
     </div>

@@ -8,6 +8,7 @@ import {
   UserGroupIcon,
   SparklesIcon,
 } from '@heroicons/react/24/outline'
+import teamImage from '@/images/team.jpg'
 
 type ColorKey = 'blue' | 'emerald' | 'purple'
 
@@ -96,7 +97,7 @@ export function About() {
             <div className="relative lg:order-2">
               <div className="relative">
                 <Image
-                  src="/images/about/team.jpg"
+                  src={teamImage}
                   alt="MaxApp Team"
                   width={600}
                   height={400}

@@ -9,6 +9,46 @@ import {
   colors,
 } from '@/data/tech-stack'
 
+// Import all logos
+import reactLogo from '@/images/logos/react.svg'
+import nextjsLogo from '@/images/logos/nextjs.svg'
+import typescriptLogo from '@/images/logos/typescript.svg'
+import tailwindLogo from '@/images/logos/tailwindcss.svg'
+import shadcnLogo from '@/images/logos/shadcn.svg'
+import supabaseLogo from '@/images/logos/supabase.svg'
+import postgresqlLogo from '@/images/logos/postgresql.svg'
+import redisLogo from '@/images/logos/redis.svg'
+import mongodbLogo from '@/images/logos/mongodb.svg'
+import azureLogo from '@/images/logos/azure.svg'
+import gitLogo from '@/images/logos/git.svg'
+import dockerLogo from '@/images/logos/docker.svg'
+import kubernetesLogo from '@/images/logos/kubernetes.svg'
+import vercelLogo from '@/images/logos/vercel.svg'
+import figmaLogo from '@/images/logos/figma.svg'
+import githubLogo from '@/images/logos/github.svg'
+import framerLogo from '@/images/logos/framer.svg'
+
+// Map of logo names to their imports
+const logoMap = {
+  '/src/images/logos/react.svg': reactLogo,
+  '/src/images/logos/nextjs.svg': nextjsLogo,
+  '/src/images/logos/typescript.svg': typescriptLogo,
+  '/src/images/logos/tailwind.svg': tailwindLogo,
+  '/src/images/logos/shadcn.svg': shadcnLogo,
+  '/src/images/logos/supabase.svg': supabaseLogo,
+  '/src/images/logos/postgresql.svg': postgresqlLogo,
+  '/src/images/logos/redis.svg': redisLogo,
+  '/src/images/logos/mongodb.svg': mongodbLogo,
+  '/src/images/logos/azure.svg': azureLogo,
+  '/src/images/logos/git.svg': gitLogo,
+  '/src/images/logos/docker.svg': dockerLogo,
+  '/src/images/logos/kubernetes.svg': kubernetesLogo,
+  '/src/images/logos/vercel.svg': vercelLogo,
+  '/src/images/logos/figma.svg': figmaLogo,
+  '/src/images/logos/github.svg': githubLogo,
+  '/src/images/logos/framer.svg': framerLogo,
+}
+
 function TechStackCard({ stack }: { stack: TechStackType }) {
   const t = useTranslations('techStack')
 
@@ -42,7 +82,7 @@ function TechStackCard({ stack }: { stack: TechStackType }) {
               >
                 <div className="relative mb-3 h-12 w-12 transition-transform duration-200 group-hover/tech:scale-110">
                   <Image
-                    src={tech.logo}
+                    src={logoMap[tech.logo as keyof typeof logoMap]}
                     alt={tech.name}
                     fill
                     className="object-contain"

@@ -1,56 +1,9 @@
-import Image from 'next/image'
+'use client'
+
 import { Container } from '@/components/Container'
-import {
-  CodeBracketIcon,
-  GlobeAltIcon,
-  DevicePhoneMobileIcon,
-  CheckCircleIcon,
-} from '@heroicons/react/24/outline'
+import { CheckCircleIcon } from '@heroicons/react/24/outline'
 import { useTranslations } from 'next-intl'
-
-type ColorKey = 'blue' | 'emerald' | 'purple'
-
-const colors = {
-  blue: {
-    light: 'bg-blue-50',
-    medium: 'bg-blue-100',
-    text: 'text-blue-600',
-    border: 'border-blue-200',
-    gradient: 'bg-gradient-to-tr from-blue-100 to-blue-50',
-    shadow: 'shadow-blue-100/50',
-  },
-  emerald: {
-    light: 'bg-emerald-50',
-    medium: 'bg-emerald-100',
-    text: 'text-emerald-600',
-    border: 'border-emerald-200',
-    gradient: 'bg-gradient-to-tr from-emerald-100 to-emerald-50',
-    shadow: 'shadow-emerald-100/50',
-  },
-  purple: {
-    light: 'bg-purple-50',
-    medium: 'bg-purple-100',
-    text: 'text-purple-600',
-    border: 'border-purple-200',
-    gradient: 'bg-gradient-to-tr from-purple-100 to-purple-50',
-    shadow: 'shadow-purple-100/50',
-  },
-}
-
-const serviceKeys = ['webApps', 'websites', 'pwa'] as const
-type ServiceKey = (typeof serviceKeys)[number]
-
-const serviceIcons = {
-  webApps: CodeBracketIcon,
-  websites: GlobeAltIcon,
-  pwa: DevicePhoneMobileIcon,
-}
-
-const serviceColors: Record<ServiceKey, ColorKey> = {
-  webApps: 'blue',
-  websites: 'emerald',
-  pwa: 'purple',
-}
+import { services, colors } from '@/data/services'
 
 export function Services() {
   const t = useTranslations('services')
@@ -75,13 +28,13 @@ export function Services() {
 
         <div className="mx-auto mt-12 max-w-7xl px-4 sm:mt-16 sm:px-6 lg:px-8">
           <div className="mx-auto grid max-w-2xl grid-cols-1 gap-x-6 gap-y-8 sm:gap-x-8 sm:gap-y-12 lg:mx-0 lg:max-w-none lg:grid-cols-3">
-            {serviceKeys.map((serviceKey) => {
-              const Icon = serviceIcons[serviceKey]
-              const color = serviceColors[serviceKey]
+            {services.map((service) => {
+              const Icon = service.icon
+              const color = service.color
 
               return (
                 <article
-                  key={serviceKey}
+                  key={service.key}
                   className={`group relative isolate flex flex-col overflow-hidden rounded-2xl bg-white p-6 shadow-lg ring-1 ring-slate-200 transition-all duration-200 hover:shadow-xl sm:rounded-3xl sm:p-8 ${colors[color].shadow}`}
                 >
                   <div className="flex items-center gap-x-4">
@@ -91,31 +44,18 @@ export function Services() {
                       <Icon className="h-5 w-5 sm:h-6 sm:w-6" />
                     </div>
                     <h3 className="text-lg font-semibold text-slate-900 sm:text-xl">
-                      {t(`items.${serviceKey}.title`)}
+                      {t(`items.${service.key}.title`)}
                     </h3>
                   </div>
 
                   <div className="relative mt-4 flex-1 sm:mt-6">
-                    <div
-                      className={`aspect-[4/3] overflow-hidden rounded-xl sm:rounded-2xl ${colors[color].gradient}`}
-                    >
-                      <Image
-                        src={`/images/illustrations/${serviceKey}.jpg`}
-                        alt={t(`items.${serviceKey}.title`)}
-                        className="h-full w-full object-cover transition duration-300 group-hover:scale-105"
-                        width={400}
-                        height={300}
-                        priority
-                      />
-                    </div>
-
-                    <p className="mt-4 text-sm leading-6 text-slate-600 sm:mt-6 sm:text-base sm:leading-7">
-                      {t(`items.${serviceKey}.description`)}
+                    <p className="text-sm leading-6 text-slate-600 sm:text-base sm:leading-7">
+                      {t(`items.${service.key}.description`)}
                     </p>
 
                     <ul className="mt-4 space-y-2 sm:mt-6 sm:space-y-3">
                       {t
-                        .raw(`items.${serviceKey}.features`)
+                        .raw(`items.${service.key}.features`)
                         .map((feature: string) => (
                           <li
                             key={feature}
@@ -132,7 +72,6 @@ export function Services() {
                     </ul>
                   </div>
 
-                  {/* Decorative gradient background */}
                   <div className="absolute inset-0 -z-10 bg-gradient-to-br from-slate-50 via-white to-slate-50 opacity-0 transition-opacity duration-200 group-hover:opacity-100" />
                 </article>
               )

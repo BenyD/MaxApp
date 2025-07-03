@@ -113,7 +113,6 @@ export const techStacks: TechStack[] = [
       'Modern, responsive, and interactive user interfaces built with cutting-edge web technologies.',
     technologies: [
       { name: 'React', logo: '/images/logos/react.svg', type: 'Framework' },
-      { name: 'Vue.js', logo: '/images/logos/vue.svg', type: 'Framework' },
       { name: 'Next.js', logo: '/images/logos/nextjs.svg', type: 'Framework' },
       {
         name: 'TypeScript',
@@ -125,23 +124,10 @@ export const techStacks: TechStack[] = [
         logo: '/images/logos/tailwind.svg',
         type: 'Styling',
       },
-    ],
-  },
-  {
-    category: 'Backend Development',
-    icon: CommandLineIcon,
-    color: 'purple',
-    description:
-      'Robust and scalable server-side solutions that power our applications.',
-    technologies: [
-      { name: 'Node.js', logo: '/images/logos/nodejs.svg', type: 'Runtime' },
-      { name: 'Java', logo: '/images/logos/java.svg', type: 'Language' },
-      { name: 'PHP', logo: '/images/logos/php.svg', type: 'Language' },
-      { name: 'Laravel', logo: '/images/logos/laravel.svg', type: 'Framework' },
       {
-        name: 'Express.js',
-        logo: '/images/logos/express.svg',
-        type: 'Framework',
+        name: 'Shadcn',
+        logo: '/images/logos/shadcn.svg',
+        type: 'UI Components',
       },
     ],
   },
@@ -151,10 +137,14 @@ export const techStacks: TechStack[] = [
     color: 'emerald',
     description: 'Efficient and reliable data storage and management systems.',
     technologies: [
+      {
+        name: 'Supabase',
+        logo: '/images/logos/supabase.svg',
+        type: 'Database',
+      },
       { name: 'PostgreSQL', logo: '/images/logos/postgresql.svg', type: 'SQL' },
-      { name: 'MySQL', logo: '/images/logos/mysql.svg', type: 'SQL' },
-      { name: 'MongoDB', logo: '/images/logos/mongodb.svg', type: 'NoSQL' },
       { name: 'Redis', logo: '/images/logos/redis.svg', type: 'Cache' },
+      { name: 'MongoDB', logo: '/images/logos/mongodb.svg', type: 'NoSQL' },
     ],
   },
   {
@@ -164,7 +154,8 @@ export const techStacks: TechStack[] = [
     description:
       'Seamless deployment and scaling with modern cloud infrastructure.',
     technologies: [
-      { name: 'AWS', logo: '/images/logos/aws.svg', type: 'Cloud' },
+      { name: 'Azure', logo: '/images/logos/azure.svg', type: 'Cloud' },
+      { name: 'Git', logo: '/images/logos/git.svg', type: 'Version Control' },
       { name: 'Docker', logo: '/images/logos/docker.svg', type: 'Container' },
       {
         name: 'Kubernetes',
@@ -188,11 +179,10 @@ export const techStacks: TechStack[] = [
         type: 'Version Control',
       },
       {
-        name: 'Jira',
-        logo: '/images/logos/jira.svg',
-        type: 'Project Management',
+        name: 'Framer',
+        logo: '/images/logos/framer.svg',
+        type: 'Design',
       },
-      { name: 'Slack', logo: '/images/logos/slack.svg', type: 'Communication' },
     ],
   },
 ]

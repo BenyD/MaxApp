@@ -5,6 +5,7 @@ import { ArrowTopRightOnSquareIcon } from '@heroicons/react/24/outline'
 import { Project, projects, colors } from '@/data/projects'
 import Image from 'next/image'
 import { useTranslations } from 'next-intl'
+import { useState } from 'react'
 
 function ProjectCard({
   project,
@@ -13,6 +14,8 @@ function ProjectCard({
   project: Project
   isReversed: boolean
 }) {
+  const [isVideoLoaded, setIsVideoLoaded] = useState(false)
+
   return (
     <article
       className={`group relative isolate flex flex-col gap-6 overflow-hidden rounded-2xl bg-white p-6 shadow-lg ring-1 ring-slate-200 transition-all duration-200 hover:shadow-xl sm:flex-row sm:gap-8 sm:rounded-3xl sm:p-8 ${
@@ -53,14 +56,44 @@ function ProjectCard({
       </div>
 
       <div className="aspect-[16/9] w-full overflow-hidden rounded-xl sm:aspect-[4/3] sm:w-1/2 sm:rounded-2xl">
-        <Image
-          src={project.image}
-          alt={project.name}
-          width={800}
-          height={600}
-          className="h-full w-full object-cover transition duration-300 group-hover:scale-105"
-          priority={true}
-        />
+        {project.video ? (
+          <div className="relative h-full w-full">
+            <div
+              className={`absolute inset-0 ${!isVideoLoaded ? 'block' : 'hidden'}`}
+            >
+              <Image
+                src={project.image}
+                alt={project.name}
+                width={800}
+                height={600}
+                className="h-full w-full object-cover"
+                priority={true}
+              />
+            </div>
+            <video
+              autoPlay
+              loop
+              muted
+              playsInline
+              className={`h-full w-full object-cover transition duration-300 group-hover:scale-105 ${
+                isVideoLoaded ? 'opacity-100' : 'opacity-0'
+              }`}
+              onLoadedData={() => setIsVideoLoaded(true)}
+            >
+              <source src={project.video} type="video/mp4" />
+              Your browser does not support the video tag.
+            </video>
+          </div>
+        ) : (
+          <Image
+            src={project.image}
+            alt={project.name}
+            width={800}
+            height={600}
+            className="h-full w-full object-cover transition duration-300 group-hover:scale-105"
+            priority={true}
+          />
+        )}
       </div>
 
       {/* Decorative gradient background */}

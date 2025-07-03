@@ -21,21 +21,17 @@ import Image from 'next/image'
 
 type Office = {
   key: 'switzerland' | 'india' | 'srilanka'
-  image: string
 }
 
 const offices: Office[] = [
   {
     key: 'switzerland',
-    image: '/images/offices/switzerland.jpg',
   },
   {
     key: 'india',
-    image: '/images/offices/india.jpg',
   },
   {
     key: 'srilanka',
-    image: '/images/offices/srilanka.jpg',
   },
 ]
 
@@ -397,22 +393,23 @@ export function Contact() {
               <dl className="space-y-4 text-sm leading-6 text-slate-600">
                 <div className="flex gap-x-4">
                   <dt className="flex-none">
-                    <span className="sr-only">
-                      {t('offices.switzerland.address')}
-                    </span>
+                    <span className="sr-only">Address</span>
                     <div className="rounded-lg bg-emerald-50/50 p-2 text-emerald-600/80 ring-1 ring-emerald-200/50 ring-inset">
                       <MapPinIcon className="h-5 w-5" />
                     </div>
                   </dt>
-                  <dd className="flex items-center">
-                    {t('offices.switzerland.address')}
+                  <dd className="flex flex-col">
+                    <span className="font-medium">
+                      {t('offices.switzerland.company')}
+                    </span>
+                    <span>{t('offices.switzerland.addressLine1')}</span>
+                    <span>{t('offices.switzerland.addressLine2')}</span>
+                    <span>{t('offices.switzerland.addressLine3')}</span>
                   </dd>
                 </div>
                 <div className="flex gap-x-4">
                   <dt className="flex-none">
-                    <span className="sr-only">
-                      {t('offices.switzerland.phone')}
-                    </span>
+                    <span className="sr-only">Phone</span>
                     <div className="rounded-lg bg-emerald-50/50 p-2 text-emerald-600/80 ring-1 ring-emerald-200/50 ring-inset">
                       <PhoneIcon className="h-5 w-5" />
                     </div>
@@ -428,9 +425,7 @@ export function Contact() {
                 </div>
                 <div className="flex gap-x-4">
                   <dt className="flex-none">
-                    <span className="sr-only">
-                      {t('offices.switzerland.email')}
-                    </span>
+                    <span className="sr-only">Email</span>
                     <div className="rounded-lg bg-emerald-50/50 p-2 text-emerald-600/80 ring-1 ring-emerald-200/50 ring-inset">
                       <EnvelopeIcon className="h-5 w-5" />
                     </div>
@@ -442,19 +437,6 @@ export function Contact() {
                     >
                       {t('offices.switzerland.email')}
                     </a>
-                  </dd>
-                </div>
-                <div className="flex gap-x-4">
-                  <dt className="flex-none">
-                    <span className="sr-only">
-                      {t('offices.switzerland.hours')}
-                    </span>
-                    <div className="rounded-lg bg-emerald-50/50 p-2 text-emerald-600/80 ring-1 ring-emerald-200/50 ring-inset">
-                      <ClockIcon className="h-5 w-5" />
-                    </div>
-                  </dt>
-                  <dd className="flex items-center">
-                    {t('offices.switzerland.hours')}
                   </dd>
                 </div>
               </dl>
@@ -479,36 +461,64 @@ export function Contact() {
                 </p>
               </div>
             </div>
-            <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-              {offices.map((office) => (
-                <div
-                  key={office.key}
-                  className="group/card relative overflow-hidden rounded-2xl bg-white shadow-md ring-1 ring-slate-200 transition-all duration-200 hover:shadow-lg"
-                >
-                  <div className="h-24 overflow-hidden">
-                    <Image
-                      src={office.image}
-                      alt={`${t(`offices.${office.key}.city`)}, ${t(`offices.${office.key}.country`)}`}
-                      className="h-full w-full object-cover object-center transition duration-300 group-hover/card:scale-105"
-                      width={240}
-                      height={96}
-                    />
-                  </div>
-                  <div className="p-4">
-                    <h4 className="text-sm font-medium text-slate-900">
-                      {t(`offices.${office.key}.city`)},{' '}
-                      {t(`offices.${office.key}.country`)}
+            <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
+              {offices.map((office) => {
+                const officeTranslations = t.raw(`offices.${office.key}`)
+                const hasEmail = 'email' in officeTranslations
+                const hasPhone = 'phone' in officeTranslations
+
+                return (
+                  <div key={office.key} className="relative">
+                    <h4 className="mb-2 text-lg font-semibold text-slate-900">
+                      {t(`offices.${office.key}.title`)}
                     </h4>
-                    <div className="mt-2 space-y-1.5 text-xs text-slate-600">
-                      <p>{t(`offices.${office.key}.address`)}</p>
-                      <p>{t(`offices.${office.key}.phone`)}</p>
-                      <p className="text-slate-500">
-                        {t(`offices.${office.key}.timezone`)}
-                      </p>
+                    <div className="space-y-4 text-sm text-slate-600">
+                      <div className="flex items-start gap-x-3">
+                        <MapPinIcon
+                          className="mt-1 h-5 w-5 flex-shrink-0 text-slate-400"
+                          aria-hidden="true"
+                        />
+                        <div>
+                          <p className="font-medium">
+                            {t(`offices.${office.key}.company`)}
+                          </p>
+                          <p>{t(`offices.${office.key}.addressLine1`)}</p>
+                          <p>{t(`offices.${office.key}.addressLine2`)}</p>
+                          <p>{t(`offices.${office.key}.addressLine3`)}</p>
+                        </div>
+                      </div>
+                      {hasEmail && (
+                        <div className="flex items-center gap-x-3">
+                          <EnvelopeIcon
+                            className="h-5 w-5 flex-shrink-0 text-slate-400"
+                            aria-hidden="true"
+                          />
+                          <a
+                            href={`mailto:${t(`offices.${office.key}.email`)}`}
+                            className="hover:text-blue-600"
+                          >
+                            {t(`offices.${office.key}.email`)}
+                          </a>
+                        </div>
+                      )}
+                      {hasPhone && (
+                        <div className="flex items-center gap-x-3">
+                          <PhoneIcon
+                            className="h-5 w-5 flex-shrink-0 text-slate-400"
+                            aria-hidden="true"
+                          />
+                          <a
+                            href={`tel:${t(`offices.${office.key}.phone`)}`}
+                            className="hover:text-blue-600"
+                          >
+                            {t(`offices.${office.key}.phone`)}
+                          </a>
+                        </div>
+                      )}
                     </div>
                   </div>
-                </div>
-              ))}
+                )
+              })}
             </div>
 
             {/* Decorative gradient background */}

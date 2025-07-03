@@ -180,7 +180,8 @@
       "Framework": "Framework",
       "Language": "Programmiersprache",
       "Styling": "Styling",
-      "Runtime": "Laufzeitumgebung",
+      "UI Components": "UI-Komponenten",
+      "Database": "Datenbank",
       "SQL": "SQL-Datenbank",
       "NoSQL": "NoSQL-Datenbank",
       "Cache": "Cache-System",
@@ -188,16 +189,14 @@
       "Container": "Container-Plattform",
       "Orchestration": "Container-Orchestrierung",
       "Hosting": "Hosting-Plattform",
-      "Design": "Design-Tool",
       "Version Control": "Versionskontrolle",
-      "Project Management": "Projektmanagement",
-      "Communication": "Kommunikations-Tool"
+      "Design": "Design-Tool"
     }
   },
   "contact": {
-    "title": "Kontakt aufnehmen",
-    "subtitle": "Lassen Sie uns gemeinsam etwas Großartiges entwickeln",
-    "description": "Haben Sie ein Projekt im Sinn? Wir würden gerne davon hören. Senden Sie uns eine Nachricht und wir melden uns so schnell wie möglich bei Ihnen.",
+    "title": "Kontakt",
+    "subtitle": "Kontaktieren Sie uns",
+    "description": "Haben Sie ein Projekt im Sinn? Lassen Sie uns besprechen, wie wir Ihnen helfen können.",
     "form": {
       "title": "Nachricht senden",
       "description": "Füllen Sie das untenstehende Formular aus und wir melden uns innerhalb von 24 Stunden bei Ihnen.",
@@ -244,34 +243,32 @@
       "description": "Kontaktieren Sie uns über einen dieser Kanäle."
     },
     "offices": {
-      "title": "Unsere globalen Büros",
-      "description": "Wir sind an mehreren Standorten präsent, um Sie besser bedienen zu können.",
       "switzerland": {
-        "city": "Zürich",
-        "country": "Schweiz",
-        "address": "Bahnhofstrasse 21, 8001 Zürich, Schweiz",
-        "phone": "+41 44 123 45 67",
-        "email": "zurich@maxapp.com",
-        "hours": "Mo-Fr: 9:00 - 18:00 Uhr MEZ",
-        "timezone": "Mitteleuropäische Zeit (MEZ/MESZ)"
-      },
-      "india": {
-        "city": "Bangalore",
-        "country": "Indien",
-        "address": "Brigade Road, Bangalore 560001, Indien",
-        "phone": "+91 80 4567 8901",
-        "email": "bangalore@maxapp.com",
-        "hours": "Mo-Fr: 9:00 - 18:00 Uhr IST",
-        "timezone": "Indische Standardzeit (IST)"
+        "title": "Schweiz",
+        "company": "Maxsoft AG",
+        "addressLine1": "Birkenstrasse 49",
+        "addressLine2": "6343 Rotkreuz",
+        "addressLine3": "Schweiz",
+        "email": "info@maxsoft.ch",
+        "phone": "+41415111166"
       },
       "srilanka": {
-        "city": "Colombo",
-        "country": "Sri Lanka",
-        "address": "Galle Road, Colombo 03, Sri Lanka",
-        "phone": "+94 11 234 5678",
-        "email": "colombo@maxapp.com",
-        "hours": "Mo-Fr: 9:00 - 18:00 Uhr SLST",
-        "timezone": "Sri-Lanka-Standardzeit (SLST)"
+        "title": "Sri Lanka",
+        "company": "Maxapp",
+        "addressLine1": "Erlalai center Erlalai",
+        "addressLine2": "Jaffna",
+        "addressLine3": "Sri Lanka",
+        "email": "srilanka@maxapp.com",
+        "phone": "+94 21 222 4455"
+      },
+      "india": {
+        "title": "Indien",
+        "company": "Maxapp",
+        "addressLine1": "123A Triplicane High Road",
+        "addressLine2": "Triplicane, Tamil Nadu",
+        "addressLine3": "Chennai 600 005",
+        "email": "india@maxapp.com",
+        "phone": "+91 44 2848 2111"
       }
     }
   },

@@ -3,6 +3,7 @@ export type Project = {
   description: string
   tech: string[]
   image: string
+  video?: string
   link: string
   category: string
   color: 'blue' | 'emerald' | 'purple'
@@ -15,6 +16,7 @@ export const projects: Project[] = [
       'A smart restaurant order and billing platform that revolutionizes dining operations. Features include QR code menus, real-time order tracking, and integrated payment processing.',
     tech: ['React', 'Node.js', 'MySQL', 'Stripe'],
     image: '/images/projects/dineeasy.jpg',
+    video: '/videos/projects/dineeasy.mp4',
     link: '#',
     category: 'Restaurant Tech',
     color: 'emerald',

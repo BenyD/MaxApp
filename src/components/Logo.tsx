@@ -16,7 +16,7 @@ export function Logo({ className, invert = false }: LogoProps) {
       width={109}
       height={40}
       className={cn(
-        'h-auto w-auto object-contain',
+        'object-contain',
         invert && 'brightness-0 invert',
         className,
       )}

@@ -3,8 +3,9 @@ const withNextIntl = require('next-intl/plugin')('./src/i18n/request.ts')
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   images: {
-    domains: [],
-    remotePatterns: [],
+    dangerouslyAllowSVG: true,
+    contentDispositionType: 'attachment',
+    contentSecurityPolicy: "default-src 'self'; script-src 'none'; sandbox;",
   },
 }
 

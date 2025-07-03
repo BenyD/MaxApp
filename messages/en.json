@@ -381,30 +381,30 @@
     "learnMore": "Learn More"
   },
   "cookieBanner": {
-    "mainText": "We use cookies to enhance your browsing experience and analyze our traffic. By clicking \"Accept all,\" you consent to our use of cookies. See our {policyLink} for more information about how we use cookies and how to manage your preferences.",
-    "policyLink": "cookie policy",
-    "acceptAll": "Accept all",
+    "mainText": "We use cookies to enhance your browsing experience. By continuing to use our site, you agree to our",
+    "policyLinkText": "cookie policy",
+    "acceptAll": "Accept All",
     "customize": "Customize",
-    "rejectAll": "Reject all",
+    "rejectAll": "Reject All",
     "preferences": {
       "title": "Cookie Preferences",
-      "save": "Save preferences",
+      "save": "Save Preferences",
       "cookies": {
         "essential": {
           "title": "Essential Cookies",
-          "description": "Required for the website to function properly. Cannot be disabled."
+          "description": "These cookies are necessary for the website to function and cannot be switched off."
         },
         "analytics": {
           "title": "Analytics Cookies",
-          "description": "Help us improve our website by collecting anonymous usage information."
+          "description": "These cookies help us understand how visitors interact with our website."
         },
         "marketing": {
           "title": "Marketing Cookies",
-          "description": "Used to track visitors across websites to display relevant advertisements."
+          "description": "These cookies are used to track visitors across websites to display relevant advertisements."
         },
         "preferences": {
           "title": "Preference Cookies",
-          "description": "Remember your settings and preferences for a better experience."
+          "description": "These cookies enable the website to remember choices you make and provide enhanced functionality."
         }
       }
     }

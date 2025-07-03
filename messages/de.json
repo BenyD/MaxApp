@@ -318,9 +318,9 @@
         "actions": "Aktionen"
       },
       "status": {
-          "new": "Neu",
-          "replied": "Beantwortet",
-          "archived": "Archiviert"
+        "new": "Neu",
+        "replied": "Beantwortet",
+        "archived": "Archiviert"
       },
       "actions": {
         "view": "Ansehen"
@@ -375,8 +375,8 @@
     "learnMore": "Mehr erfahren"
   },
   "cookieBanner": {
-    "mainText": "Wir verwenden Cookies, um Ihr Browsing-Erlebnis zu verbessern und unseren Verkehr zu analysieren. Durch Klicken auf \"Alle akzeptieren\" stimmen Sie der Verwendung von Cookies zu. Weitere Informationen zur Verwendung von Cookies und zur Verwaltung Ihrer Einstellungen finden Sie in unserer {policyLink}.",
-    "policyLink": "Cookie-Richtlinie",
+    "mainText": "Wir verwenden Cookies, um Ihr Browsing-Erlebnis zu verbessern. Durch die weitere Nutzung unserer Website stimmen Sie unserer",
+    "policyLinkText": "Cookie-Richtlinie",
     "acceptAll": "Alle akzeptieren",
     "customize": "Anpassen",
     "rejectAll": "Alle ablehnen",
@@ -386,19 +386,19 @@
       "cookies": {
         "essential": {
           "title": "Essentielle Cookies",
-          "description": "Erforderlich für das ordnungsgemäße Funktionieren der Website. Können nicht deaktiviert werden."
+          "description": "Diese Cookies sind für die Funktion der Website notwendig und können nicht deaktiviert werden."
         },
         "analytics": {
           "title": "Analyse-Cookies",
-          "description": "Helfen uns, unsere Website durch Sammeln anonymer Nutzungsinformationen zu verbessern."
+          "description": "Diese Cookies helfen uns zu verstehen, wie Besucher mit unserer Website interagieren."
         },
         "marketing": {
           "title": "Marketing-Cookies",
-          "description": "Werden verwendet, um Besucher über Websites hinweg zu verfolgen und relevante Werbung anzuzeigen."
+          "description": "Diese Cookies werden verwendet, um Besucher über Websites hinweg zu verfolgen und relevante Werbung anzuzeigen."
         },
         "preferences": {
           "title": "Präferenz-Cookies",
-          "description": "Speichern Ihre Einstellungen und Präferenzen für ein besseres Erlebnis."
+          "description": "Diese Cookies ermöglichen es der Website, sich an Ihre Auswahl zu erinnern und erweiterte Funktionen bereitzustellen."
         }
       }
     }

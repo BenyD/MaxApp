@@ -81,16 +81,13 @@ export function CookieBanner() {
       {!showPreferences ? (
         <>
           <p className="max-w-4xl text-sm leading-6 text-slate-700">
-            {t.rich('mainText', {
-              policyLink: (chunks) => (
-                <Link
-                  href="/cookie-policy"
-                  className="font-semibold text-blue-600 hover:text-blue-500"
-                >
-                  {chunks}
-                </Link>
-              ),
-            })}
+            {t('mainText')}{' '}
+            <Link
+              href="/cookie-policy"
+              className="font-semibold text-blue-600 hover:text-blue-500"
+            >
+              {t('policyLinkText')}
+            </Link>
           </p>
           <div className="flex flex-none items-center gap-x-5">
             <Button
@@ -207,4 +204,3 @@ export function CookieBanner() {
     </div>
   )
 }
- 

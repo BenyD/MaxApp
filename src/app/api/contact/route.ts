@@ -3,9 +3,11 @@ import { createClient } from '@supabase/supabase-js'
 import { cookies } from 'next/headers'
 import { resend, DEFAULT_FROM_EMAIL } from '@/lib/resend'
 import ContactConfirmationEmail from '@/emails/ContactConfirmation'
+import AdminNotificationEmail from '@/emails/AdminNotification'
 
 const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL!
 const supabaseServiceKey = process.env.SUPABASE_SERVICE_ROLE_KEY!
+const ADMIN_EMAIL = 'web@maxapp.ch'
 
 export async function POST(request: Request) {
   try {
@@ -57,39 +59,40 @@ export async function POST(request: Request) {
       )
     }
 
-    // Send confirmation email
+    // Send emails
     try {
-      console.log('Attempting to send confirmation email to:', email)
       const isDevelopment = process.env.NODE_ENV === 'development'
 
-      // In development, always send to the verified email
-      const toEmail = isDevelopment ? 'web@maxapp.ch' : email
-
-      console.log(
-        'Sending confirmation email in',
-        isDevelopment ? 'development' : 'production',
-        'mode to:',
-        toEmail,
-      )
-
-      const emailResult = await resend.emails.send({
+      // Send confirmation email to user
+      const userEmail = isDevelopment ? ADMIN_EMAIL : email
+      await resend.emails.send({
         from: DEFAULT_FROM_EMAIL,
-        to: toEmail,
+        to: userEmail,
         subject: 'Thank you for contacting Max App',
         react: ContactConfirmationEmail({
           name: firstName,
         }) as React.ReactElement,
       })
-      console.log('Confirmation email sent successfully:', emailResult)
 
-      if (isDevelopment && toEmail !== email) {
-        console.log(
-          'Note: In development mode, confirmation emails are only sent to the verified email address:',
-          toEmail,
-        )
+      // Send notification email to admin
+      await resend.emails.send({
+        from: DEFAULT_FROM_EMAIL,
+        to: ADMIN_EMAIL,
+        subject: `New Contact Form Submission: ${firstName} ${lastName}`,
+        react: AdminNotificationEmail({
+          firstName,
+          lastName,
+          email,
+          phone,
+          message,
+        }) as React.ReactElement,
+      })
+
+      if (isDevelopment) {
+        console.log('Development mode: All emails sent to', ADMIN_EMAIL)
       }
     } catch (emailError) {
-      console.error('Error sending confirmation email:', emailError)
+      console.error('Error sending emails:', emailError)
       // Don't return error response here as the submission was successful
       if (process.env.NODE_ENV === 'development') {
         console.log('Continuing despite email error in development mode')

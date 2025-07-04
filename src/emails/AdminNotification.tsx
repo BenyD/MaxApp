@@ -14,7 +14,6 @@ interface AdminNotificationEmailProps {
   firstName: string
   lastName: string
   email: string
-  phone: string
   message: string
 }
 
@@ -22,7 +21,6 @@ export const AdminNotificationEmail = ({
   firstName,
   lastName,
   email,
-  phone,
   message,
 }: AdminNotificationEmailProps) => {
   return (
@@ -42,9 +40,6 @@ export const AdminNotificationEmail = ({
             </Text>
             <Text style={detail}>
               <strong>Email:</strong> {email}
-            </Text>
-            <Text style={detail}>
-              <strong>Phone:</strong> {phone}
             </Text>
           </Section>
 

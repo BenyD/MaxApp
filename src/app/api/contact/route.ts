@@ -3,16 +3,16 @@ import { createClient } from '@supabase/supabase-js'
 import { cookies } from 'next/headers'
 import { resend, DEFAULT_FROM_EMAIL } from '@/lib/resend'
 import ContactConfirmationEmail from '@/emails/ContactConfirmation'
-import AdminNotificationEmail from '@/emails/AdminNotification'
+import AdminNotification from '@/emails/AdminNotification'
 
 const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL!
 const supabaseServiceKey = process.env.SUPABASE_SERVICE_ROLE_KEY!
-const ADMIN_EMAIL = 'web@maxapp.ch'
+const ADMIN_EMAIL = 'info@maxsoft.ch'
 
 export async function POST(request: Request) {
   try {
     const body = await request.json()
-    const { firstName, lastName, email, phone, message } = body
+    const { firstName, lastName, email, message } = body
 
     console.log('Processing contact form submission:', {
       firstName,
@@ -26,7 +26,7 @@ export async function POST(request: Request) {
     })
 
     // Validate input
-    if (!firstName || !lastName || !email || !phone || !message) {
+    if (!firstName || !lastName || !email || !message) {
       return NextResponse.json(
         { error: 'All fields are required' },
         { status: 400 },
@@ -44,7 +44,6 @@ export async function POST(request: Request) {
           first_name: firstName,
           last_name: lastName,
           email,
-          phone,
           message,
           status: 'new',
         },
@@ -79,11 +78,10 @@ export async function POST(request: Request) {
         from: DEFAULT_FROM_EMAIL,
         to: ADMIN_EMAIL,
         subject: `New Contact Form Submission: ${firstName} ${lastName}`,
-        react: AdminNotificationEmail({
+        react: AdminNotification({
           firstName,
           lastName,
           email,
-          phone,
           message,
         }) as React.ReactElement,
       })

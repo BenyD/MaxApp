@@ -81,7 +81,7 @@ export async function POST(request: Request) {
       const isDevelopment = process.env.NODE_ENV === 'development'
 
       // In development, always send to the verified email
-      const toEmail = isDevelopment ? 'web@maxapp.ch' : submission.email
+      const toEmail = isDevelopment ? 'info@maxsoft.ch' : submission.email
 
       console.log(
         'Sending email in',

@@ -251,8 +251,7 @@
         "addressLine1": "Birkenstrasse 49",
         "addressLine2": "6343 Rotkreuz",
         "addressLine3": "Schweiz",
-        "email": "info@maxsoft.ch",
-        "phone": "+41415111166"
+        "email": "info@maxsoft.ch"
       },
       "srilanka": {
         "title": "Sri Lanka",
@@ -260,8 +259,7 @@
         "addressLine1": "Erlalai center Erlalai",
         "addressLine2": "Jaffna",
         "addressLine3": "Sri Lanka",
-        "email": "srilanka@maxapp.com",
-        "phone": "+94 21 222 4455"
+        "email": "info@maxsoft.ch"
       },
       "india": {
         "title": "Indien",
@@ -269,8 +267,7 @@
         "addressLine1": "123A Triplicane High Road",
         "addressLine2": "Triplicane, Tamil Nadu",
         "addressLine3": "Chennai 600 005",
-        "email": "india@maxapp.com",
-        "phone": "+91 44 2848 2111"
+        "email": "info@maxsoft.ch"
       }
     }
   },

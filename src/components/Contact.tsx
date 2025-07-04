@@ -39,7 +39,6 @@ type FormData = {
   firstName: string
   lastName: string
   email: string
-  phone: string
   message: string
 }
 
@@ -127,7 +126,6 @@ export function Contact() {
     firstName: '',
     lastName: '',
     email: '',
-    phone: '',
     message: '',
   })
 
@@ -152,12 +150,6 @@ export function Contact() {
       newErrors.email = t('form.email.error.required')
     } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) {
       newErrors.email = t('form.email.error.invalid')
-    }
-
-    if (!formData.phone.trim()) {
-      newErrors.phone = t('form.phone.error.required')
-    } else if (!/^\+?[\d\s-()]{8,}$/.test(formData.phone)) {
-      newErrors.phone = t('form.phone.error.invalid')
     }
 
     if (!formData.message.trim()) {
@@ -198,7 +190,6 @@ export function Contact() {
         firstName: '',
         lastName: '',
         email: '',
-        phone: '',
         message: '',
       })
     } catch (error) {
@@ -280,7 +271,7 @@ export function Contact() {
                   </div>
 
                   {/* Contact Fields Row */}
-                  <div className="grid grid-cols-1 gap-x-4 gap-y-4 sm:grid-cols-2">
+                  <div className="grid grid-cols-1 gap-x-4 gap-y-4">
                     <FormInput
                       id="email"
                       type="email"
@@ -293,19 +284,6 @@ export function Contact() {
                       }
                       error={errors.email}
                       autoComplete="email"
-                    />
-                    <FormInput
-                      id="phone"
-                      type="tel"
-                      label={t('form.phone.label')}
-                      icon={PhoneIcon}
-                      placeholder={t('form.phone.placeholder')}
-                      value={formData.phone}
-                      onChange={(value) =>
-                        setFormData({ ...formData, phone: value })
-                      }
-                      error={errors.phone}
-                      autoComplete="tel"
                     />
                   </div>
 
@@ -409,22 +387,6 @@ export function Contact() {
                 </div>
                 <div className="flex gap-x-4">
                   <dt className="flex-none">
-                    <span className="sr-only">Phone</span>
-                    <div className="rounded-lg bg-emerald-50/50 p-2 text-emerald-600/80 ring-1 ring-emerald-200/50 ring-inset">
-                      <PhoneIcon className="h-5 w-5" />
-                    </div>
-                  </dt>
-                  <dd className="flex items-center">
-                    <a
-                      className="hover:text-slate-900"
-                      href={`tel:${t('offices.switzerland.phone')}`}
-                    >
-                      {t('offices.switzerland.phone')}
-                    </a>
-                  </dd>
-                </div>
-                <div className="flex gap-x-4">
-                  <dt className="flex-none">
                     <span className="sr-only">Email</span>
                     <div className="rounded-lg bg-emerald-50/50 p-2 text-emerald-600/80 ring-1 ring-emerald-200/50 ring-inset">
                       <EnvelopeIcon className="h-5 w-5" />
@@ -465,7 +427,6 @@ export function Contact() {
               {offices.map((office) => {
                 const officeTranslations = t.raw(`offices.${office.key}`)
                 const hasEmail = 'email' in officeTranslations
-                const hasPhone = 'phone' in officeTranslations
 
                 return (
                   <div key={office.key} className="relative">
@@ -498,20 +459,6 @@ export function Contact() {
                             className="hover:text-blue-600"
                           >
                             {t(`offices.${office.key}.email`)}
-                          </a>
-                        </div>
-                      )}
-                      {hasPhone && (
-                        <div className="flex items-center gap-x-3">
-                          <PhoneIcon
-                            className="h-5 w-5 flex-shrink-0 text-slate-400"
-                            aria-hidden="true"
-                          />
-                          <a
-                            href={`tel:${t(`offices.${office.key}.phone`)}`}
-                            className="hover:text-blue-600"
-                          >
-                            {t(`offices.${office.key}.phone`)}
                           </a>
                         </div>
                       )}

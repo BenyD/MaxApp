@@ -2,6 +2,7 @@
 
 import Image from 'next/image'
 import { cn } from '@/lib/utils'
+import maxappLogo from '@/images/maxapp_logo.png'
 
 type LogoProps = {
   className?: string
@@ -11,12 +12,10 @@ type LogoProps = {
 export function Logo({ className, invert = false }: LogoProps) {
   return (
     <Image
-      src="/images/logo.png"
+      src={maxappLogo}
       alt="MaxApp Logo"
-      width={109}
-      height={40}
       className={cn(
-        'object-contain',
+        'h-10 w-auto object-contain',
         invert && 'brightness-0 invert',
         className,
       )}

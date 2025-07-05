@@ -2,11 +2,12 @@
 
 import { usePathname } from 'next/navigation'
 import Link from 'next/link'
-import { Popover } from '@headlessui/react'
 import clsx from 'clsx'
 import { LanguageSwitcher } from './LanguageSwitcher'
+import { motion, AnimatePresence, Variants } from 'framer-motion'
+import { useEffect, useState } from 'react'
 
-function MobileNavIcon({ open }: { open: boolean }) {
+function MobileNavIcon({ isOpen }: { isOpen: boolean }) {
   return (
     <svg
       aria-hidden="true"
@@ -15,75 +16,211 @@ function MobileNavIcon({ open }: { open: boolean }) {
       strokeWidth={2}
       strokeLinecap="round"
     >
-      <path
+      <motion.path
         d="M0 1H14M0 7H14M0 13H14"
-        className={clsx(
-          'origin-center transition',
-          open && 'scale-90 opacity-0',
-        )}
+        className="origin-center"
+        animate={{
+          scale: isOpen ? 0.9 : 1,
+          opacity: isOpen ? 0 : 1,
+        }}
+        transition={{ duration: 0.2, ease: [0.4, 0, 0.2, 1] }}
       />
-      <path
+      <motion.path
         d="M2 2L12 12M12 2L2 12"
-        className={clsx(
-          'origin-center transition',
-          !open && 'scale-90 opacity-0',
-        )}
+        className="origin-center"
+        animate={{
+          scale: !isOpen ? 0.9 : 1,
+          opacity: !isOpen ? 0 : 1,
+        }}
+        transition={{ duration: 0.2, ease: [0.4, 0, 0.2, 1] }}
       />
     </svg>
   )
 }
 
-function MobileNavLink({
-  href,
-  children,
-}: {
-  href: string
-  children: React.ReactNode
-}) {
-  const pathname = usePathname()
-  const isHomePage = pathname === '/'
-  const fullHref = isHomePage ? href : `/${href.slice(1)}`
+const menuVariants: Variants = {
+  closed: {
+    opacity: 0,
+    y: -8,
+    scale: 0.95,
+    transition: {
+      duration: 0.2,
+      ease: [0.4, 0, 0.2, 1],
+      staggerChildren: 0.05,
+      staggerDirection: -1,
+    },
+  },
+  open: {
+    opacity: 1,
+    y: 0,
+    scale: 1,
+    transition: {
+      duration: 0.3,
+      ease: [0, 0, 0.2, 1],
+      staggerChildren: 0.07,
+      delayChildren: 0.1,
+    },
+  },
+}
 
-  return (
-    <Popover.Button as={Link} href={fullHref} className="block w-full p-2">
-      {children}
-    </Popover.Button>
-  )
+const menuItemVariants: Variants = {
+  closed: {
+    opacity: 0,
+    x: -16,
+    transition: {
+      duration: 0.2,
+      ease: [0.4, 0, 0.2, 1],
+    },
+  },
+  open: {
+    opacity: 1,
+    x: 0,
+    transition: {
+      duration: 0.3,
+      ease: [0, 0, 0.2, 1],
+    },
+  },
+}
+
+const overlayVariants: Variants = {
+  closed: {
+    opacity: 0,
+    transition: {
+      duration: 0.2,
+      ease: [0.4, 0, 0.2, 1],
+    },
+  },
+  open: {
+    opacity: 1,
+    transition: {
+      duration: 0.3,
+      ease: [0, 0, 0.2, 1],
+    },
+  },
 }
 
 export function MobileNavigation() {
   const pathname = usePathname()
   const isHomePage = pathname === '/'
+  const [isOpen, setIsOpen] = useState(false)
+
+  // Close menu when pathname changes
+  useEffect(() => {
+    if (isOpen) {
+      setIsOpen(false)
+    }
+  }, [pathname, isOpen])
+
+  // Prevent body scroll when menu is open
+  useEffect(() => {
+    if (isOpen) {
+      document.body.style.overflow = 'hidden'
+    } else {
+      document.body.style.overflow = 'unset'
+    }
+    return () => {
+      document.body.style.overflow = 'unset'
+    }
+  }, [isOpen])
+
+  const toggleMenu = () => setIsOpen(!isOpen)
+
+  const menuItems = [
+    { href: '#about', label: 'About' },
+    { href: '#services', label: 'Services' },
+    { href: '#why-us', label: 'Why Us' },
+    { href: '#projects', label: 'Projects' },
+    { href: '#tech-stack', label: 'Tech Stack' },
+  ]
 
   return (
-    <Popover>
-      <Popover.Button
-        className="relative z-10 flex h-8 w-8 items-center justify-center focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:outline-none"
+    <div className="relative z-50">
+      <button
+        className={clsx(
+          'relative z-10 flex h-8 w-8 items-center justify-center rounded-md',
+          'focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:outline-none',
+          'hover:bg-slate-100 active:bg-slate-200',
+          'transition-colors duration-200',
+        )}
+        onClick={toggleMenu}
         aria-label="Toggle Navigation"
+        aria-expanded={isOpen}
       >
-        {({ open }) => <MobileNavIcon open={open} />}
-      </Popover.Button>
-      <Popover.Overlay className="fixed inset-0 bg-slate-300/50 backdrop-blur-sm" />
-      <Popover.Panel className="absolute inset-x-4 top-full mt-4 flex origin-top flex-col rounded-2xl bg-white text-lg tracking-tight text-slate-900 shadow-xl ring-1 ring-slate-900/5">
-        <div className="p-4">
-          {isHomePage && (
-            <>
-              <MobileNavLink href="#about">About</MobileNavLink>
-              <MobileNavLink href="#services">Services</MobileNavLink>
-              <MobileNavLink href="#why-us">Why Us</MobileNavLink>
-              <MobileNavLink href="#projects">Projects</MobileNavLink>
-              <MobileNavLink href="#tech-stack">Tech Stack</MobileNavLink>
-              <hr className="my-4 border-slate-200" />
-            </>
-          )}
-          <MobileNavLink href={isHomePage ? '#contact' : '/#contact'}>
-            Contact
-          </MobileNavLink>
-        </div>
-        <div className="border-t border-slate-200">
-          <LanguageSwitcher variant="mobile" />
-        </div>
-      </Popover.Panel>
-    </Popover>
+        <MobileNavIcon isOpen={isOpen} />
+      </button>
+
+      <AnimatePresence>
+        {isOpen && (
+          <>
+            <motion.div
+              initial="closed"
+              animate="open"
+              exit="closed"
+              variants={overlayVariants}
+              className="fixed inset-0 bg-slate-900/20 backdrop-blur-sm"
+              onClick={toggleMenu}
+              aria-hidden="true"
+            />
+
+            <motion.div
+              initial="closed"
+              animate="open"
+              exit="closed"
+              variants={menuVariants}
+              className={clsx(
+                'absolute inset-x-4 top-full mt-4 origin-top overflow-hidden',
+                'rounded-2xl bg-white text-lg tracking-tight text-slate-900',
+                'shadow-xl ring-1 ring-slate-900/5',
+              )}
+            >
+              <motion.div className="p-4">
+                {isHomePage && (
+                  <>
+                    {menuItems.map((item) => (
+                      <motion.div key={item.href} variants={menuItemVariants}>
+                        <Link
+                          href={item.href}
+                          className={clsx(
+                            'block w-full rounded-lg p-2',
+                            'hover:bg-slate-50 active:bg-slate-100',
+                            'transition-colors duration-200',
+                          )}
+                          onClick={toggleMenu}
+                        >
+                          {item.label}
+                        </Link>
+                      </motion.div>
+                    ))}
+                    <motion.hr
+                      variants={menuItemVariants}
+                      className="my-4 border-slate-200"
+                    />
+                  </>
+                )}
+                <motion.div variants={menuItemVariants}>
+                  <Link
+                    href={isHomePage ? '#contact' : '/#contact'}
+                    className={clsx(
+                      'block w-full rounded-lg p-2',
+                      'hover:bg-slate-50 active:bg-slate-100',
+                      'transition-colors duration-200',
+                    )}
+                    onClick={toggleMenu}
+                  >
+                    Contact
+                  </Link>
+                </motion.div>
+              </motion.div>
+              <motion.div
+                variants={menuItemVariants}
+                className="border-t border-slate-200"
+              >
+                <LanguageSwitcher variant="mobile" />
+              </motion.div>
+            </motion.div>
+          </>
+        )}
+      </AnimatePresence>
+    </div>
   )
 }

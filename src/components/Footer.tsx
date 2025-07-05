@@ -16,12 +16,25 @@ function FooterLink({
   children: React.ReactNode
 }) {
   const pathname = usePathname()
-  const isHomePage = pathname === '/'
-  const fullHref = isHomePage ? href : `/${href.slice(1)}`
+  const locale = useLocale()
+  const isHomePage = pathname === `/${locale}`
+  
+  // Handle hash links correctly
+  if (href.startsWith('#')) {
+    return (
+      <Link
+        href={isHomePage ? href : `/${locale}${href}`}
+        className="inline-block rounded-lg px-2 py-1.5 text-sm text-slate-600 transition hover:bg-slate-100 hover:text-slate-900"
+      >
+        {children}
+      </Link>
+    )
+  }
 
+  // Handle regular links
   return (
     <Link
-      href={fullHref}
+      href={`/${locale}/${href}`}
       className="inline-block rounded-lg px-2 py-1.5 text-sm text-slate-600 transition hover:bg-slate-100 hover:text-slate-900"
     >
       {children}
@@ -32,7 +45,7 @@ function FooterLink({
 export function Footer() {
   const pathname = usePathname()
   const locale = useLocale()
-  const isHomePage = pathname === '/'
+  const isHomePage = pathname === `/${locale}`
   const t = useTranslations('footer')
 
   const navigationLinks = [

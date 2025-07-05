@@ -106,7 +106,7 @@ function FeatureCard({ feature }: { feature: Feature }) {
 
   return (
     <div
-      className={`group relative isolate flex h-full flex-col overflow-hidden rounded-3xl bg-white p-8 shadow-lg ring-1 ring-slate-200 transition-all duration-200 hover:shadow-xl ${colors[feature.color].shadow} ${sizeClasses[feature.size || 'medium']}`}
+      className={`group relative isolate flex h-full flex-col overflow-hidden rounded-3xl bg-white p-6 shadow-lg ring-1 ring-slate-200 transition-all duration-200 hover:shadow-xl sm:p-8 ${colors[feature.color].shadow} ${sizeClasses[feature.size || 'medium']}`}
     >
       <div className="flex items-center gap-x-4">
         <div
@@ -126,19 +126,19 @@ function FeatureCard({ feature }: { feature: Feature }) {
 
         {/* Metrics Grid - Only for large card */}
         {feature.size === 'large' && (
-          <div className="mt-8 grid grid-cols-3 gap-4">
+          <div className="mt-8 grid grid-cols-1 gap-3 sm:grid-cols-3 sm:gap-4">
             {['codeCoverage', 'testSuccess', 'satisfaction'].map(
               (metricKey) => (
                 <div
                   key={metricKey}
-                  className={`rounded-2xl ${colors[feature.color].light} border p-4 text-center ${colors[feature.color].border}`}
+                  className={`rounded-2xl ${colors[feature.color].light} border p-3 text-center sm:p-4 ${colors[feature.color].border}`}
                 >
                   <div
-                    className={`text-2xl font-bold ${colors[feature.color].text}`}
+                    className={`text-xl font-bold sm:text-2xl ${colors[feature.color].text}`}
                   >
                     {t(`${feature.key}.metrics.${metricKey}.value`)}
                   </div>
-                  <div className="mt-1 text-sm text-slate-600">
+                  <div className="mt-1 text-xs text-slate-600 sm:text-sm">
                     {t(`${feature.key}.metrics.${metricKey}.label`)}
                   </div>
                 </div>
@@ -151,14 +151,14 @@ function FeatureCard({ feature }: { feature: Feature }) {
         {feature.size !== 'large' && (
           <div className="mt-8">
             <div
-              className={`inline-flex items-baseline rounded-xl ${colors[feature.color].light} border px-4 py-2 ${colors[feature.color].border}`}
+              className={`inline-flex flex-wrap items-baseline rounded-xl ${colors[feature.color].light} border px-3 py-2 sm:px-4 ${colors[feature.color].border}`}
             >
               <span
-                className={`text-2xl font-bold ${colors[feature.color].text}`}
+                className={`text-xl font-bold sm:text-2xl ${colors[feature.color].text}`}
               >
                 {t(`${feature.key}.stats`)}
               </span>
-              <span className="ml-2 text-sm text-slate-600">
+              <span className="ml-2 text-xs text-slate-600 sm:text-sm">
                 {t(`${feature.key}.statsText`)}
               </span>
             </div>

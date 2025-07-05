@@ -92,7 +92,7 @@ function FormInput({
             value={value}
             onChange={(e) => onChange(e.target.value)}
             placeholder={placeholder}
-            className={`block w-full rounded-lg border-0 px-3.5 py-2 text-slate-900 shadow-sm ring-1 transition duration-200 ring-inset ${
+            className={`block w-full rounded-lg border-0 px-3 py-2 text-slate-900 shadow-sm ring-1 transition duration-200 ring-inset ${
               error
                 ? 'ring-red-300 focus:ring-red-500'
                 : 'ring-slate-200 focus:ring-blue-500'
@@ -107,7 +107,7 @@ function FormInput({
             onChange={(e) => onChange(e.target.value)}
             autoComplete={autoComplete}
             placeholder={placeholder}
-            className={`block w-full rounded-lg border-0 px-3.5 py-2 text-slate-900 shadow-sm ring-1 transition duration-200 ring-inset ${
+            className={`block w-full rounded-lg border-0 px-3 py-2 text-slate-900 shadow-sm ring-1 transition duration-200 ring-inset ${
               error
                 ? 'ring-red-300 focus:ring-red-500'
                 : 'ring-slate-200 focus:ring-blue-500'
@@ -208,7 +208,7 @@ export function Contact() {
   return (
     <section
       id="contact"
-      className="relative isolate bg-white px-6 py-16 sm:py-24 lg:px-8"
+      className="relative isolate bg-white px-4 py-12 sm:px-6 sm:py-16 lg:px-8 lg:py-24"
     >
       {/* Gradient Background */}
       <div className="absolute inset-x-0 top-0 -z-10 h-24 bg-gradient-to-b from-slate-50" />
@@ -216,31 +216,31 @@ export function Contact() {
 
       <Container>
         <div className="mx-auto max-w-2xl text-center">
-          <h2 className="text-3xl font-bold tracking-tight text-slate-900 sm:text-4xl">
+          <h2 className="text-2xl font-bold tracking-tight text-slate-900 sm:text-3xl lg:text-4xl">
             {t('title')}
           </h2>
-          <p className="mt-2 text-lg font-semibold text-blue-600">
+          <p className="mt-2 text-base font-semibold text-blue-600 sm:text-lg">
             {t('subtitle')}
           </p>
-          <p className="mt-3 text-lg leading-8 text-slate-600">
+          <p className="mt-3 text-base leading-7 text-slate-600 sm:text-lg">
             {t('description')}
           </p>
         </div>
 
-        <div className="mx-auto mt-12 max-w-6xl space-y-8">
+        <div className="mx-auto mt-8 max-w-6xl space-y-6 sm:mt-12 sm:space-y-8">
           {/* Top Section: Contact Form and Info */}
-          <div className="grid gap-6 lg:grid-cols-2">
+          <div className="grid gap-4 sm:gap-6 lg:grid-cols-2">
             {/* Contact Form */}
-            <div className="group relative isolate flex flex-col overflow-hidden rounded-3xl bg-white p-8 shadow-lg ring-1 ring-slate-200 transition-all duration-200 hover:shadow-xl">
-              <div className="mb-6 flex items-center gap-x-4">
-                <div className="rounded-xl bg-blue-50 p-2.5 text-blue-600 ring-1 ring-blue-200 ring-inset">
-                  <EnvelopeIcon className="h-6 w-6" />
+            <div className="group relative isolate flex flex-col overflow-hidden rounded-2xl bg-white p-5 shadow-lg ring-1 ring-slate-200 transition-all duration-200 hover:shadow-xl sm:rounded-3xl sm:p-8">
+              <div className="mb-4 flex items-center gap-x-3 sm:mb-6 sm:gap-x-4">
+                <div className="rounded-xl bg-blue-50 p-2 text-blue-600 ring-1 ring-blue-200 ring-inset sm:p-2.5">
+                  <EnvelopeIcon className="h-5 w-5 sm:h-6 sm:w-6" />
                 </div>
                 <div>
-                  <h3 className="text-xl font-semibold text-slate-900">
+                  <h3 className="text-lg font-semibold text-slate-900 sm:text-xl">
                     {t('form.title')}
                   </h3>
-                  <p className="mt-1 text-sm leading-6 text-slate-600">
+                  <p className="mt-0.5 text-xs leading-5 text-slate-600 sm:mt-1 sm:text-sm sm:leading-6">
                     {t('form.description')}
                   </p>
                 </div>
@@ -359,24 +359,24 @@ export function Contact() {
             </div>
 
             {/* Contact Information */}
-            <div className="group relative isolate overflow-hidden rounded-3xl bg-white p-8 shadow-lg ring-1 ring-slate-200 transition-all duration-200 hover:shadow-xl">
+            <div className="group relative isolate overflow-hidden rounded-2xl bg-white p-5 shadow-lg ring-1 ring-slate-200 transition-all duration-200 hover:shadow-xl sm:rounded-3xl sm:p-8">
               <div className="relative">
-                <div className="mb-6 flex items-center gap-x-4">
-                  <div className="rounded-xl bg-emerald-50 p-2.5 text-emerald-600 ring-1 ring-emerald-200 ring-inset">
-                    <MapPinIcon className="h-6 w-6" />
+                <div className="mb-4 flex items-center gap-x-3 sm:mb-6 sm:gap-x-4">
+                  <div className="rounded-xl bg-emerald-50 p-2 text-emerald-600 ring-1 ring-emerald-200 ring-inset sm:p-2.5">
+                    <MapPinIcon className="h-5 w-5 sm:h-6 sm:w-6" />
                   </div>
                   <div>
-                    <h3 className="text-xl font-semibold text-slate-900">
+                    <h3 className="text-lg font-semibold text-slate-900 sm:text-xl">
                       {t('info.title')}
                     </h3>
-                    <p className="mt-1 text-sm leading-6 text-slate-600">
+                    <p className="mt-0.5 text-xs leading-5 text-slate-600 sm:mt-1 sm:text-sm sm:leading-6">
                       {t('info.description')}
                     </p>
                   </div>
                 </div>
 
                 {/* Team Image */}
-                <div className="relative mb-8 overflow-hidden rounded-2xl">
+                <div className="relative mb-6 overflow-hidden rounded-xl sm:mb-8 sm:rounded-2xl">
                   <div className="aspect-[16/9]">
                     <Image
                       src={teamImage}
@@ -387,10 +387,10 @@ export function Contact() {
                       priority
                     />
                   </div>
-                  <div className="absolute inset-0 rounded-2xl ring-1 ring-slate-900/5 ring-inset" />
+                  <div className="absolute inset-0 rounded-xl ring-1 ring-slate-900/5 ring-inset sm:rounded-2xl" />
                 </div>
 
-                <dl className="space-y-4 text-sm leading-6 text-slate-600">
+                <dl className="space-y-3 text-xs leading-5 text-slate-600 sm:space-y-4 sm:text-sm sm:leading-6">
                   <div className="flex gap-x-4">
                     <dt className="flex-none">
                       <span className="sr-only">Address</span>
@@ -432,21 +432,21 @@ export function Contact() {
           </div>
 
           {/* Global Offices */}
-          <div className="group relative isolate overflow-hidden rounded-3xl bg-white p-8 shadow-lg ring-1 ring-slate-200 transition-all duration-200 hover:shadow-xl">
-            <div className="mb-8 flex items-center gap-x-4">
-              <div className="rounded-xl bg-purple-50 p-2.5 text-purple-600 ring-1 ring-purple-200 ring-inset">
-                <BuildingOffice2Icon className="h-6 w-6" />
+          <div className="group relative isolate overflow-hidden rounded-2xl bg-white p-5 shadow-lg ring-1 ring-slate-200 transition-all duration-200 hover:shadow-xl sm:rounded-3xl sm:p-8">
+            <div className="mb-6 flex items-center gap-x-3 sm:mb-8 sm:gap-x-4">
+              <div className="rounded-xl bg-purple-50 p-2 text-purple-600 ring-1 ring-purple-200 ring-inset sm:p-2.5">
+                <BuildingOffice2Icon className="h-5 w-5 sm:h-6 sm:w-6" />
               </div>
               <div>
-                <h3 className="text-xl font-semibold text-slate-900">
+                <h3 className="text-lg font-semibold text-slate-900 sm:text-xl">
                   {t('offices.title')}
                 </h3>
-                <p className="mt-1 text-sm leading-6 text-slate-600">
+                <p className="mt-0.5 text-xs leading-5 text-slate-600 sm:mt-1 sm:text-sm sm:leading-6">
                   {t('offices.description')}
                 </p>
               </div>
             </div>
-            <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
+            <div className="grid gap-4 sm:grid-cols-2 sm:gap-6 lg:grid-cols-3 lg:gap-8">
               {offices.map((office) => {
                 const officeTranslations = t.raw(`offices.${office.key}`)
                 const hasEmail = 'email' in officeTranslations
@@ -455,20 +455,20 @@ export function Contact() {
                 return (
                   <div
                     key={office.key}
-                    className="group/card relative rounded-2xl bg-slate-50/50 p-6 ring-1 ring-slate-200/50 transition-all duration-200 hover:bg-white hover:shadow-md hover:ring-slate-300"
+                    className="group/card relative rounded-xl bg-slate-50/50 p-4 ring-1 ring-slate-200/50 transition-all duration-200 hover:bg-white hover:shadow-md hover:ring-slate-300 sm:rounded-2xl sm:p-6"
                   >
-                    <div className="absolute top-6 right-6 text-2xl">
+                    <div className="absolute top-4 right-4 text-xl sm:top-6 sm:right-6 sm:text-2xl">
                       {office.flag}
                     </div>
-                    <h4 className="mb-4 text-lg font-semibold text-slate-900">
+                    <h4 className="mb-3 text-base font-semibold text-slate-900 sm:mb-4 sm:text-lg">
                       {t(`offices.${office.key}.title`)}
                     </h4>
-                    <div className="space-y-4 text-sm text-slate-600">
-                      <div className="flex items-start gap-x-3">
+                    <div className="space-y-3 text-xs text-slate-600 sm:space-y-4 sm:text-sm">
+                      <div className="flex items-start gap-x-2 sm:gap-x-3">
                         <div className="relative mt-1">
                           <div className="absolute -inset-2 hidden rounded-lg bg-purple-100/50 opacity-0 transition-all duration-200 group-hover/card:block group-hover/card:opacity-100" />
                           <MapPinIcon
-                            className="relative h-5 w-5 flex-shrink-0 text-purple-600"
+                            className="relative h-4 w-4 flex-shrink-0 text-purple-600 sm:h-5 sm:w-5"
                             aria-hidden="true"
                           />
                         </div>
@@ -482,11 +482,11 @@ export function Contact() {
                         </div>
                       </div>
                       {hasEmail && (
-                        <div className="flex items-center gap-x-3">
+                        <div className="flex items-center gap-x-2 sm:gap-x-3">
                           <div className="relative">
                             <div className="absolute -inset-2 hidden rounded-lg bg-blue-100/50 opacity-0 transition-all duration-200 group-hover/card:block group-hover/card:opacity-100" />
                             <EnvelopeIcon
-                              className="relative h-5 w-5 flex-shrink-0 text-blue-600"
+                              className="relative h-4 w-4 flex-shrink-0 text-blue-600 sm:h-5 sm:w-5"
                               aria-hidden="true"
                             />
                           </div>
@@ -499,11 +499,11 @@ export function Contact() {
                         </div>
                       )}
                       {hasHours && (
-                        <div className="flex items-start gap-x-3">
+                        <div className="flex items-start gap-x-2 sm:gap-x-3">
                           <div className="relative mt-1">
-                            <div className="absolute -inset-2 hidden rounded-lg bg-emerald-100/50 opacity-0 transition-all duration-200 group-hover/card:block group-hover/card:opacity-100" />
+                            <div className="absolute -inset-2 hidden rounded-lg bg-amber-100/50 opacity-0 transition-all duration-200 group-hover/card:block group-hover/card:opacity-100" />
                             <ClockIcon
-                              className="relative h-5 w-5 flex-shrink-0 text-emerald-600"
+                              className="relative h-4 w-4 flex-shrink-0 text-amber-600 sm:h-5 sm:w-5"
                               aria-hidden="true"
                             />
                           </div>
@@ -512,9 +512,6 @@ export function Contact() {
                               {t(`offices.${office.key}.hours.title`)}
                             </p>
                             <p>{t(`offices.${office.key}.hours.weekdays`)}</p>
-                            {t.raw(`offices.${office.key}.hours.weekends`) && (
-                              <p>{t(`offices.${office.key}.hours.weekends`)}</p>
-                            )}
                           </div>
                         </div>
                       )}
@@ -523,9 +520,6 @@ export function Contact() {
                 )
               })}
             </div>
-
-            {/* Decorative gradient background */}
-            <div className="absolute inset-0 -z-10 bg-gradient-to-br from-slate-50 via-white to-slate-50 opacity-0 transition-opacity duration-200 group-hover:opacity-100" />
           </div>
         </div>
       </Container>

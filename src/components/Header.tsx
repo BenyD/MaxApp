@@ -10,10 +10,15 @@ import { Logo } from '@/components/Logo'
 import { HashLink } from '@/components/HashLink'
 import { LanguageSwitcher } from '@/components/LanguageSwitcher'
 import { Link } from '@/i18n/navigation'
+import { useLocale } from 'next-intl'
+import { usePathname } from 'next/navigation'
 import clsx from 'clsx'
 
 export function Header() {
   const t = useTranslations('navigation')
+  const locale = useLocale()
+  const pathname = usePathname()
+  const isHomePage = pathname === `/${locale}`
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
   const [scrolled, setScrolled] = useState(false)
   const [scrollProgress, setScrollProgress] = useState(0)
@@ -92,20 +97,22 @@ export function Header() {
                 )}
               />
             </Link>
-            <div className="hidden md:flex md:gap-x-8">
-              {navigationLinks.map(({ href, key }) => (
-                <HashLink
-                  key={key}
-                  href={href}
-                  className={clsx(
-                    'transition-all duration-300',
-                    scrolled ? 'text-base' : 'text-sm',
-                  )}
-                >
-                  {t(key)}
-                </HashLink>
-              ))}
-            </div>
+            {isHomePage && (
+              <div className="hidden md:flex md:gap-x-8">
+                {navigationLinks.map(({ href, key }) => (
+                  <HashLink
+                    key={key}
+                    href={href}
+                    className={clsx(
+                      'transition-all duration-300',
+                      scrolled ? 'text-base' : 'text-sm',
+                    )}
+                  >
+                    {t(key)}
+                  </HashLink>
+                ))}
+              </div>
+            )}
           </div>
           <div className="flex items-center gap-x-5 md:gap-x-8">
             <div className="hidden md:block">
@@ -113,7 +120,7 @@ export function Header() {
             </div>
             <div className="hidden md:block">
               <Button
-                href="#contact"
+                href={isHomePage ? '#contact' : `/${locale}#contact`}
                 color="blue"
                 className={clsx(
                   'transition-all duration-300',
@@ -183,24 +190,36 @@ export function Header() {
               </div>
               <nav className="mt-6 px-4 sm:px-6">
                 <div className="divide-y divide-slate-100">
-                  <div className="space-y-1 pb-6">
-                    {navigationLinks.map(({ href, key }) => (
-                      <HashLink
-                        key={key}
-                        href={href}
+                  {isHomePage ? (
+                    <div className="space-y-1 pb-6">
+                      {navigationLinks.map(({ href, key }) => (
+                        <HashLink
+                          key={key}
+                          href={href}
+                          onClick={() => setMobileMenuOpen(false)}
+                          className="block rounded-lg px-3 py-2.5 text-base font-medium text-slate-700 hover:bg-slate-50 hover:text-slate-900"
+                        >
+                          {t(key)}
+                        </HashLink>
+                      ))}
+                    </div>
+                  ) : (
+                    <div className="space-y-1 pb-6">
+                      <Link
+                        href="/"
                         onClick={() => setMobileMenuOpen(false)}
                         className="block rounded-lg px-3 py-2.5 text-base font-medium text-slate-700 hover:bg-slate-50 hover:text-slate-900"
                       >
-                        {t(key)}
-                      </HashLink>
-                    ))}
-                  </div>
+                        {t('home')}
+                      </Link>
+                    </div>
+                  )}
                   <div className="py-6">
                     <div className="mb-4">
                       <LanguageSwitcher variant="mobile" />
                     </div>
                     <Button
-                      href="#contact"
+                      href={isHomePage ? '#contact' : `/${locale}#contact`}
                       color="blue"
                       className="w-full justify-center py-2.5 text-base"
                       onClick={() => setMobileMenuOpen(false)}

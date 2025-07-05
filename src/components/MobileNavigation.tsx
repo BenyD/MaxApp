@@ -6,6 +6,7 @@ import clsx from 'clsx'
 import { LanguageSwitcher } from './LanguageSwitcher'
 import { motion, AnimatePresence, Variants } from 'framer-motion'
 import { useEffect, useState } from 'react'
+import { useLocale } from 'next-intl'
 
 function MobileNavIcon({ isOpen }: { isOpen: boolean }) {
   return (
@@ -101,7 +102,8 @@ const overlayVariants: Variants = {
 
 export function MobileNavigation() {
   const pathname = usePathname()
-  const isHomePage = pathname === '/'
+  const locale = useLocale()
+  const isHomePage = pathname === `/${locale}`
   const [isOpen, setIsOpen] = useState(false)
 
   // Close menu when pathname changes
@@ -174,7 +176,7 @@ export function MobileNavigation() {
               )}
             >
               <motion.div className="p-4">
-                {isHomePage && (
+                {isHomePage ? (
                   <>
                     {menuItems.map((item) => (
                       <motion.div key={item.href} variants={menuItemVariants}>
@@ -196,10 +198,24 @@ export function MobileNavigation() {
                       className="my-4 border-slate-200"
                     />
                   </>
+                ) : (
+                  <motion.div variants={menuItemVariants}>
+                    <Link
+                      href={`/${locale}`}
+                      className={clsx(
+                        'block w-full rounded-lg p-2',
+                        'hover:bg-slate-50 active:bg-slate-100',
+                        'transition-colors duration-200',
+                      )}
+                      onClick={toggleMenu}
+                    >
+                      Home
+                    </Link>
+                  </motion.div>
                 )}
                 <motion.div variants={menuItemVariants}>
                   <Link
-                    href={isHomePage ? '#contact' : '/#contact'}
+                    href={isHomePage ? '#contact' : `/${locale}#contact`}
                     className={clsx(
                       'block w-full rounded-lg p-2',
                       'hover:bg-slate-50 active:bg-slate-100',
